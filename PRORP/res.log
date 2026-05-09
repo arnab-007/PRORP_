@@ -1,0 +1,378 @@
+
+[?2004lSaved working directory and index state WIP on exp2: d656d990 update
+
+[?2004h(boolprog) [;32m┌──([1;34mnitesht㉿cse[;32m)-[[0;1m~/project/PRORP/PRORP[;32m]
+[;32m└─[1;34m$[0m git status
+[?2004lOn branch exp2
+Your branch is up to date with 'origin/exp2'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	[31mres.log[m
+	[31mresults/results_ModSum_16bits/[m
+	[31msrc/DistEstimate/DistEstimate_results/exp_ModSum_1.json[m
+	[31msrc/DistEstimate/DistEstimate_results/exp_ModSum_1.json.lock[m
+	[31msrc/Validifier/Validifier_results/exp_ModSum_1.json[m
+	[31msrc/Validifier/Validifier_results/exp_ModSum_1.json.lock[m
+	[31msrc/Validifier/Validifier_results/exp_ModSum_2.json.lock[m
+	[31mtemp/candidate_dnf_ModSum[m
+	[31mtemp/input_cnf_ModSum[m
+	[31mtemp/samples_converted_ModSum.txt[m
+	[31mtemp/samples_dist_ModSum.out[m
+	[31mtemp/samples_valid_ModSum.out[m
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+[?2004h(boolprog) [;32m┌──([1;34mnitesht㉿cse[;32m)-[[0;1m~/project/PRORP/PRORP[;32m]
+[;32m└─[1;34m$[0m git clean -fd
+[?2004lRemoving res.log
+Removing results/results_ModSum_16bits/
+Removing src/DistEstimate/DistEstimate_results/exp_ModSum_1.json
+Removing src/DistEstimate/DistEstimate_results/exp_ModSum_1.json.lock
+Removing src/Validifier/Validifier_results/exp_ModSum_1.json
+Removing src/Validifier/Validifier_results/exp_ModSum_1.json.lock
+Removing src/Validifier/Validifier_results/exp_ModSum_2.json.lock
+Removing temp/candidate_dnf_ModSum
+Removing temp/input_cnf_ModSum
+Removing temp/samples_converted_ModSum.txt
+Removing temp/samples_dist_ModSum.out
+Removing temp/samples_valid_ModSum.out
+
+[?2004h(boolprog) [;32m┌──([1;34mnitesht㉿cse[;32m)-[[0;1m~/project/PRORP/PRORP[;32m]
+[;32m└─[1;34m$[0m clear
+[?2004l[H[2J
+[?2004h(boolprog) [;32m┌──([1;34mnitesht㉿cse[;32m)-[[0;1m~/project/PRORP/PRORP[;32m]
+[;32m└─[1;34m$[0m git status
+[?2004lOn branch exp2
+Your branch is up to date with 'origin/exp2'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	[31mres.log[m
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+[?2004h(boolprog) [;32m┌──([1;34mnitesht㉿cse[;32m)-[[0;1m~/project/PRORP/PRORP[;32m]
+[;32m└─[1;34m$[0m rm -rf res[K[K[K[K[K[K[K[K[K[Kvim dribe[K[Kver.py 
+[?2004l[?1006;1000h[?1002h[?1049h[22;0;0t[>4;2m[?1h=[?2004h[?1004h[1;55r[?12h[?12l[22;2t[22;1t[27m[29m[m[H[2J[?25l[55;1H"driver.py" [noeol] 194L, 8588B[2;1H▽[6n[2;1H  [3;1HPzz\[0%m[6n[3;1H           [1;1H[>c]10;?]11;?[1;1H[35mimport[m subprocess
+[35mimport[m os[2;10H[K[3;1H[35mimport[m time[3;12H[K[4;1H[35mimport[m sys
+[35mfrom[m concurrent.futures [35mimport[m ProcessPoolExecutor, as_completed
+[35mfrom[m datetime [35mimport[m datetime
+[35mimport[m itertools
+
+CURRENT_PATH = os.path.realpath([31m""[m)
+SHARED_INPUT_DIR = [31m"/shared/input/"[m  [34m# Read-only shared input[m
+OUTPUT_BASE_DIR = [31m"/shared/output/"[m  [34m# Workers write here[m
+
+M = [31m512[m
+p = [31m0.5[m
+
+[38;5;130mdef[m [36mget_init_states[m(progname, k, M):
+    INIT_STATES_MAP = {[18;9H[31m"Temp"[m: [[31m"(z == 0)"[m],[19;9H[31m"BigGeo0"[m: [[31m"(z == 0)"[m],[20;9H[31m"BigGeo1"[m: [[31m"(z == 0 && x == 16)"[m],[21;9H[31m"BigGeo2"[m: [[31m"(z == 0 && x == 16)"[m, [31m"(z < 64 && x < 16)"[m],[22;9H[31m"LinExp"[m: [f[31m"(count == 0 && n < {k})"[m, f[31m"(count == 0 && n < {k})"[m],[23;9H[31m"Sum0"[m: [f[31m"(x < 8 && n < {k})"[m],[24;9H[31m"ModSum"[m: [f[31m"(x == 0 && n < {k})"[m],[25;9H[31m"Prinsys"[m: [[31m"(x == 0)"[m],[26;9H[31m"Detm"[m: [[31m"(count == 0)"[m],[27;9H[31m"Fair"[m: [[31m"(count == 0)"[m, [31m"(count < 64)"[m],[28;9H[31m"Mart"[m: [[31m"(c == 0 && b == 64 && rounds == 0)"[m],[29;9H[31m"GeoAr"[m: [[31m"(x == 0 && y == 0)"[m],[30;9H[31m"Bin0"[m: [f[31m"(x == 0 && y == 2 && n == {k})"[m, f[31m"(x < 64 && y == 2 && n == {k})"[m],[31;9H[31m"Bin1"[m: [f[31m"(x == 0 && n == {M - k/2})"[m, f[31m"(x < 32 && n == {M - k/2})"[m],[32;9H[31m"BinMod"[m: [f[31m"(x == 0 && n == {M - k/2})"[m],[33;9H[31m"Bin2"[m: [f[31m"(x == 0 && y == 8 && n < {k/2})"[m, f[31m"(x < 32 && y == 8 && n < {k/2})"[m],[34;9H[31m"BiasDir"[m: [[31m"(x == 0 && y == 0)"[m, [31m"(x == 1 && y == 1)"[m],[35;9H[31m"DepRV"[m: [f[31m"(x == 0 && y == 0 && n == {k})"[m, f[31m"(x == 8 && y == 16 && n == {k})"[m],[36;9H[31m"RevBin"[m: [f[31m"(x < {k/2} && z == 0)"[m],[37;9H[31m"Duel"[m: [[31m"(t == 0)"[m, [31m"(t == 1)"[m],
+    }
+    [38;5;130mreturn[m INIT_STATES_MAP.get(progname, [])
+
+[38;5;130mdef[m [36mApproxInv[m(progname, iters, epsilon, eta, delta, mode, worker_id):
+    [36mprint[m(f[31m"Running PRORP({progname},k={iters}, ε[42;50H={epsilon}, η[42;63H={eta}, δ[42;72H={delta}), mode={mode}"[m)
+    worker_output_dir = os.path.join([44;9Hos.path.expanduser([31m"~"[m), [31m"ApproxInv_Output"[m, f[31m"worker_{worker_id}"[m
+    )
+    os.makedirs(worker_output_dir, exist_ok=[36mTrue[m)[48;5Hk_values = [iters]
+    num_bits_values = [[31m16[m, [31m32[m]
+    [38;5;130mfor[m num_bits [38;5;130min[m num_bits_values:[51;9H[38;5;130mfor[m k [38;5;130min[m k_values:[52;13Hinit_states_list = get_init_states(progname, k, M)[53;13H[38;5;130mfor[m init_states [38;5;130min[m init_states_list:[54;17HProgformula_path = os.path.join(CURRENT_PATH, [31m"progformula/"[m, [31m"EXIST_progs.py"[m)[55;186H1,1[11CTop[1;1H[?25h[?4m[27m[29m[m[H[2J[?25l[1;1H[38;5;81mimport[m subprocess
+[38;5;81mimport[m os
+[38;5;81mimport[m time
+[38;5;81mimport[m sys
+[38;5;81mfrom[m concurrent.futures [38;5;81mimport[m ProcessPoolExecutor, as_completed
+[38;5;81mfrom[m datetime [38;5;81mimport[m datetime
+[38;5;81mimport[m itertools
+
+CURRENT_PATH = os.path.realpath([95m""[m)
+SHARED_INPUT_DIR = [95m"/shared/input/"[m  [96m# Read-only shared input[m
+OUTPUT_BASE_DIR = [95m"/shared/output/"[m  [96m# Workers write here[m
+
+M = [95m512[m
+p = [95m0.5[m
+
+[93mdef[m [1m[96mget_init_states[m(progname, k, M):
+    INIT_STATES_MAP = {[18;9H[95m"Temp"[m: [[95m"(z == 0)"[m],[19;9H[95m"BigGeo0"[m: [[95m"(z == 0)"[m],[20;9H[95m"BigGeo1"[m: [[95m"(z == 0 && x == 16)"[m],[21;9H[95m"BigGeo2"[m: [[95m"(z == 0 && x == 16)"[m, [95m"(z < 64 && x < 16)"[m],[22;9H[95m"LinExp"[m: [f[95m"(count == 0 && n < {k})"[m, f[95m"(count == 0 && n < {k})"[m],[23;9H[95m"Sum0"[m: [f[95m"(x < 8 && n < {k})"[m],[24;9H[95m"ModSum"[m: [f[95m"(x == 0 && n < {k})"[m],[25;9H[95m"Prinsys"[m: [[95m"(x == 0)"[m],[26;9H[95m"Detm"[m: [[95m"(count == 0)"[m],[27;9H[95m"Fair"[m: [[95m"(count == 0)"[m, [95m"(count < 64)"[m],[28;9H[95m"Mart"[m: [[95m"(c == 0 && b == 64 && rounds == 0)"[m],[29;9H[95m"GeoAr"[m: [[95m"(x == 0 && y == 0)"[m],[30;9H[95m"Bin0"[m: [f[95m"(x == 0 && y == 2 && n == {k})"[m, f[95m"(x < 64 && y == 2 && n == {k})"[m],[31;9H[95m"Bin1"[m: [f[95m"(x == 0 && n == {M - k/2})"[m, f[95m"(x < 32 && n == {M - k/2})"[m],[32;9H[95m"BinMod"[m: [f[95m"(x == 0 && n == {M - k/2})"[m],[33;9H[95m"Bin2"[m: [f[95m"(x == 0 && y == 8 && n < {k/2})"[m, f[95m"(x < 32 && y == 8 && n < {k/2})"[m],[34;9H[95m"BiasDir"[m: [[95m"(x == 0 && y == 0)"[m, [95m"(x == 1 && y == 1)"[m],[35;9H[95m"DepRV"[m: [f[95m"(x == 0 && y == 0 && n == {k})"[m, f[95m"(x == 8 && y == 16 && n == {k})"[m],[36;9H[95m"RevBin"[m: [f[95m"(x < {k/2} && z == 0)"[m],[37;9H[95m"Duel"[m: [[95m"(t == 0)"[m, [95m"(t == 1)"[m],
+    }
+    [93mreturn[m INIT_STATES_MAP.get(progname, [])
+
+[93mdef[m [1m[96mApproxInv[m(progname, iters, epsilon, eta, delta, mode, worker_id):
+    [1m[96mprint[m(f[95m"Running PRORP({progname},k={iters}, ε[42;50H={epsilon}, η[42;63H={eta}, δ[42;72H={delta}), mode={mode}"[m)
+    worker_output_dir = os.path.join([44;9Hos.path.expanduser([95m"~"[m), [95m"ApproxInv_Output"[m, f[95m"worker_{worker_id}"[m
+    )
+    os.makedirs(worker_output_dir, exist_ok=[1m[96mTrue[m)[48;5Hk_values = [iters]
+    num_bits_values = [[95m16[m, [95m32[m]
+    [93mfor[m num_bits [93min[m num_bits_values:[51;9H[93mfor[m k [93min[m k_values:[52;13Hinit_states_list = get_init_states(progname, k, M)[53;13H[93mfor[m init_states [93min[m init_states_list:[54;17HProgformula_path = os.path.join(CURRENT_PATH, [95m"progformula/"[m, [95m"EXIST_progs.py"[m)[55;186H1,1[11CTop"driver.py" [noeol] 194L, 8588B[1;1H[?25h[?25l[1;54r[1;1H[3M[1;55r[52;17Hsubprocess.run([53;21H[[95m"python3"[m, Progformula_path, [1m[96mstr[m(progname), [1m[96mstr[m(num_bits), [1m[96mstr[m(p)],[54;21Hcheck=[1m[96mTrue[m,[55;1H[K[55;186H9,1[12C2%[6;1H[?25h[?25l[1;54r[1;1H[3M[1;55r[52;17H)[53;17Hsubprocess.run([54;21H[[55;186H[K[55;186H12,0-1[9C4%[6;1H[?25h[?25l[1;54r[1;1H[3M[1;55r[52;25H[95m"python3"[m, [95m"initgen.py"[m,[53;25H[95m"--progname"[m, [1m[96mstr[m(progname),[54;25H[95m"--init_states"[m, [1m[96mstr[m(init_states),[55;186H[K[55;186H15,0-1[9C6%[6;1H[?25h[?25l[1;54r[1;1H[3M[1;55r[52;25H[95m"--num_bits"[m, [1m[96mstr[m(num_bits),[53;21H],[54;21Hcheck=[1m[96mTrue[m,[55;186H[K[55;186H18,1[11C8%[6;1H[?25h[?25l[1;54r[1;1H[3M[1;55r[52;17H)[53;17HValidifier_trigger_path = os.path.join(CURRENT_PATH, [95m"src/Validifier/"[m, [95m"validifier.py"[m)[54;17HInit_sampler_trigger_path = os.path.join(CURRENT_PATH, [95m"src/Program_state_sampler/"[m, [95m"init_sampler.py"[m)[55;186H[K[55;186H21,1[10C10%[6;1H[?25h[?25l[1;54r[1;1H[3M[1;55r[52;17HTreeLearner_trigger_path = os.path.join(CURRENT_PATH, [95m"src/TreeLearner/"[m, [95m"TreeLearner.py"[m)[53;17Hsubprocess.run([54;21H[[55;186H[K[55;186H24,1[10C12%[6;1H[?25h[?25l[1;54r[1;1H[3M[1;55r[52;25H[95m"python3"[m, Init_sampler_trigger_path,[53;25H[95m"--progname"[m, [1m[96mstr[m(progname),[54;25H[95m"--epsilon"[m, [1m[96mstr[m(epsilon),[55;186H[K[55;186H27,1[10C15%[6;1H[?25h[?25l[1;54r[1;1H[3M[1;55r[52;25H[95m"--eta"[m, [1m[96mstr[m(eta),[53;25H[95m"--delta"[m, [1m[96mstr[m(delta),[54;25H[95m"--iters"[m, [1m[96mstr[m(k),[55;186H[K[55;186H30,1[10C17%[6;1H[?25h[?25l[1;54r[1;1H[3M[1;55r[52;25H[95m"--num_bits"[m, [1m[96mstr[m(num_bits),[53;25H[95m"--flag"[m, [1m[96mstr[m(mode),[54;21H],[55;186H[K[55;186H33,1[10C19%[6;1H[?25h[?25l[1;54r[1;1H[3M[1;55r[52;21Hcheck=[1m[96mTrue[m,[53;17H)[54;17Hcmd = [[55;186H[K[55;186H36,1[10C21%[6;1H[?25h[?25l[1;54r[1;1H[3M[1;55r[52;21H[95m"python3"[m, TreeLearner_trigger_path,[53;21H[95m"--progname"[m, [1m[96mstr[m(progname),[54;21H[95m"--epsilon"[m, [1m[96mstr[m(epsilon),[55;186H[K[55;186H39,1[10C23%[6;1H[?25h[?25l[1;54r[1;1H[3M[1;55r[52;21H[95m"--eta"[m, [1m[96mstr[m(eta),[53;21H[95m"--delta"[m, [1m[96mstr[m(delta),[54;21H[95m"--iters"[m, [1m[96mstr[m(k),[55;186H[K[55;186H42,1[10C25%[6;1H[?25h[?25l[1;54r[1;1H[3M[1;55r[52;21H[95m"--num_bits"[m, [1m[96mstr[m(num_bits),[53;21H[95m"--init_states"[m, [1m[96mstr[m(init_states),[54;21H[95m"--flag"[m, [1m[96mstr[m(mode),[55;186H[K[55;186H45,1[10C27%[6;1H[?25h[?25l[1;54r[1;1H[3M[1;55r[52;17H][53;17Hlog_path = os.path.join(CURRENT_PATH, f[95m"logs/logs_{num_bits}bits/{progname}_{epsilon}_{delta}.out"[m)[54;17Hlog_dir = os.path.dirname(log_path)[55;186H[K[55;186H48,1[10C30%[6;1H[?25h[?25l[1;54r[1;1H[3M[1;55r[52;17Hos.makedirs(log_dir, exist_ok=[1m[96mTrue[m)[53;17H[93mwith[m [1m[96mopen[m(log_path, [95m"a"[m) [93mas[m log_file:[54;21Hlog_file.write(f[95m"[m[38;5;224m\n[m[95m--- Run at {datetime.now()} ---[m[38;5;224m\n[m[95m"[m)[55;186H[K[55;186H51,1[10C32%[6;1H[?25h[?25l[1;54r[1;1H[3M[1;55r[52;21Hsubprocess.run(cmd, stdout=log_file, stderr=log_file, text=[1m[96mTrue[m, check=[1m[96mTrue[m)
+
+[93mif[m __name__ == [95m"__main__"[m:[55;186H[K[55;186H54,1[10C34%[6;1H[?25h[?25l[1;54r[1;1H[3M[1;55r[54;5H[93mif[m [1m[96mlen[m(sys.argv) == [95m7[m:[55;186H[K[55;186H57,1[10C36%[6;1H[?25h[?25l[1;54r[1;1H[3M[1;55r[52;9Hprogname = sys.argv[[95m1[m][53;9Hiters = [1m[96mint[m(sys.argv[[95m2[m])[54;9Hepsilon = [1m[96mfloat[m(sys.argv[[95m3[m])[55;186H[K[55;186H60,1[10C38%[6;1H[?25h[?25l[1;54r[1;1H[3M[1;55r[52;9Heta = [1m[96mfloat[m(sys.argv[[95m4[m])[53;9Hdelta = [1m[96mfloat[m(sys.argv[[95m5[m])[54;9Hmode = [1m[96mint[m(sys.argv[[95m6[m])[55;186H[K[55;186H63,1[10C40%[6;1H[?25h[?25l[1;54r[1;1H[3M[1;55r[52;9Hinput_list = [(progname, iters, epsilon, eta, delta, mode)]
+    [93melif[m sys.argv[[95m1[m] == [95m"all"[m:[54;9H[93mfor[m mode [93min[m [[95m0[m, [95m1[m]:[55;186H[K[55;186H66,1[10C42%[6;1H[?25h[?25l[1;54r[1;1H[3M[1;55r[52;13Hinput_list = [[53;17H([95m"ModSum"[m, [95m64[m, [95m0.05[m, [95m0.05[m, [95m0.1[m, mode),[54;17H([95m"ModSum"[m, [95m96[m, [95m0.05[m, [95m0.05[m, [95m0.1[m, mode),[55;186H[K[55;186H69,1[10C45%[6;1H[?25h[?25l[1;54r[1;1H[3M[1;55r[52;17H([95m"ModSum"[m, [95m128[m, [95m0.05[m, [95m0.05[m, [95m0.1[m, mode),[53;17H([95m"ModSum"[m, [95m160[m, [95m0.05[m, [95m0.05[m, [95m0.1[m, mode),[54;17H[96m# ("Duel", 32, 0.05, 0.05, 0.1),[m[55;186H[K[55;186H72,1[10C47%[6;1H[?25h[?25l[1;54r[1;1H[3M[1;55r[52;17H[96m# ("Bin1", 32, 0.05, 0.05, 0.1),[53;17H# ("Prinsys", 32, 0.05, 0.05, 0.1),[54;17H# ("LinExp",  32, 0.01, 0.01, 0.1),[m[55;186H[K[55;186H75,1[10C49%[6;1H[?25h[?25l[1;54r[1;1H[3M[1;55r[52;17H[96m# ("Fair", 32, 0.05, 0.05, 0.1),[53;17H# ("Sum0", 32, 0.05, 0.05, 0.1),[54;17H# ("BigGeo0", 32, 0.05, 0.05, 0.1),[m[55;186H[K[55;186H78,1[10C51%[6;1H[?25h[?25l[1;54r[1;1H[3M[1;55r[52;17H[96m# ("Detm", 32, 0.05, 0.05, 0.1),[53;17H# ("DepRV", 32, 0.05, 0.05, 0.1),[54;17H# ("Bin0", 32, 0.05, 0.05, 0.1),[m[55;186H[K[55;186H81,1[10C53%[6;1H[?25h[?25l[1;54r[1;1H[3M[1;55r[52;17H[96m# ("Bin2", 32, 0.05, 0.05, 0.1),[53;17H# ("RevBin", 32, 0.05, 0.05, 0.1),[54;17H# ("BiasDir", 32, 0.05, 0.05, 0.1),[m[55;186H[K[55;186H84,1[10C55%[6;1H[?25h[?25l[1;54r[1;1H[3M[1;55r[52;17H[96m# ("BigGeo1", 32, 0.05, 0.05, 0.1),[53;17H# ("Mart", 32, 0.05, 0.05, 0.1),[54;17H# ("GeoAr", 32, 0.05, 0.05, 0.1),[m[55;186H[K[55;186H87,1[10C57%[6;1H[?25h[?25l[1;54r[1;1H[3M[1;55r[52;17H[96m# ("BigGeo2", 32, 0.05, 0.05, 0.1),[m[53;13H][55;186H[K[55;186H90,1[10C60%[6;1H[?25h[?25l[1;54r[1;1H[3M[1;55r[52;5H[93mfor[m worker_id, args [93min[m [1m[96menumerate[m(input_list):[53;9HApproxInv(*args, worker_id)[55;186H[K[55;186H93,1[10C62%[6;1H[?25h[?25l[1;54r[1;1H[3M[1;55r[52;5H[1m[96mprint[m([95m"All tasks completed."[m)[55;186H[K[55;186H96,1[10C64%[6;1H[?25h[?25l[1;54r[1;1H[3M[1;55r[55;186H[K[55;186H99,1[10C66%[6;1H[?25h[?25l[1;54r[1;1H[3M[1;55r[54;1H[96m# if progname == "BigGeo0":[m[55;186H[K[55;186H102,1[9C68%[6;1H[?25h[?25l[1;54r[1;1H[3M[1;55r[52;1H[96m#                 init_states_list = ["(z == 0)"]
+#                 # init_states_list = [f"(z{7*int((num_bits/8))})", f"(z{5*int((num_bits/8))})", f"(z{3*int((num_bits/8))})",]
+#             if progname == "BigGeo1":[m[55;186H[K[55;186H105,1[9C70%[6;1H[?25h[?25l[1;54r[1;1H[3M[1;55r[52;1H[96m#                 init_states_list = ["(z == 0 && x == 16)"]
+#                                     #"(z < 64 && x < 16)",]
+#             if progname == "BigGeo2":[m[55;186H[K[55;186H108,1[9C72%[6;1H[?25h[?25l[1;54r[1;1H[3M[1;55r[52;1H[96m#                 init_states_list = ["(z == 0 && x == 16)", "(z < 64 && x < 16)",]
+#             if progname == "LinExp":
+#                 init_states_list = [f"(count == 0 && n < {k})", f"(count == 0 && n < {k})"][m[55;186H[K[55;186H111,1[9C75%[6;1H[?25h[?25l[1;54r[1;1H[3M[1;55r[52;1H[96m#             if progname == "Sum0":
+#                 init_states_list = [f"(x == 0 && n == {k})"]
+#                 # init_states_list = [f"(x < 8 && n < {k})", f"(x == 64 && n < {k})"][m[55;186H[K[55;186H114,1[9C77%[6;1H[?25h[?25l[1;54r[1;1H[3L[1;55r[1;9Hprogname = sys.argv[[95m1[m][2;9Hiters = [1m[96mint[m(sys.argv[[95m2[m])[3;9Hepsilon = [1m[96mfloat[m(sys.argv[[95m3[m])[55;186H[K[55;186H114,1[9C75%[9;1H[?25h[?25l[1;54r[1;1H[3L[1;55r[3;5H[93mif[m [1m[96mlen[m(sys.argv) == [95m7[m:[55;186H[K[55;186H114,1[9C72%[12;1H[?25h[?25l[1;54r[1;1H[3M[1;55r[52;1H[96m#                 init_states_list = ["(z == 0 && x == 16)", "(z < 64 && x < 16)",]
+#             if progname == "LinExp":
+#                 init_states_list = [f"(count == 0 && n < {k})", f"(count == 0 && n < {k})"][m[55;186H[K[55;186H114,1[9C75%[9;1H[?25h[?25l[1;54r[1;1H[3M[1;55r[52;1H[96m#             if progname == "Sum0":
+#                 init_states_list = [f"(x == 0 && n == {k})"]
+#                 # init_states_list = [f"(x < 8 && n < {k})", f"(x == 64 && n < {k})"][m[55;186H[K[55;186H114,1[9C77%[6;1H[?25h[?25l[55;176H~@k[6;1H[55;176H   [7;1H[55;188H5[7;1H[?25h[?25l[55;176H~@k[7;1H[55;176H   [8;1H[55;188H6[8;1H[?25h[?25l[55;176H~@k[8;1H[55;176H   [9;1H[55;188H7[9;1H[?25h[?25l[55;176H~@k[9;1H[55;176H   [10;1H[55;188H8[10;1H[?25h[?25l[55;176H~@k[10;1H[55;176H   [11;1H[55;188H9[11;1H[?25h[?25l[55;176H~@k[11;1H[55;176H   [12;1H[55;187H20[12;1H[?25h[?25l[55;176H~@k[12;1H[55;176H   [13;1H[55;188H1[13;1H[?25h[?25l[55;176H~@k[13;1H[55;176H   [14;1H[55;188H2[14;1H[?25h[?25l[55;176H~@k[14;1H[55;176H   [15;1H[55;188H3[15;1H[?25h[?25l[55;176H~@k[15;1H[55;176H   [16;1H[55;188H4[16;1H[?25h[?25l[55;176H~@k[16;1H[55;176H   [17;1H[55;188H5[17;1H[?25h[?25l[55;176H~@k[17;1H[55;176H   [18;1H[55;188H6[18;1H[?25h[?25l[55;176H~@k[18;1H[55;176H   [19;1H[55;188H7[19;1H[?25h[?25l[55;176H~@k[19;1H[55;176H   [20;1H[55;188H8[20;1H[?25h[?25l[55;176H~@k[20;1H[55;176H   [21;1H[55;188H9[21;1H[?25h[?25l[55;176H~@k[21;1H[55;176H   [22;1H[55;187H30[22;1H[?25h[?25l[55;176H~@k[22;1H[55;176H   [23;1H[55;188H1[23;1H[?25h[?25l[55;176H~@k[23;1H[55;176H   [24;1H[55;188H2[24;1H[?25h[?25l[55;176H~@k[24;1H[55;176H   [25;1H[55;188H3[25;1H[?25h[?25l[55;176H~@k[25;1H[55;176H   [26;1H[55;188H4[26;1H[?25h[?25l[55;176H~@k[26;1H[55;176H   [27;1H[55;188H5[27;1H[?25h[?25l[55;176H~@k[27;1H[55;176H   [28;1H[55;188H6[28;1H[?25h[?25l[55;176H~@k[28;1H[55;176H   [29;1H[55;188H7[29;1H[?25h[?25l[55;176H~@k[29;1H[55;176H   [30;1H[55;188H8,0-1[30;1H[?25h[?25l[55;176H~@k[30;1H[55;176H   [31;1H[55;188H9,1  [31;1H[?25h[?25l[55;176Hi[31;1H[55;176H [31;1H[55;1H[1m-- INSERT --[m[55;186H[K[55;186H139,1[9C77%[31;1H[?25h[?25l[55;190H2[31;2H[?25h[?25l[55;190H3[31;3H[?25h[?25l[55;190H4[31;4H[?25h[?25l[55;190H5[31;5H[?25h[?25l    [93mfor[m worker_id, args [93min[m [1m[96menumerate[m(input_list):[55;190H9[31;9H[?25h[?25l    [93mfor[m worker_id, args [93min[m [1m[96menumerate[m(input_list):[55;190H13[31;13H[?25h[?25l[55;188H8,1 [30;1H[?25h[?25l[7;26H[46m[[29;13H][m[55;188H7,13[29;13H[?25h[?25l[7;26H[[29;13H][55;188H6[28;13H[?25h[?25l[55;188H5[27;13H[?25h[?25l[55;188H4[26;13H[?25h[?25l[55;188H3[25;13H[?25h[?25l[55;188H2[24;13H[?25h[?25l[55;188H1[23;13H[?25h[?25l[55;188H0[22;13H[?25h[?25l[55;187H29[21;13H[?25h[?25l[55;188H8[20;13H[?25h[?25l[55;188H7[19;13H[?25h[?25l[55;188H6[18;13H[?25h[?25l[55;188H5[17;13H[?25h[?25l[55;188H4[16;13H[?25h[?25l[55;188H3[15;13H[?25h[?25l[55;188H2[14;13H[?25h[?25l[55;188H1[13;13H[?25h[?25l[55;188H0[12;13H[?25h[?25l[55;187H19[11;13H[?25h[?25l[55;188H7[9;13H[?25h[?25l[55;188H6[8;13H[?25h[?25l[55;188H5[7;13H[?25h[?25l[55;188H4[6;13H[?25h[?25l[1;54r[1;1H[L[1;55r[1;9Hepsilon = [1m[96mfloat[m(sys.argv[[95m3[m])[55;186H[K[55;186H113,13[8C76%[6;13H[?25h[?25l[1;54r[1;1H[L[1;55r[1;9Hiters = [1m[96mint[m(sys.argv[[95m2[m])[55;186H[K[55;186H112,13[8C75%[6;13H[?25h[?25l[1;54r[1;1H[L[1;55r[1;9Hprogname = sys.argv[[95m1[m][55;186H[K[55;186H111,13[8C75%[6;13H[?25h[?25l[1;54r[1;1H[L[1;55r[1;5H[93mif[m [1m[96mlen[m(sys.argv) == [95m7[m:[55;186H[K[55;186H110,13[8C74%[6;13H[?25h[?25l[1;54r[1;1H[L[1;55r[55;186H[K[55;186H109,13[8C73%[6;13H[?25h[?25l[1;54r[1;1H[L[1;55r[55;186H[K[55;186H108,13[8C72%[6;13H[?25h[?25l[55;188H9[7;13H[?25h[?25l[55;187H12[10;13H[?25h[?25l[55;188H3[11;13H[?25h[?25l[55;188H4[12;13H[?25h[?25l[55;188H6[14;13H[?25h[?25l[55;187H20[18;13H[?25h[?25l[55;188H1[19;13H[?25h[?25l[55;188H5[23;13H[?25h[?25l[55;188H6[24;13H[?25h[?25l[55;188H7[25;13H[?25h[?25l[55;188H8[26;13H[?25h[?25l[55;187H32[30;13H[?25h[?25l[55;188H3[31;13H[?25h[?25l[55;188H4[32;13H[?25h[?25l[55;188H6[34;13H[?25h[?25l[55;188H8,1 [36;1H[?25h[?25l[55;188H9,13[37;13H[?25h[?25l[55;187H40[38;13H[?25h[?25l[55;188H1,1 [39;1H[?25h[?25l[55;188H5,13[43;13H[?25h[?25l[55;188H6,1 [44;1H[?25h[?25l[55;188H5,13[43;13H[?25h[?25l[55;188H4,1 [42;1H[?25h[?25l[55;188H3[41;1H[?25h[?25l[55;188H2,13[40;13H[?25h[?25l[55;188H1,1 [39;1H[?25h[?25l[55;188H0,13[38;13H[?25h[?25l[55;187H39[37;13H[?25h[?25l[55;187H40[38;13H[?25h[?25l[55;191H2[38;12H[?25h[?25l[55;191H1[38;11H[?25h[?25l[55;191H0[38;10H[?25h[?25l[55;190H9 [38;9H[?25h[?25l    ApproxInv(*args, worker_id)[55;190H13[38;13H[?25h[?25l    ApproxInv(*args, worker_id)[55;191H7[38;17H[?25h[?25l[55;188H1,1 [39;1H[?25h[?25l[55;188H2,17[40;17H[?25h[?25l[55;188H1,1 [39;1H[?25h[?25l[55;188H0,17[38;17H[?25h[?25l[55;187H39[37;17H[?25h[?25l[55;188H8,1 [36;1H[?25h[?25l[13;26H[46m[[35;13H][m[55;188H7,14[35;14H[?25h[?25l[13;26H[[35;13H][55;188H6,17[34;17H[?25h[?25l[55;188H5[33;17H[?25h[?25l[55;188H4[32;17H[?25h[?25l[55;188H3[31;17H[?25h[?25l[55;188H2[30;17H[?25h[?25l[55;188H1[29;17H[?25h[?25l[55;188H0[28;17H[?25h[?25l[55;187H29[27;17H[?25h[?25l[55;188H8[26;17H[?25h[?25l[55;188H7[25;17H[?25h[?25l[55;188H6[24;17H[?25h[?25l[55;188H5[23;17H[?25h[?25l[55;188H3[21;17H[?25h[?25l[55;188H2[20;17H[?25h[?25l[55;188H1[19;17H[?25h[?25l[55;188H0[18;17H[?25h[?25l[17;17H[46m([36C)[m[55;187H19[17;17H[?25h[?25l[16;17H[46m([36C)[m[17;17H([36C)[55;188H8[16;17H[?25h[?25l[15;17H[46m([35C)[m[16;17H([36C)[55;188H7[15;17H[?25h[?25l[14;17H[46m([35C)[m[15;17H([35C)[55;188H6[14;17H[?25h[?25l([35C)[55;188H5[13;17H[?25h[?25l[55;188H4[12;17H[?25h[?25l[55;188H3[11;17H[?25h[?25l[55;188H2[10;17H[?25h[?25l[55;188H1[9;17H[?25h[?25l[55;188H0[8;17H[?25h[?25l[55;187H09[7;17H[?25h[?25l[55;187H10[8;17H[?25h[?25l[1;54r[1;1H[3M[1;55r[52;1H[96m#                 init_states_list = ["(z == 0 && x == 16)", "(z < 64 && x < 16)",]
+#             if progname == "LinExp":
+#                 init_states_list = [f"(count == 0 && n < {k})", f"(count == 0 && n < {k})"][m[55;186H[K[55;186H111,17[8C75%[6;17H[?25h[?25l[1;54r[1;1H[3M[1;55r[52;1H[96m#             if progname == "Sum0":
+#                 init_states_list = [f"(x == 0 && n == {k})"]
+#                 # init_states_list = [f"(x < 8 && n < {k})", f"(x == 64 && n < {k})"][m[55;186H[K[55;186H114,17[8C77%[6;17H[?25h[?25l[1;54r[1;1H[3L[1;55r[1;9Hprogname = sys.argv[[95m1[m][2;9Hiters = [1m[96mint[m(sys.argv[[95m2[m])[3;9Hepsilon = [1m[96mfloat[m(sys.argv[[95m3[m])[55;186H[K[55;186H114,17[8C75%[9;17H[?25h[?25l[1;54r[1;1H[3L[1;55r[3;5H[93mif[m [1m[96mlen[m(sys.argv) == [95m7[m:[55;186H[K[55;186H114,17[8C72%[12;17H[?25h[55;1H[K[?25l[55;186H114,16[8C72%[12;16H[?25h[?25l[55;176H:[12;16H[55;176H[K[55;1H:[?25hwq[?25l[?1006;1000l[?1002l[?2004l[>4;m"driver.py" 194L, 8605B written[23;2t[23;1t
+[?1004l[?2004l[?1l>[?1049l[23;0;0t[?25h[>4;m
+[?2004h(boolprog) [;32m┌──([1;34mnitesht㉿cse[;32m)-[[0;1m~/project/PRORP/PRORP[;32m]
+[;32m└─[1;34m$[0m cat driev[K[K[Kiver.py 
+[?2004limport subprocess
+import os
+import time
+import sys
+from concurrent.futures import ProcessPoolExecutor, as_completed
+from datetime import datetime
+import itertools
+
+CURRENT_PATH = os.path.realpath("")
+SHARED_INPUT_DIR = "/shared/input/"  # Read-only shared input
+OUTPUT_BASE_DIR = "/shared/output/"  # Workers write here
+
+M = 512
+p = 0.5
+
+def get_init_states(progname, k, M):
+    INIT_STATES_MAP = {
+        "Temp": ["(z == 0)"],
+        "BigGeo0": ["(z == 0)"],
+        "BigGeo1": ["(z == 0 && x == 16)"],
+        "BigGeo2": ["(z == 0 && x == 16)", "(z < 64 && x < 16)"],
+        "LinExp": [f"(count == 0 && n < {k})", f"(count == 0 && n < {k})"],
+        "Sum0": [f"(x < 8 && n < {k})"],
+        "ModSum": [f"(x == 0 && n < {k})"],
+        "Prinsys": ["(x == 0)"],
+        "Detm": ["(count == 0)"],
+        "Fair": ["(count == 0)", "(count < 64)"],
+        "Mart": ["(c == 0 && b == 64 && rounds == 0)"],
+        "GeoAr": ["(x == 0 && y == 0)"],
+        "Bin0": [f"(x == 0 && y == 2 && n == {k})", f"(x < 64 && y == 2 && n == {k})"],
+        "Bin1": [f"(x == 0 && n == {M - k/2})", f"(x < 32 && n == {M - k/2})"],
+        "BinMod": [f"(x == 0 && n == {M - k/2})"],
+        "Bin2": [f"(x == 0 && y == 8 && n < {k/2})", f"(x < 32 && y == 8 && n < {k/2})"],
+        "BiasDir": ["(x == 0 && y == 0)", "(x == 1 && y == 1)"],
+        "DepRV": [f"(x == 0 && y == 0 && n == {k})", f"(x == 8 && y == 16 && n == {k})"],
+        "RevBin": [f"(x < {k/2} && z == 0)"],
+        "Duel": ["(t == 0)", "(t == 1)"],
+    }
+    return INIT_STATES_MAP.get(progname, [])
+
+def ApproxInv(progname, iters, epsilon, eta, delta, mode, worker_id):
+    print(f"Running PRORP({progname},k={iters}, ε={epsilon}, η={eta}, δ={delta}), mode={mode}")
+    worker_output_dir = os.path.join(
+        os.path.expanduser("~"), "ApproxInv_Output", f"worker_{worker_id}"
+    )
+    os.makedirs(worker_output_dir, exist_ok=True)
+
+    k_values = [iters]
+    num_bits_values = [16, 32]
+    for num_bits in num_bits_values:
+        for k in k_values:
+            init_states_list = get_init_states(progname, k, M)
+            for init_states in init_states_list:
+                Progformula_path = os.path.join(CURRENT_PATH, "progformula/", "EXIST_progs.py")
+                subprocess.run(
+                    ["python3", Progformula_path, str(progname), str(num_bits), str(p)],
+                    check=True,
+                )
+                subprocess.run(
+                    [
+                        "python3", "initgen.py",
+                        "--progname", str(progname),
+                        "--init_states", str(init_states),
+                        "--num_bits", str(num_bits),
+                    ],
+                    check=True,
+                )
+                Validifier_trigger_path = os.path.join(CURRENT_PATH, "src/Validifier/", "validifier.py")
+                Init_sampler_trigger_path = os.path.join(CURRENT_PATH, "src/Program_state_sampler/", "init_sampler.py")
+                TreeLearner_trigger_path = os.path.join(CURRENT_PATH, "src/TreeLearner/", "TreeLearner.py")
+                subprocess.run(
+                    [
+                        "python3", Init_sampler_trigger_path,
+                        "--progname", str(progname),
+                        "--epsilon", str(epsilon),
+                        "--eta", str(eta),
+                        "--delta", str(delta),
+                        "--iters", str(k),
+                        "--num_bits", str(num_bits),
+                        "--flag", str(mode),
+                    ],
+                    check=True,
+                )
+                cmd = [
+                    "python3", TreeLearner_trigger_path,
+                    "--progname", str(progname),
+                    "--epsilon", str(epsilon),
+                    "--eta", str(eta),
+                    "--delta", str(delta),
+                    "--iters", str(k),
+                    "--num_bits", str(num_bits),
+                    "--init_states", str(init_states),
+                    "--flag", str(mode),
+                ]
+                log_path = os.path.join(CURRENT_PATH, f"logs/logs_{num_bits}bits/{progname}_{epsilon}_{delta}.out")
+                log_dir = os.path.dirname(log_path)
+                os.makedirs(log_dir, exist_ok=True)
+                with open(log_path, "a") as log_file:
+                    log_file.write(f"\n--- Run at {datetime.now()} ---\n")
+                    subprocess.run(cmd, stdout=log_file, stderr=log_file, text=True, check=True)
+
+if __name__ == "__main__":
+    
+    
+    if len(sys.argv) == 7:
+        progname = sys.argv[1]
+        iters = int(sys.argv[2])
+        epsilon = float(sys.argv[3])
+        eta = float(sys.argv[4])
+        delta = float(sys.argv[5])
+        mode = int(sys.argv[6])
+        input_list = [(progname, iters, epsilon, eta, delta, mode)]
+    elif sys.argv[1] == "all":
+        for mode in [0, 1]:
+            input_list = [
+                ("ModSum", 64, 0.05, 0.05, 0.1, mode),
+                ("ModSum", 96, 0.05, 0.05, 0.1, mode),
+                ("ModSum", 128, 0.05, 0.05, 0.1, mode),
+                ("ModSum", 160, 0.05, 0.05, 0.1, mode),
+                # ("Duel", 32, 0.05, 0.05, 0.1),
+                # ("Bin1", 32, 0.05, 0.05, 0.1),
+                # ("Prinsys", 32, 0.05, 0.05, 0.1),
+                # ("LinExp",  32, 0.01, 0.01, 0.1),
+                # ("Fair", 32, 0.05, 0.05, 0.1),
+                # ("Sum0", 32, 0.05, 0.05, 0.1),
+                # ("BigGeo0", 32, 0.05, 0.05, 0.1),
+                # ("Detm", 32, 0.05, 0.05, 0.1),
+                # ("DepRV", 32, 0.05, 0.05, 0.1),
+                # ("Bin0", 32, 0.05, 0.05, 0.1),
+                # ("Bin2", 32, 0.05, 0.05, 0.1),
+                # ("RevBin", 32, 0.05, 0.05, 0.1),
+                # ("BiasDir", 32, 0.05, 0.05, 0.1),
+                # ("BigGeo1", 32, 0.05, 0.05, 0.1),
+                # ("Mart", 32, 0.05, 0.05, 0.1),
+                # ("GeoAr", 32, 0.05, 0.05, 0.1),
+                # ("BigGeo2", 32, 0.05, 0.05, 0.1),
+            ]
+
+            for worker_id, args in enumerate(input_list):
+                ApproxInv(*args, worker_id)
+
+    print("All tasks completed.")
+
+
+            
+
+
+
+
+# if progname == "BigGeo0":
+#                 init_states_list = ["(z == 0)"]
+#                 # init_states_list = [f"(z{7*int((num_bits/8))})", f"(z{5*int((num_bits/8))})", f"(z{3*int((num_bits/8))})",]
+#             if progname == "BigGeo1":
+#                 init_states_list = ["(z == 0 && x == 16)"]
+#                                     #"(z < 64 && x < 16)",]
+#             if progname == "BigGeo2":
+#                 init_states_list = ["(z == 0 && x == 16)", "(z < 64 && x < 16)",]
+#             if progname == "LinExp":
+#                 init_states_list = [f"(count == 0 && n < {k})", f"(count == 0 && n < {k})"]
+#             if progname == "Sum0":
+#                 init_states_list = [f"(x == 0 && n == {k})"]
+#                 # init_states_list = [f"(x < 8 && n < {k})", f"(x == 64 && n < {k})"]
+#             if progname == "Prinsys":
+#                 init_states_list = ["(x == 0)"]
+#             if progname == "Detm":
+#                 init_states_list = ["(count == 0)"]
+#             if progname == "Fair":
+#                 init_states_list = ["(count == 0)", "(count < 64)",]
+#             if progname == "Mart":
+#                 init_states_list = ["(c == 0 && b == 64 && rounds == 0)", ]
+#                                     # "(c < 32 && b == 64 && rounds == 32)",]
+#             if progname == "GeoAr":
+#                 init_states_list = ["(x == 0 && y == 0)"]
+#                                     #, "(x < 64 && y == 16)",]
+#             if progname == "Bin0":
+#                 init_states_list = [f"(x == 0 && y == 2 && n == {k})", f"(x < 64 && y == 2 && n == {k})"]
+#             if progname == "Bin1":
+#                 init_states_list = [f"(x == 0 && n == {M - k/2})", f"(x < 32 && n == {M - k/2})"]
+#             if progname == "Bin2":
+#                 init_states_list = [f"(x == 0 && y == 8 && n < {k/2})", f"(x < 32 && y == 8 && n < {k/2})"]
+#             if progname == "BiasDir":
+#                 init_states_list = ["(x == 0 && y == 0)", "(x == 1 && y == 1)",]
+#             if progname == "DepRV":
+#                 init_states_list = [f"(x == 0 && y == 0 && n == {k})", f"(x == 8 && y == 16 && n == {k})"]
+#             if progname == "RevBin":
+#                 init_states_list = [f"(x < {k/2} && z == 0)"]
+#                                     #f"(x == {k/2} && z < 16)"]
+#             if progname == "Duel":
+#                 init_states_list = ["(t == 0)", "(t == 1)",]
+
+
+
+
+           
+
+[?2004h(boolprog) [;32m┌──([1;34mnitesht㉿cse[;32m)-[[0;1m~/project/PRORP/PRORP[;32m]
+[;32m└─[1;34m$[0m cat driver.py [C[C[C[Cvim[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[4Pgit status[C[C[C[C[5Pcleargit clean -fd[3Pstatus[1Pshtussu[C[C[C[C[5Pclearpython driver.py all[C[C[C[C[C[C[C[C[C[C[C[4P--version[C[C[C[Cclear[Konda deactivate[C[C[C[Cexit[Kcleard PRORP/[C[C[C[C[4Pls -aclearonda deactivate[C[C[C[C[Clear[Kgit status[C[C[C[Crm -rf cms.zip cmsgen.zip lib/[C[C[C[C[20Pgit status[1Pshtusbranch -a[C[C[C[C[8Pclearwhich cmsgenryptominisat5[C[C[C[Csudo chmod +x /usr/local/bin/cmsgen[C[C[C[C[C[C[C[C[C[5Pmv cmsgen /usr/local/bin/[C[C[C[C[14Punzip cmsgen.zip[C[C[C[C[95@wget https://github.com/meelgroup/cmsgen/releases/download/release%2F6.1.1/cmsgen-linux-amd64.zip -O[C[C[C[C[C[C[C[C[C[C[C[9Pv[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cclear[Kuname -m[C[C[C[Cwget https://github.com/meelgroup/cmsgen/releases/download/v6.1.1/cmsgen-linux-x86_64.zip -O cmsgen.zip[7@release/[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[67Psudo chmod +x /usr/local/bin/cryptominisat5[C[C[C[C[C[C[C[C[C[5Pmv cryptominisat5 /usr/local/bin/[C[C[C[Cls -a[Kunzip cms.zip[C[C[C[C[7Pls -la[C[C[C[Cwget https://github.com/msoos/cryptominisat/releases/download/release/5.13.0/cryptominisat5-linux-amd64.zip -O cms.zip[C[C[C[C[C[C[C[C[C[https://github.com/msoos/cryptominisat/releases/download/release/5.13.0/cryptominisat5-linux-amd64.zip](https://github.com/msoos/cryptominisat/releases/download/release/5.13.0/cryptominisat5-linux-amd64.zip) -O cms.zip[A[C[C[C[Cclear[K
+[K[A[C[C[C[C[C[C[C[C[Cpip install -r requirements.txt[C[C[C[Cclear[Kat requirements.txt [C[C[C[Cls -a[Kcd PRORP/[C[C[C[C[4Pls -acd PRORP/[C[C[C[C[4Pls -acd ..[2Ppwdls -acleargit checkout exp2[C[C[C[C[C[C[C[C[4Pbranch -a[C[C[C[C[8Pls[C[C[Ccd ..ls -acd src/[C[C[C[C[2Pls -aclearpython --version[C[C[C[Cclear[Konda activate boolprog[C[C[C[C[C[C[C[C[C[C[9Penv listlist envenv listactivate boolprog[C[C[C[C[Clear[Kpython --version[C[C[C[Cclear[Kls -acd src/[C[C[C[C[2Pls -acd ..ls -a[8@git branch[C[C[Ccheckout exp2[C[C[C[Cclear[Kls -a[2Ppwdcd ..ls -acd PRORP/[C[C[C[C[4Pls -acd PRORP/[C[C[C[C[4Pls -acat requirements.txt [C[C[C[C[Clear[Kpip install -r requirements.txt[C[C[C[Cclear[Kwget [https://github.com/msoos/cryptominisat/releases/download/release/5.13.0/cryptominisat5-linux-amd64.zip](https://github.com/msoos/cryptominisat/releases/download/release/5.13.0/cryptominisat5-linux-amd64.zip) -O cms.zip[A[C[C[C[C[C[C[C[C[C[81Phttps://github.com/msoos/cryptominisat/releases/download/release/5.13.0/cryptominisat5-linux-amd64.zip -O cms.zip
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls -la[K[C[C[C[Cunzip cms.zip[C[C[C[C[8Pls -a[K[K[K[K[Kclear
+[?2004l[H[2J
+[?2004h(boolprog) [;32m┌──([1;34mnitesht㉿cse[;32m)-[[0;1m~/project/PRORP/PRORP[;32m]
+[;32m└─[1;34m$[0m clearat driver.py [C[C[C[Cvim[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[4Pgit status[C[C[C[C[5Pcleargit clean -fd[3Pstatus[1Pshtussu[C[C[C[C[5Pclearpython driver.py all
+[?2004lRunning PRORP(ModSum,k=64, ε=0.05, η=0.05, δ=0.1), mode=0
+
+CNF constraints successfully written to /home/nitesht/project/PRORP/PRORP/progformula/ModSum
+
+CNF constraints successfully written to /home/nitesht/project/PRORP/PRORP/progformula/ModSum
+Running PRORP(ModSum,k=96, ε=0.05, η=0.05, δ=0.1), mode=0
+
+CNF constraints successfully written to /home/nitesht/project/PRORP/PRORP/progformula/ModSum
+
+CNF constraints successfully written to /home/nitesht/project/PRORP/PRORP/progformula/ModSum
+Running PRORP(ModSum,k=128, ε=0.05, η=0.05, δ=0.1), mode=0
+
+CNF constraints successfully written to /home/nitesht/project/PRORP/PRORP/progformula/ModSum
+
+CNF constraints successfully written to /home/nitesht/project/PRORP/PRORP/progformula/ModSum
+Running PRORP(ModSum,k=160, ε=0.05, η=0.05, δ=0.1), mode=0
+
+CNF constraints successfully written to /home/nitesht/project/PRORP/PRORP/progformula/ModSum
+
+CNF constraints successfully written to /home/nitesht/project/PRORP/PRORP/progformula/ModSum
+Running PRORP(ModSum,k=64, ε=0.05, η=0.05, δ=0.1), mode=1
+
+CNF constraints successfully written to /home/nitesht/project/PRORP/PRORP/progformula/ModSum
+
+CNF constraints successfully written to /home/nitesht/project/PRORP/PRORP/progformula/ModSum
+Running PRORP(ModSum,k=96, ε=0.05, η=0.05, δ=0.1), mode=1
+
+CNF constraints successfully written to /home/nitesht/project/PRORP/PRORP/progformula/ModSum
+
+CNF constraints successfully written to /home/nitesht/project/PRORP/PRORP/progformula/ModSum
+Running PRORP(ModSum,k=128, ε=0.05, η=0.05, δ=0.1), mode=1
+
+CNF constraints successfully written to /home/nitesht/project/PRORP/PRORP/progformula/ModSum
+
+CNF constraints successfully written to /home/nitesht/project/PRORP/PRORP/progformula/ModSum
+Running PRORP(ModSum,k=160, ε=0.05, η=0.05, δ=0.1), mode=1
+
+CNF constraints successfully written to /home/nitesht/project/PRORP/PRORP/progformula/ModSum
+
+CNF constraints successfully written to /home/nitesht/project/PRORP/PRORP/progformula/ModSum
+All tasks completed.
+
+[?2004h(boolprog) [;32m┌──([1;34mnitesht㉿cse[;32m)-[[0;1m~/project/PRORP/PRORP[;32m]
+[;32m└─[1;34m$[0m clear
+[?2004l[H[2J
+[?2004h(boolprog) [;32m┌──([1;34mnitesht㉿cse[;32m)-[[0;1m~/project/PRORP/PRORP[;32m]
+[;32m└─[1;34m$[0m git 

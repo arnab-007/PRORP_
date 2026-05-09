@@ -1,0 +1,117 @@
+{
+    "Program_variables": {
+        "Vars": [
+            "x",
+            "count"
+        ],
+        "Varmap": {
+            "x": [
+                "x15",
+                "x14",
+                "x13",
+                "x12",
+                "x11",
+                "x10",
+                "x9",
+                "x8",
+                "x7",
+                "x6",
+                "x5",
+                "x4",
+                "x3",
+                "x2",
+                "x1",
+                "x0"
+            ],
+            "count": [
+                "count15",
+                "count14",
+                "count13",
+                "count12",
+                "count11",
+                "count10",
+                "count9",
+                "count8",
+                "count7",
+                "count6",
+                "count5",
+                "count4",
+                "count3",
+                "count2",
+                "count1",
+                "count0"
+            ]
+        },
+        "Bools": [
+            "x15",
+            "x14",
+            "x13",
+            "x12",
+            "x11",
+            "x10",
+            "x9",
+            "x8",
+            "x7",
+            "x6",
+            "x5",
+            "x4",
+            "x3",
+            "x2",
+            "x1",
+            "x0",
+            "count15",
+            "count14",
+            "count13",
+            "count12",
+            "count11",
+            "count10",
+            "count9",
+            "count8",
+            "count7",
+            "count6",
+            "count5",
+            "count4",
+            "count3",
+            "count2",
+            "count1",
+            "count0"
+        ]
+    },
+    "Random_variables": {
+        "Bools": [
+            "r1",
+            "r2",
+            "r3",
+            "r4",
+            "r5",
+            "r6"
+        ]
+    },
+    "Candidate": {
+        "Expression": "(!count0 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count2 && !count3 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count1 && x4) || (!count0 && !count1 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count2 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count3 && x4) || (!count0 && !count1 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count2 && !count3 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count4 && x4) || (!count1 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count3 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count0 && count2 && x4) || (!count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count3 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count0 && count1 && count2 && x4) || (!count0 && !count1 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count3 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count2 && x4) || (!count1 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count2 && !count3 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count0 && x4) || (!count0 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count1 && count2 && count3 && x4) || (!count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count2 && !count3 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count0 && count1 && x4) || (!count1 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count2 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count0 && count3 && x4) || (!count1 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count0 && count2 && count3 && x4) || (!count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count0 && count1 && count2 && count3 && x4) || (!count0 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count2 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count1 && count3 && x4) || (!count0 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count3 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count1 && count2 && x4) || (!count0 && !count1 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count2 && count3 && x4) || (!count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count2 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count0 && count1 && count3 && x4)"
+    },
+    "Initial states": {
+        "Expression": "(!count15) && (!count14) && (!count13) && (!count12) && (!count11) && (!count10) && (!count9) && (!count8) && (!count7) && (!count6) && (!count5) && (!count4) && (!count3) && (!count2) && (!count1) && (!count0) && (!x15) && (!x14) && (!x13) && (!x12) && (!x11) && (!x10) && (!x9) && (!x8) && (!x7) && (!x6) && (!x5) && (!x4)",
+        "Loop guard": "(!x15) && (!x14) && (!x13) && (!x12) && (!x11) && (!x10) && (!x9) && (!x8) && (!x7) && (!x6) && (!x5) && (!x4)"
+    },
+    "Loop guard": "(x < 16)",
+    "Updates in each iteration": {
+        "x1": 1,
+        "x2": 1,
+        "x3": 1,
+        "x4": 2,
+        "x5": 1,
+        "x6": 2,
+        "x7": 1,
+        "x8": 2,
+        "x9": 1,
+        "x10": 1,
+        "x11": 3,
+        "x12": 1
+    },
+    "Program specification": {
+        "iterations": 4,
+        "operations per line": 4,
+        "number of lines": 15
+    }
+}

@@ -1,0 +1,23 @@
+(!t) && (c)
+64
+Starting model fitting...
+--- Fitting took: 0.0007 seconds ---
+Starting custom tree build...
+--- Custom tree build took: 0.0005 seconds ---
+Conflict detected for feature values: (np.float64(0.0), np.float64(1.0))
+     c    t  label    weight  member
+0  0.0  1.0    1.0  0.306667     1.0
+1  0.0  1.0    0.0  0.240000     0.0
+Traceback (most recent call last):
+  File "/home/nitesht/projects/BoolProg/src/TreeLearner/TreeLearner.py", line 550, in <module>
+    TreeLearner()
+  File "/home/nitesht/projects/BoolProg/src/TreeLearner/TreeLearner.py", line 376, in TreeLearner
+    predictions = clf.predict(
+                  ^^^^^^^^^^^^
+  File "/home/nitesht/projects/BoolProg/src/TreeLearner/DecisionTreeLearner.py", line 218, in predict
+    self._batch_update_leaves(new_data_for_leaves)
+  File "/home/nitesht/projects/BoolProg/src/TreeLearner/DecisionTreeLearner.py", line 189, in _batch_update_leaves
+    raise ValueError(
+ValueError: Conflict: Same datapoint with different 'member' values detected!
+
+--- Run at 2025-08-25 09:11:13.902044 ---

@@ -1,0 +1,122 @@
+{
+    "Program_variables": {
+        "Vars": [
+            "z",
+            "x",
+            "flip"
+        ],
+        "Varmap": {
+            "z": [
+                "z15",
+                "z14",
+                "z13",
+                "z12",
+                "z11",
+                "z10",
+                "z9",
+                "z8",
+                "z7",
+                "z6",
+                "z5",
+                "z4",
+                "z3",
+                "z2",
+                "z1",
+                "z0"
+            ],
+            "x": [
+                "x15",
+                "x14",
+                "x13",
+                "x12",
+                "x11",
+                "x10",
+                "x9",
+                "x8",
+                "x7",
+                "x6",
+                "x5",
+                "x4",
+                "x3",
+                "x2",
+                "x1",
+                "x0"
+            ],
+            "flip": [
+                "flip"
+            ]
+        },
+        "Bools": [
+            "z15",
+            "z14",
+            "z13",
+            "z12",
+            "z11",
+            "z10",
+            "z9",
+            "z8",
+            "z7",
+            "z6",
+            "z5",
+            "z4",
+            "z3",
+            "z2",
+            "z1",
+            "z0",
+            "x15",
+            "x14",
+            "x13",
+            "x12",
+            "x11",
+            "x10",
+            "x9",
+            "x8",
+            "x7",
+            "x6",
+            "x5",
+            "x4",
+            "x3",
+            "x2",
+            "x1",
+            "x0",
+            "flip"
+        ]
+    },
+    "Random_variables": {
+        "Bools": [
+            "r1",
+            "r2",
+            "r3",
+            "r4",
+            "r5",
+            "r6"
+        ]
+    },
+    "Candidate": {
+        "Expression": "(flip && !flip)"
+    },
+    "Initial states": {
+        "Expression": "(z == 0 && x == 16) && (!flip)",
+        "Loop guard": "(!flip)"
+    },
+    "Loop guard": "(!flip)",
+    "Updates in each iteration": {
+        "x1": 1,
+        "x2": 1,
+        "x3": 1,
+        "x4": 2,
+        "x5": 1,
+        "x6": 2,
+        "x7": 1,
+        "x8": 2,
+        "x9": 1,
+        "x10": 1,
+        "x11": 3,
+        "x12": 1
+    },
+    "Program specification": {
+        "iterations": 4,
+        "operations per line": 4,
+        "number of lines": 15
+    }
+}

@@ -1,0 +1,87 @@
+{
+    "Program_variables": {
+        "Vars": [
+            "z",
+            "flip"
+        ],
+        "Varmap": {
+            "z": [
+                "z15",
+                "z14",
+                "z13",
+                "z12",
+                "z11",
+                "z10",
+                "z9",
+                "z8",
+                "z7",
+                "z6",
+                "z5",
+                "z4",
+                "z3",
+                "z2",
+                "z1",
+                "z0"
+            ],
+            "flip": [
+                "flip"
+            ]
+        },
+        "Bools": [
+            "z15",
+            "z14",
+            "z13",
+            "z12",
+            "z11",
+            "z10",
+            "z9",
+            "z8",
+            "z7",
+            "z6",
+            "z5",
+            "z4",
+            "z3",
+            "z2",
+            "z1",
+            "z0",
+            "flip"
+        ]
+    },
+    "Random_variables": {
+        "Bools": [
+            "r1",
+            "r2",
+            "r3",
+            "r4",
+            "r5",
+            "r6"
+        ]
+    },
+    "Candidate": {
+        "Expression": "(!z10 && !z11 && !z12 && !z13 && !z14 && !z15 && !z3 && !z4 && !z5 && !z6 && !z7 && !z8 && !z9 && flip)"
+    },
+    "Initial states": {
+        "Expression": "(!z15) && (!z14) && (!z13) && (!z12) && (!z11) && (!z10) && (!z9) && (!z8) && (!z7) && (!z6) && (!z5) && (!z4) && (!z3) && (!z2) && (!z1) && (!z0) && (!flip)",
+        "Loop guard": "(!flip)"
+    },
+    "Loop guard": "(!flip)",
+    "Updates in each iteration": {
+        "x1": 1,
+        "x2": 1,
+        "x3": 1,
+        "x4": 2,
+        "x5": 1,
+        "x6": 2,
+        "x7": 1,
+        "x8": 2,
+        "x9": 1,
+        "x10": 1,
+        "x11": 3,
+        "x12": 1
+    },
+    "Program specification": {
+        "iterations": 4,
+        "operations per line": 4,
+        "number of lines": 15
+    }
+}

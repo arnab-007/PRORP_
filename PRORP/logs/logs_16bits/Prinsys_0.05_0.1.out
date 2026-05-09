@@ -1,0 +1,71 @@
+(!x1) && (!x0) && (!x1) && (!x0)
+128
+Starting model fitting...
+--- Fitting took: 0.0018 seconds ---
+Starting custom tree build...
+--- Custom tree build took: 0.0007 seconds ---
+Prediction time : 0.0041980743408203125
+Initial phase DNF: (!x1)
+Final DistEstimate value:  0.0
+Check for DistEstimate value : 0.0
+Final Validifier value:  0.0
+Check for Validifier value : 0.0
+Final candidate learnt:  (!x1 && x0)
+Height of learnt decision tree:  2
+Number of terms in the candidate DNF:  1
+Total DistEstimate time : 0.24506306648254395
+Total Validifier time : 2.8302438259124756
+Total TreeLearner time : 0.012138128280639648
+Total time (seconds) : 3.0937278270721436
+
+--- Run at 2025-10-29 17:51:15.923896 ---
+Traceback (most recent call last):
+  File "/Users/arnabray/Codes/PRORP/PRORP/src/TreeLearner/TreeLearner.py", line 365, in <module>
+    TreeLearner()
+  File "/Users/arnabray/Codes/PRORP/PRORP/src/TreeLearner/TreeLearner.py", line 233, in TreeLearner
+    df = prepare_data(distestimate_data, validifier_data, prog_variables)
+  File "/Users/arnabray/Codes/PRORP/PRORP/src/TreeLearner/utils.py", line 444, in prepare_data
+    initial_valid_dict = validifier_data["output_dict"]["counterexamples"]
+TypeError: tuple indices must be integers or slices, not str
+
+--- Run at 2025-12-22 18:30:53.876659 ---
+Initial phase DNF: x1 || !x1
+Final DistEstimate value: 0.0
+Final Validifier value: 0.0
+Final candidate learnt: (x1) || (x0 && x1) || (!x1 && x0)
+Height of learnt decision tree: 2
+Number of terms in the candidate DNF: 3
+Total DistEstimate time: 0.31322407722473145
+Total Validifier time: 1.7122907638549805
+Total TreeLearner time: 0.011790990829467773
+Total time (seconds): 2.0543527603149414
+Starting model fitting...
+--- Fitting took: 0.0021 seconds ---
+Starting custom tree build...
+--- Custom tree build took: 0.0002 seconds ---
+
+--- Run at 2025-12-22 18:36:02.533635 ---
+Initial phase DNF: (!x1 && x0)
+Final DistEstimate value: 0.0
+Final Validifier value: 0.0
+Final candidate learnt: (!x1 && x0)
+Height of learnt decision tree: 2
+Number of terms in the candidate DNF: 1
+Total DistEstimate time: 0.30460405349731445
+Total Validifier time: 1.2838609218597412
+Total TreeLearner time: 0.008589982986450195
+Total time (seconds): 1.6152849197387695
+
+--- Run at 2025-12-22 22:47:04.582778 ---
+Initial phase DNF: (!x1 && x0)
+Final DistEstimate value: 0.0
+Final Validifier value: 0.0
+Final candidate learnt: (!x1 && x0)
+Height of learnt decision tree: 2
+Number of terms in the candidate DNF: 1
+Total DistEstimate time: 0.26775622367858887
+Total Validifier time: 1.5490307807922363
+Total TreeLearner time: 0.0038077831268310547
+Total time (seconds): 1.8348910808563232
+
+--- Run at 2025-12-22 23:24:15.152740 ---

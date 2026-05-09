@@ -1,0 +1,51 @@
+{
+    "Program_variables": {
+        "Bools": [
+            "retries7",
+            "retries6",
+            "retries5",
+            "retries4",
+            "retries3",
+            "retries2",
+            "retries1",
+            "retries0",
+            "success"
+        ]
+    },
+    "Random_variables": {
+        "Bools": [
+            "r1",
+            "r2",
+            "r3",
+            "r4",
+            "r5",
+            "r6"
+        ]
+    },
+    "Candidate": {
+        "Expression": "(!retries0i && !retries1i && !retries2f && !retries2i && !retries3f && !retries3i && !retries4i && !retries5f && !retries5i && !retries6f && !retries6i && !retries7f && !retries7i && !successi && successf) || (!retries0i && !retries1i && !retries2i && !retries3f && !retries3i && !retries4i && !retries5f && !retries5i && !retries6f && !retries6i && !retries7f && !retries7i && !successi && retries2f && successf) || (!retries0f && !retries0i && !retries1f && !retries1i && !retries2i && !retries3i && !retries4i && !retries5f && !retries5i && !retries6f && !retries6i && !retries7f && !retries7i && !successi && retries3f && successf)"
+    },
+    "Initial states": {
+        "Expression": "(!retries7) && (!retries6) && (!retries5) && (!retries4) && (!retries3) && (!retries2) && (!retries1) && (!retries0) && (!success) && (!retries7) && (!retries6) && (!retries5 || !retries4)",
+        "Loop guard": "(!success) && (!retries7) && (!retries6) && (!retries5 || !retries4)"
+    },
+    "Updates in each iteration": {
+        "x1": 1,
+        "x2": 1,
+        "x3": 1,
+        "x4": 2,
+        "x5": 1,
+        "x6": 2,
+        "x7": 1,
+        "x8": 2,
+        "x9": 1,
+        "x10": 1,
+        "x11": 3,
+        "x12": 1
+    },
+    "Program specification": {
+        "iterations": 4,
+        "operations per line": 4,
+        "number of lines": 15
+    }
+}

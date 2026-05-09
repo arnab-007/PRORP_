@@ -1,0 +1,27 @@
+Initial phase DNF: (!z6 && !z12 && !z14 && !z5 && !z13 && flip && !z7 && !z15 && !z0) || (!z6 && !z12 && !z14 && !z5 && !z13 && flip && !z7 && !z15 && z0)
+Phase: 2
+DistEstimate value: 0.0
+Validifier value: 0.97
+Phase 2 DNF before prediction: (!z6 && !z12 && !z14 && !z5 && !z13 && flip && !z7 && !z15 && !z0) || (!z6 && !z12 && !z14 && !z5 && !z13 && flip && !z7 && !z15 && z0)
+Starting model fitting...
+--- Fitting took: 0.0022 seconds ---
+Starting custom tree build...
+--- Custom tree build took: 0.0035 seconds ---
+Conflict detected for feature values: (np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(1.0), np.float64(1.0), np.float64(1.0), np.float64(1.0), np.float64(0.0), np.float64(1.0))
+    z15  z14  z13  z12  z11  z10  ...   z1   z0  flip  label    weight  member
+7   0.0  0.0  0.0  0.0  0.0  0.0  ...  1.0  0.0   1.0    1.0  0.000017     1.0
+40  0.0  0.0  0.0  0.0  0.0  0.0  ...  1.0  0.0   1.0    0.0  0.001667     0.0
+
+[2 rows x 20 columns]
+Traceback (most recent call last):
+  File "/Users/arnabray/Codes/PRORP/PRORP/src/TreeLearner/TreeLearner.py", line 357, in <module>
+    TreeLearner()
+  File "/Users/arnabray/Codes/PRORP/PRORP/src/TreeLearner/TreeLearner.py", line 269, in TreeLearner
+    intermediate_tree.predict(
+  File "/Users/arnabray/Codes/PRORP/PRORP/src/TreeLearner/DecisionTreeLearner.py", line 218, in predict
+    self._batch_update_leaves(new_data_for_leaves)
+  File "/Users/arnabray/Codes/PRORP/PRORP/src/TreeLearner/DecisionTreeLearner.py", line 189, in _batch_update_leaves
+    raise ValueError(
+ValueError: Conflict: Same datapoint with different 'member' values detected!
+
+--- Run at 2025-11-04 14:45:14.145125 ---

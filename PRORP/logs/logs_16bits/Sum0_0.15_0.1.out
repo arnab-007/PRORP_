@@ -1,0 +1,399 @@
+(!x15) && (!x14) && (!x13) && (!x12) && (!x11) && (!x10) && (!x9) && (!x8) && (!x7) && (!x6) && (!x5) && (!x4) && (!x3) && (!x2) && (!x1) && (!x0) && (!n15) && (!n14) && (!n13) && (!n12) && (!n11) && (!n10) && (!n9) && (!n8) && (!n7) && (!n6) && (n5) && (!n4) && (!n3) && (!n2) && (!n1) && (!n0) && (n15 || n14 || n13 || n12 || n11 || n10 || n9 || n8 || n7 || n6 || n5 || n4 || n3 || n2 || n1 || n0)
+32
+Starting model fitting...
+--- Fitting took: 0.0026 seconds ---
+Starting custom tree build...
+--- Custom tree build took: 0.0012 seconds ---
+Prediction time : 0.18493223190307617
+Initial phase DNF: (!n4 && !n5 && !n7 && !n9 && !n13 && !x11 && !n12 && !n0 && !n14 && !x10)
+Phase : 2
+DistEstimate value: 0.0
+Validifier value: 0.9583333333333334
+Phase 2 DNF before prediction: (!n4 && !n5 && !n7 && !n9 && !n13 && !x11 && !n12 && !n0 && !n14 && !x10)
+Phase 2 DNF after prediction: x15 && !x15
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 4, 'prune': 0}
+Next phase total time:  5.449154376983643
+Next phase DistEstimate time : 0.1571042537689209
+Next phase Validifier time : 4.993273735046387
+Next phase TreeLearner time : 0.29750752449035645
+Phase : 3
+DistEstimate value: 0.0
+Validifier value: 0.49166666666666664
+Phase 3 DNF before prediction: (!n4 && !n5 && !n7 && !n9 && !n13 && !x11 && !n12 && !n0 && !n14 && !x10 && !x12 && !x13 && !x9 && !x14)
+Phase 3 DNF after prediction: (!n4 && !n5 && !n7 && !n9 && !n13 && !x11 && !n12 && !n0 && !n14 && !x10 && !x12 && !x13 && !x9 && !x14)
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 1, 'prune': 0}
+Next phase total time:  5.2984559535980225
+Next phase DistEstimate time : 0.13123345375061035
+Next phase Validifier time : 5.065906763076782
+Next phase TreeLearner time : 0.10000872611999512
+Final DistEstimate value:  0.0
+Final Validifier value:  0.0
+Final candidate learnt:  (!n0 && !n1 && !n10 && !n11 && !n12 && !n13 && !n14 && !n15 && !n2 && !n3 && !n4 && !n5 && !n6 && !n7 && !n8 && !n9 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x9)
+Height of learnt decision tree:  23
+Number of terms in the candidate DNF:  1
+Total DistEstimate time : 0.41497349739074707
+Total Validifier time : 15.03090763092041
+Total TreeLearner time : 0.6744556427001953
+Total time (seconds) : 16.12843370437622
+
+--- Run at 2025-08-31 17:08:37.758340 ---
+(!x15) && (!x14) && (!x13) && (!x12) && (!x11) && (!x10) && (!x9) && (!x8) && (!x7) && (!x6) && (!x5) && (!x4) && (!x3) && (!x2) && (!x1) && (!x0) && (!n15) && (!n14) && (!n13) && (!n12) && (!n11) && (!n10) && (!n9) && (!n8) && (!n7) && (!n6) && (n5) && (!n4) && (!n3) && (!n2) && (!n1) && (!n0) && (n15 || n14 || n13 || n12 || n11 || n10 || n9 || n8 || n7 || n6 || n5 || n4 || n3 || n2 || n1 || n0)
+32
+Starting model fitting...
+--- Fitting took: 0.0027 seconds ---
+Starting custom tree build...
+--- Custom tree build took: 0.0012 seconds ---
+Prediction time : 0.18546533584594727
+Initial phase DNF: (!x12 && !n4 && !n1 && !x11 && !n2 && !n13 && !n8 && !n9 && !n7 && !n0)
+Phase : 2
+DistEstimate value: 0.0
+Validifier value: 0.9533333333333334
+Phase 2 DNF before prediction: (!x12 && !n4 && !n1 && !x11 && !n2 && !n13 && !n8 && !n9 && !n7 && !n0)
+Phase 2 DNF after prediction: (!x12 && !n4 && !n1 && !x11 && !n2 && !n13 && !n8 && !n9 && !n7 && !n0)
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 3, 'prune': 0}
+Next phase total time:  5.187373399734497
+Next phase DistEstimate time : 0.1243896484375
+Next phase Validifier time : 4.846725940704346
+Next phase TreeLearner time : 0.21521425247192383
+Phase : 3
+DistEstimate value: 0.0
+Validifier value: 0.74
+Phase 3 DNF before prediction: (!x12 && !n4 && !n1 && !x11 && !n2 && !n13 && !n8 && !n9 && !n7 && !n0 && !x9 && !x13 && !x15)
+Phase 3 DNF after prediction: (!x12 && !n4 && !n1 && !x11 && !n2 && !n13 && !n8 && !n9 && !n7 && !n0 && !x9 && !x13 && !x15)
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 2, 'prune': 0}
+Next phase total time:  5.334027528762817
+Next phase DistEstimate time : 0.1349198818206787
+Next phase Validifier time : 5.020554780960083
+Next phase TreeLearner time : 0.1777510643005371
+Final DistEstimate value:  0.0
+Final Validifier value:  0.0
+Final candidate learnt:  (!n0 && !n1 && !n10 && !n11 && !n12 && !n13 && !n14 && !n15 && !n2 && !n3 && !n4 && !n5 && !n6 && !n7 && !n8 && !n9 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x9)
+Height of learnt decision tree:  23
+Number of terms in the candidate DNF:  1
+Total DistEstimate time : 0.40741991996765137
+Total Validifier time : 14.572412490844727
+Total TreeLearner time : 0.6709306240081787
+Total time (seconds) : 15.657501220703125
+
+--- Run at 2025-08-31 17:09:05.230942 ---
+(!x15) && (!x14) && (!x13) && (!x12) && (!x11) && (!x10) && (!x9) && (!x8) && (!x7) && (!x6) && (!x5) && (!x4) && (!x3) && (!x2) && (!x1) && (!x0) && (!n15) && (!n14) && (!n13) && (!n12) && (!n11) && (!n10) && (!n9) && (!n8) && (!n7) && (!n6) && (n5) && (!n4) && (!n3) && (!n2) && (!n1) && (!n0) && (n15 || n14 || n13 || n12 || n11 || n10 || n9 || n8 || n7 || n6 || n5 || n4 || n3 || n2 || n1 || n0)
+32
+Starting model fitting...
+--- Fitting took: 0.0027 seconds ---
+Starting custom tree build...
+--- Custom tree build took: 0.0012 seconds ---
+Prediction time : 0.18636417388916016
+Initial phase DNF: (!n15 && !x9 && !n8 && !n14 && !x10 && !n4 && !x15 && !n7 && !n6 && !n11)
+Phase : 2
+DistEstimate value: 0.0
+Validifier value: 0.9701492537313433
+Phase 2 DNF before prediction: (!n15 && !x9 && !n8 && !n14 && !x10 && !n4 && !x15 && !n7 && !n6 && !n11)
+Phase 2 DNF after prediction: (!n15 && !x9 && !n8 && !n14 && !x10 && !n4 && !x15 && !n7 && !n6 && !n11)
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 2, 'prune': 0}
+Next phase total time:  5.136473178863525
+Next phase DistEstimate time : 0.12392187118530273
+Next phase Validifier time : 4.851490259170532
+Next phase TreeLearner time : 0.16016054153442383
+Phase : 3
+DistEstimate value: 0.0
+Validifier value: 0.7014925373134329
+Phase 3 DNF before prediction: (!n15 && !x9 && !n8 && !n14 && !x10 && !n4 && !x15 && !n7 && !n6 && !n11 && !x11 && !x13)
+Phase 3 DNF after prediction: (!n15 && !x9 && !n8 && !n14 && !x10 && !n4 && !x15 && !n7 && !n6 && !n11 && !x11 && !x13)
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 2, 'prune': 0}
+Next phase total time:  5.268123388290405
+Next phase DistEstimate time : 0.1446549892425537
+Next phase Validifier time : 4.952293872833252
+Next phase TreeLearner time : 0.17036008834838867
+Final DistEstimate value:  0.0
+Final Validifier value:  0.0
+Final candidate learnt:  (!n0 && !n1 && !n10 && !n11 && !n12 && !n13 && !n14 && !n15 && !n2 && !n3 && !n4 && !n5 && !n6 && !n7 && !n8 && !n9 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x9)
+Height of learnt decision tree:  23
+Number of terms in the candidate DNF:  1
+Total DistEstimate time : 0.3882791996002197
+Total Validifier time : 14.534663915634155
+Total TreeLearner time : 0.6098437309265137
+Total time (seconds) : 15.539361715316772
+
+--- Run at 2025-08-31 17:09:31.964288 ---
+(!x15) && (!x14) && (!x13) && (!x12) && (!x11) && (!x10) && (!x9) && (!x8) && (!x7) && (!x6) && (!x5) && (!x4) && (!x3) && (!x2) && (!x1) && (!x0) && (!n15) && (!n14) && (!n13) && (!n12) && (!n11) && (!n10) && (!n9) && (!n8) && (!n7) && (!n6) && (n5) && (!n4) && (!n3) && (!n2) && (!n1) && (!n0) && (n15 || n14 || n13 || n12 || n11 || n10 || n9 || n8 || n7 || n6 || n5 || n4 || n3 || n2 || n1 || n0)
+32
+Starting model fitting...
+--- Fitting took: 0.0027 seconds ---
+Starting custom tree build...
+--- Custom tree build took: 0.0012 seconds ---
+Prediction time : 0.1836085319519043
+Initial phase DNF: (!x13 && !n4 && !n11 && !n3 && !x14 && !n0 && !x9 && !n8 && !x15 && !n1)
+Phase : 2
+DistEstimate value: 0.0
+Validifier value: 0.8947368421052632
+Phase 2 DNF before prediction: (!x13 && !n4 && !n11 && !n3 && !x14 && !n0 && !x9 && !n8 && !x15 && !n1)
+Phase 2 DNF after prediction: (!x13 && !n4 && !n11 && !n3 && !x14 && !n0 && !x9 && !n8 && !x15 && !n1)
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 2, 'prune': 0}
+Next phase total time:  5.289064407348633
+Next phase DistEstimate time : 0.12909483909606934
+Next phase Validifier time : 4.980318546295166
+Next phase TreeLearner time : 0.17884111404418945
+Phase : 3
+DistEstimate value: 0.0
+Validifier value: 0.5263157894736842
+Phase 3 DNF before prediction: (!x13 && !n4 && !n11 && !n3 && !x14 && !n0 && !x9 && !n8 && !x15 && !n1 && !x11 && !x12)
+Phase 3 DNF after prediction: (!x13 && !n4 && !n11 && !n3 && !x14 && !n0 && !x9 && !n8 && !x15 && !n1 && !x11 && !x12)
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 1, 'prune': 0}
+Next phase total time:  5.131160736083984
+Next phase DistEstimate time : 0.1516106128692627
+Next phase Validifier time : 4.901238679885864
+Next phase TreeLearner time : 0.07764244079589844
+Final DistEstimate value:  0.0
+Final Validifier value:  0.0
+Final candidate learnt:  (!n0 && !n1 && !n10 && !n11 && !n12 && !n13 && !n14 && !n15 && !n2 && !n3 && !n4 && !n5 && !n6 && !n7 && !n8 && !n9 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x9)
+Height of learnt decision tree:  23
+Number of terms in the candidate DNF:  1
+Total DistEstimate time : 0.39836716651916504
+Total Validifier time : 14.583013772964478
+Total TreeLearner time : 0.5317049026489258
+Total time (seconds) : 15.519272089004517
+
+--- Run at 2025-08-31 17:09:56.986864 ---
+(!x15) && (!x14) && (!x13) && (!x12) && (!x11) && (!x10) && (!x9) && (!x8) && (!x7) && (!x6) && (!x5) && (!x4) && (!x3) && (!x2) && (!x1) && (!x0) && (!n15) && (!n14) && (!n13) && (!n12) && (!n11) && (!n10) && (!n9) && (!n8) && (!n7) && (!n6) && (n5) && (!n4) && (!n3) && (!n2) && (!n1) && (!n0) && (n15 || n14 || n13 || n12 || n11 || n10 || n9 || n8 || n7 || n6 || n5 || n4 || n3 || n2 || n1 || n0)
+32
+Starting model fitting...
+--- Fitting took: 0.0026 seconds ---
+Starting custom tree build...
+--- Custom tree build took: 0.0011 seconds ---
+Prediction time : 0.18438935279846191
+Initial phase DNF: (!x9 && !n14 && !n9 && !n7 && !n6 && !n11 && !n2 && !x11 && !x13 && !x14)
+Phase : 2
+DistEstimate value: 0.0
+Validifier value: 0.9583333333333334
+Phase 2 DNF before prediction: (!x9 && !n14 && !n9 && !n7 && !n6 && !n11 && !n2 && !x11 && !x13 && !x14)
+Phase 2 DNF after prediction: (!x9 && !n14 && !n9 && !n7 && !n6 && !n11 && !n2 && !x11 && !x13 && !x14)
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 2, 'prune': 0}
+Next phase total time:  4.989137887954712
+Next phase DistEstimate time : 0.12160420417785645
+Next phase Validifier time : 4.670015096664429
+Next phase TreeLearner time : 0.19663500785827637
+Phase : 3
+DistEstimate value: 0.0
+Validifier value: 0.5833333333333334
+Phase 3 DNF before prediction: (!x9 && !n14 && !n9 && !n7 && !n6 && !n11 && !n2 && !x11 && !x13 && !x14 && !x12 && !x10)
+Phase 3 DNF after prediction: (!x9 && !n14 && !n9 && !n7 && !n6 && !n11 && !n2 && !x11 && !x13 && !x14 && !x12 && !x10)
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 1, 'prune': 0}
+Next phase total time:  4.985175609588623
+Next phase DistEstimate time : 0.1275942325592041
+Next phase Validifier time : 4.786281585693359
+Next phase TreeLearner time : 0.07058572769165039
+Final DistEstimate value:  0.0
+Final Validifier value:  0.0
+Final candidate learnt:  (!n0 && !n1 && !n10 && !n11 && !n12 && !n13 && !n14 && !n15 && !n2 && !n3 && !n4 && !n5 && !n6 && !n7 && !n8 && !n9 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x9)
+Height of learnt decision tree:  23
+Number of terms in the candidate DNF:  1
+Total DistEstimate time : 0.37105536460876465
+Total Validifier time : 14.022859811782837
+Total TreeLearner time : 0.54386305809021
+Total time (seconds) : 14.944035291671753
+
+--- Run at 2025-08-31 17:10:23.841132 ---
+(!x15) && (!x14) && (!x13) && (!x12) && (!x11) && (!x10) && (!x9) && (!x8) && (!x7) && (!x6) && (!x5) && (!x4) && (!x3) && (!x2) && (!x1) && (!x0) && (!n15) && (!n14) && (!n13) && (!n12) && (!n11) && (!n10) && (!n9) && (!n8) && (!n7) && (!n6) && (n5) && (!n4) && (!n3) && (!n2) && (!n1) && (!n0) && (n15 || n14 || n13 || n12 || n11 || n10 || n9 || n8 || n7 || n6 || n5 || n4 || n3 || n2 || n1 || n0)
+32
+Starting model fitting...
+--- Fitting took: 0.0067 seconds ---
+Starting custom tree build...
+--- Custom tree build took: 0.0024 seconds ---
+Prediction time : 0.4514329433441162
+Initial phase DNF: (!x14 && !x12 && !n2 && !x15 && !n0 && !n5 && !n13 && !n4 && !x11)
+Phase : 2
+DistEstimate value: 0.0
+Validifier value: 0.8783333333333333
+Phase 2 DNF before prediction: (!x14 && !x12 && !n2 && !x15 && !n0 && !n5 && !n13 && !n4 && !x11)
+Phase 2 DNF after prediction: x15 && !x15
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 3, 'prune': 0}
+Next phase total time:  6.577297925949097
+Next phase DistEstimate time : 0.22572803497314453
+Next phase Validifier time : 6.052489280700684
+Next phase TreeLearner time : 0.2965199947357178
+Final DistEstimate value:  0.0
+Final Validifier value:  0.0
+Final candidate learnt:  (!n0 && !n1 && !n10 && !n11 && !n12 && !n13 && !n14 && !n15 && !n2 && !n3 && !n4 && !n5 && !n6 && !n7 && !n8 && !n9 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x9)
+Height of learnt decision tree:  23
+Number of terms in the candidate DNF:  1
+Total DistEstimate time : 0.44681501388549805
+Total Validifier time : 12.331803321838379
+Total TreeLearner time : 0.9929478168487549
+Total time (seconds) : 13.787392139434814
+
+--- Run at 2025-09-01 12:19:36.472502 ---
+(!x15) && (!x14) && (!x13) && (!x12) && (!x11) && (!x10) && (!x9) && (!x8) && (!x7) && (!x6) && (!x5) && (!x4) && (!x3) && (!x2) && (!x1) && (!x0) && (!n15) && (!n14) && (!n13) && (!n12) && (!n11) && (!n10) && (!n9) && (!n8) && (!n7) && (!n6) && (n5) && (!n4) && (!n3) && (!n2) && (!n1) && (!n0) && (n15 || n14 || n13 || n12 || n11 || n10 || n9 || n8 || n7 || n6 || n5 || n4 || n3 || n2 || n1 || n0)
+32
+Starting model fitting...
+--- Fitting took: 0.0067 seconds ---
+Starting custom tree build...
+--- Custom tree build took: 0.0026 seconds ---
+Prediction time : 0.48983120918273926
+Initial phase DNF: (!n6 && !n0 && !n5 && !x9 && !x11 && !x15 && !n15 && !n8 && !x13 && !x12)
+Phase : 2
+DistEstimate value: 0.0
+Validifier value: 0.7266666666666667
+Phase 2 DNF before prediction: (!n6 && !n0 && !n5 && !x9 && !x11 && !x15 && !n15 && !n8 && !x13 && !x12)
+Phase 2 DNF after prediction: (!n6 && !n0 && !n5 && !x9 && !x11 && !x15 && !n15 && !n8 && !x13 && !x12)
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 2, 'prune': 0}
+Next phase total time:  6.560888767242432
+Next phase DistEstimate time : 0.22081828117370605
+Next phase Validifier time : 6.114306926727295
+Next phase TreeLearner time : 0.22329187393188477
+Final DistEstimate value:  0.0
+Final Validifier value:  0.0
+Final candidate learnt:  (!n0 && !n1 && !n10 && !n11 && !n12 && !n13 && !n14 && !n15 && !n2 && !n3 && !n4 && !n5 && !n6 && !n7 && !n8 && !n9 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x9)
+Height of learnt decision tree:  23
+Number of terms in the candidate DNF:  1
+Total DistEstimate time : 0.45406150817871094
+Total Validifier time : 12.614410877227783
+Total TreeLearner time : 0.9570770263671875
+Total time (seconds) : 14.041003942489624
+
+--- Run at 2025-09-01 12:20:06.387828 ---
+(!x15) && (!x14) && (!x13) && (!x12) && (!x11) && (!x10) && (!x9) && (!x8) && (!x7) && (!x6) && (!x5) && (!x4) && (!x3) && (!x2) && (!x1) && (!x0) && (!n15) && (!n14) && (!n13) && (!n12) && (!n11) && (!n10) && (!n9) && (!n8) && (!n7) && (!n6) && (n5) && (!n4) && (!n3) && (!n2) && (!n1) && (!n0) && (n15 || n14 || n13 || n12 || n11 || n10 || n9 || n8 || n7 || n6 || n5 || n4 || n3 || n2 || n1 || n0)
+32
+Starting model fitting...
+--- Fitting took: 0.0067 seconds ---
+Starting custom tree build...
+--- Custom tree build took: 0.0026 seconds ---
+Prediction time : 0.4533412456512451
+Initial phase DNF: (!n15 && !x13 && !n13 && !x12 && !n2 && !x15 && !n9 && !n10 && !x11 && !n8)
+Phase : 2
+DistEstimate value: 0.0
+Validifier value: 0.8805970149253731
+Phase 2 DNF before prediction: (!n15 && !x13 && !n13 && !x12 && !n2 && !x15 && !n9 && !n10 && !x11 && !n8)
+Phase 2 DNF after prediction: (!n15 && !x13 && !n13 && !x12 && !n2 && !x15 && !n9 && !n10 && !x11 && !n8)
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 2, 'prune': 0}
+Next phase total time:  6.479479074478149
+Next phase DistEstimate time : 0.21922802925109863
+Next phase Validifier time : 6.083111047744751
+Next phase TreeLearner time : 0.17480897903442383
+Phase : 3
+DistEstimate value: 0.0
+Validifier value: 0.582089552238806
+Phase 3 DNF before prediction: (!n15 && !x13 && !n13 && !x12 && !n2 && !x15 && !n9 && !n10 && !x11 && !n8 && !x9 && !x10)
+Phase 3 DNF after prediction: (!n15 && !x13 && !n13 && !x12 && !n2 && !x15 && !n9 && !n10 && !x11 && !n8 && !x9 && !x10)
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 1, 'prune': 0}
+Next phase total time:  6.512278079986572
+Next phase DistEstimate time : 0.21653008460998535
+Next phase Validifier time : 6.182355165481567
+Next phase TreeLearner time : 0.11104393005371094
+Final DistEstimate value:  0.0
+Final Validifier value:  0.0
+Final candidate learnt:  (!n0 && !n1 && !n10 && !n11 && !n12 && !n13 && !n14 && !n15 && !n2 && !n3 && !n4 && !n5 && !n6 && !n7 && !n8 && !n9 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x9)
+Height of learnt decision tree:  23
+Number of terms in the candidate DNF:  1
+Total DistEstimate time : 0.6699743270874023
+Total Validifier time : 18.23165011405945
+Total TreeLearner time : 0.9854490756988525
+Total time (seconds) : 19.904579877853394
+
+--- Run at 2025-09-01 12:20:37.717792 ---
+(!x15) && (!x14) && (!x13) && (!x12) && (!x11) && (!x10) && (!x9) && (!x8) && (!x7) && (!x6) && (!x5) && (!x4) && (!x3) && (!x2) && (!x1) && (!x0) && (!n15) && (!n14) && (!n13) && (!n12) && (!n11) && (!n10) && (!n9) && (!n8) && (!n7) && (!n6) && (n5) && (!n4) && (!n3) && (!n2) && (!n1) && (!n0) && (n15 || n14 || n13 || n12 || n11 || n10 || n9 || n8 || n7 || n6 || n5 || n4 || n3 || n2 || n1 || n0)
+32
+Starting model fitting...
+--- Fitting took: 0.0066 seconds ---
+Starting custom tree build...
+--- Custom tree build took: 0.0026 seconds ---
+Prediction time : 0.49715423583984375
+Initial phase DNF: (!n0 && !x12 && !x14 && !x11 && !n11 && !n2 && !x15 && !n9 && !n4 && !n5)
+Phase : 2
+DistEstimate value: 0.0
+Validifier value: 0.8947368421052632
+Phase 2 DNF before prediction: (!n0 && !x12 && !x14 && !x11 && !n11 && !n2 && !x15 && !n9 && !n4 && !n5)
+Phase 2 DNF after prediction: (!n0 && !x12 && !x14 && !x11 && !n11 && !n2 && !x15 && !n9 && !n4 && !n5)
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 2, 'prune': 0}
+Next phase total time:  6.985109806060791
+Next phase DistEstimate time : 0.21470308303833008
+Next phase Validifier time : 6.591159820556641
+Next phase TreeLearner time : 0.1767270565032959
+Phase : 3
+DistEstimate value: 0.0
+Validifier value: 0.4473684210526316
+Phase 3 DNF before prediction: (!n0 && !x12 && !x14 && !x11 && !n11 && !n2 && !x15 && !n9 && !n4 && !n5 && !x9 && !x13)
+Phase 3 DNF after prediction: (!n0 && !x12 && !x14 && !x11 && !n11 && !n2 && !x15 && !n9 && !n4 && !n5 && !x9 && !x13)
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 1, 'prune': 0}
+Next phase total time:  6.329017162322998
+Next phase DistEstimate time : 0.21022987365722656
+Next phase Validifier time : 6.010832071304321
+Next phase TreeLearner time : 0.10559725761413574
+Final DistEstimate value:  0.0
+Final Validifier value:  0.0
+Final candidate learnt:  (!n0 && !n1 && !n10 && !n11 && !n12 && !n13 && !n14 && !n15 && !n2 && !n3 && !n4 && !n5 && !n6 && !n7 && !n8 && !n9 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x9)
+Height of learnt decision tree:  23
+Number of terms in the candidate DNF:  1
+Total DistEstimate time : 0.683305025100708
+Total Validifier time : 19.2845618724823
+Total TreeLearner time : 1.0268363952636719
+Total time (seconds) : 21.189770936965942
+
+--- Run at 2025-09-01 12:21:14.696499 ---
+(!x15) && (!x14) && (!x13) && (!x12) && (!x11) && (!x10) && (!x9) && (!x8) && (!x7) && (!x6) && (!x5) && (!x4) && (!x3) && (!x2) && (!x1) && (!x0) && (!n15) && (!n14) && (!n13) && (!n12) && (!n11) && (!n10) && (!n9) && (!n8) && (!n7) && (!n6) && (n5) && (!n4) && (!n3) && (!n2) && (!n1) && (!n0) && (n15 || n14 || n13 || n12 || n11 || n10 || n9 || n8 || n7 || n6 || n5 || n4 || n3 || n2 || n1 || n0)
+32
+Starting model fitting...
+--- Fitting took: 0.0063 seconds ---
+Starting custom tree build...
+--- Custom tree build took: 0.0027 seconds ---
+Prediction time : 0.4519188404083252
+Initial phase DNF: (!n14 && !n9 && !x12 && !x11 && !n12 && !n3 && !x9 && !n1 && !n7 && !x13)
+Phase : 2
+DistEstimate value: 0.0
+Validifier value: 0.8333333333333334
+Phase 2 DNF before prediction: (!n14 && !n9 && !x12 && !x11 && !n12 && !n3 && !x9 && !n1 && !n7 && !x13)
+Phase 2 DNF after prediction: (!n14 && !n9 && !x12 && !x11 && !n12 && !n3 && !x9 && !n1 && !n7 && !x13)
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 1, 'prune': 0}
+Next phase total time:  6.145612001419067
+Next phase DistEstimate time : 0.21301603317260742
+Next phase Validifier time : 5.826860189437866
+Next phase TreeLearner time : 0.10282611846923828
+Phase : 3
+DistEstimate value: 0.0
+Validifier value: 0.7083333333333334
+Phase 3 DNF before prediction: (!n14 && !n9 && !x12 && !x11 && !n12 && !n3 && !x9 && !n1 && !n7 && !x13 && !x10)
+Phase 3 DNF after prediction: (!n14 && !n9 && !x12 && !x11 && !n12 && !n3 && !x9 && !n1 && !n7 && !x13 && !x10)
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 1, 'prune': 0}
+Next phase total time:  6.366802930831909
+Next phase DistEstimate time : 0.21149682998657227
+Next phase Validifier time : 6.046289920806885
+Next phase TreeLearner time : 0.10660600662231445
+Phase : 4
+DistEstimate value: 0.0
+Validifier value: 0.5
+Phase 4 DNF before prediction: (!n14 && !n9 && !x12 && !x11 && !n12 && !n3 && !x9 && !n1 && !n7 && !x13 && !x10 && !x14)
+Phase 4 DNF after prediction: (!n14 && !n9 && !x12 && !x11 && !n12 && !n3 && !x9 && !n1 && !n7 && !x13 && !x10 && !x14)
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 1, 'prune': 0}
+Next phase total time:  6.384572744369507
+Next phase DistEstimate time : 0.21602821350097656
+Next phase Validifier time : 6.059086799621582
+Next phase TreeLearner time : 0.10646486282348633
+Final DistEstimate value:  0.0
+Final Validifier value:  0.0
+Final candidate learnt:  (!n0 && !n1 && !n10 && !n11 && !n12 && !n13 && !n14 && !n15 && !n2 && !n3 && !n4 && !n5 && !n6 && !n7 && !n8 && !n9 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x9)
+Height of learnt decision tree:  23
+Number of terms in the candidate DNF:  1
+Total DistEstimate time : 0.8626110553741455
+Total Validifier time : 24.28149127960205
+Total TreeLearner time : 1.0115201473236084
+Total time (seconds) : 26.177886962890625
+
+--- Run at 2025-09-01 12:21:52.984937 ---

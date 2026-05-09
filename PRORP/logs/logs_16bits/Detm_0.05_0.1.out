@@ -1,0 +1,288 @@
+(!count15) && (!count14) && (!count13) && (!count12) && (!count11) && (!count10) && (!count9) && (!count8) && (!count7) && (!count6) && (!count5) && (!count4) && (!count3) && (!count2) && (!count1) && (!count0) && (!x15) && (!x14) && (!x13) && (!x12) && (!x11) && (!x10) && (!x9) && (!x8) && (!x7) && (!x6) && (!x5) && (!x4)
+16
+Starting model fitting...
+--- Fitting took: 0.0025 seconds ---
+Starting custom tree build...
+--- Custom tree build took: 0.0011 seconds ---
+Prediction time : 0.17519617080688477
+Initial phase DNF: (!x12 && !x5 && !x9 && !count6 && !count12 && !x0 && !count9 && !count7 && !x2)
+Phase : 2
+DistEstimate value: 0.0
+Validifier value: 1.0
+Phase 2 DNF before prediction: (!x12 && !x5 && !x9 && !count6 && !count12 && !x0 && !count9 && !count7 && !x2)
+Phase 2 DNF after prediction: x15 && !x15
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 4, 'prune': 0}
+Next phase total time:  11.73121976852417
+Next phase DistEstimate time : 0.15980958938598633
+Next phase Validifier time : 6.814375400543213
+Next phase TreeLearner time : 4.756124973297119
+Phase : 3
+DistEstimate value: 0.0
+Validifier value: 1.0
+Phase 3 DNF before prediction: (!x12 && !x5 && !x9 && !count6 && !count12 && !x0 && !count9 && !count7 && !x2 && !x6 && !x7 && !x10 && !x8)
+Phase 3 DNF after prediction: x15 && !x15
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 4, 'prune': 0}
+Next phase total time:  11.108139038085938
+Next phase DistEstimate time : 0.13659071922302246
+Next phase Validifier time : 4.0841875076293945
+Next phase TreeLearner time : 6.8864734172821045
+Phase : 4
+DistEstimate value: 0.0
+Validifier value: 1.0
+Phase 4 DNF before prediction: (!x12 && !x5 && !x9 && !count6 && !count12 && !x0 && !count9 && !count7 && !x2 && !x6 && !x7 && !x10 && !x8 && !x11 && !x13 && !x14 && !count11)
+Phase 4 DNF after prediction: x15 && !x15
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 4, 'prune': 0}
+Next phase total time:  13.12613558769226
+Next phase DistEstimate time : 0.14713215827941895
+Next phase Validifier time : 4.017378807067871
+Next phase TreeLearner time : 8.960882663726807
+Phase : 5
+DistEstimate value: 0.0
+Validifier value: 0.9783333333333334
+Phase 5 DNF before prediction: (!x12 && !x5 && !x9 && !count6 && !count12 && !x0 && !count9 && !count7 && !x2 && !x6 && !x7 && !x10 && !x8 && !x11 && !x13 && !x14 && !count11 && !x15 && !x1 && !count5 && !x3)
+Phase 5 DNF after prediction: x15 && !x15
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 4, 'prune': 0}
+Next phase total time:  14.731221437454224
+Next phase DistEstimate time : 0.14427614212036133
+Next phase Validifier time : 3.9785540103912354
+Next phase TreeLearner time : 10.607753276824951
+Phase : 6
+DistEstimate value: 0.0
+Validifier value: 0.7516666666666667
+Phase 6 DNF before prediction: (!x12 && !x5 && !x9 && !count6 && !count12 && !x0 && !count9 && !count7 && !x2 && !x6 && !x7 && !x10 && !x8 && !x11 && !x13 && !x14 && !count11 && !x15 && !x1 && !count5 && !x3 && !count8 && !count14 && !count13 && !count15)
+Phase 6 DNF after prediction: x15 && !x15
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 9, 'prune': 0}
+Next phase total time:  33.519532680511475
+Next phase DistEstimate time : 0.16332602500915527
+Next phase Validifier time : 3.959486246109009
+Next phase TreeLearner time : 29.395732641220093
+Phase : 7
+DistEstimate value: 0.0
+Validifier value: 0.05
+Phase 7 DNF before prediction: (!x12 && !x5 && !x9 && !count6 && !count12 && !x0 && !count9 && !count7 && !x2 && !x6 && !x7 && !x10 && !x8 && !x11 && !x13 && !x14 && !count11 && !x15 && !x1 && !count5 && !x3 && !count8 && !count14 && !count13 && !count15 && !count10 && !count4 && !count2 && !count1 && !count0 && count3) || (!x12 && !x5 && !x9 && !count6 && !count12 && !x0 && !count9 && !count7 && !x2 && !x6 && !x7 && !x10 && !x8 && !x11 && !x13 && !x14 && !count11 && !x15 && !x1 && !count5 && !x3 && !count8 && !count14 && !count13 && !count15 && !count10 && !count4 && !count2 && !count1 && count0) || (!x12 && !x5 && !x9 && !count6 && !count12 && !x0 && !count9 && !count7 && !x2 && !x6 && !x7 && !x10 && !x8 && !x11 && !x13 && !x14 && !count11 && !x15 && !x1 && !count5 && !x3 && !count8 && !count14 && !count13 && !count15 && !count10 && !count4 && !count2 && count1) || (!x12 && !x5 && !x9 && !count6 && !count12 && !x0 && !count9 && !count7 && !x2 && !x6 && !x7 && !x10 && !x8 && !x11 && !x13 && !x14 && !count11 && !x15 && !x1 && !count5 && !x3 && !count8 && !count14 && !count13 && !count15 && !count10 && !count4 && count2) || (!x12 && !x5 && !x9 && !count6 && !count12 && !x0 && !count9 && !count7 && !x2 && !x6 && !x7 && !x10 && !x8 && !x11 && !x13 && !x14 && !count11 && !x15 && !x1 && !count5 && !x3 && !count8 && !count14 && !count13 && !count15 && !count10 && count4 && !count3 && !count0 && !count2)
+Phase 7 DNF after prediction: (!x12 && !x5 && !x9 && !count6 && !count12 && !x0 && !count9 && !count7 && !x2 && !x6 && !x7 && !x10 && !x8 && !x11 && !x13 && !x14 && !count11 && !x15 && !x1 && !count5 && !x3 && !count8 && !count14 && !count13 && !count15 && !count10 && !count4 && !count2 && !count1 && !count0 && count3) || (!x12 && !x5 && !x9 && !count6 && !count12 && !x0 && !count9 && !count7 && !x2 && !x6 && !x7 && !x10 && !x8 && !x11 && !x13 && !x14 && !count11 && !x15 && !x1 && !count5 && !x3 && !count8 && !count14 && !count13 && !count15 && !count10 && !count4 && !count2 && !count1 && count0) || (!x12 && !x5 && !x9 && !count6 && !count12 && !x0 && !count9 && !count7 && !x2 && !x6 && !x7 && !x10 && !x8 && !x11 && !x13 && !x14 && !count11 && !x15 && !x1 && !count5 && !x3 && !count8 && !count14 && !count13 && !count15 && !count10 && !count4 && !count2 && count1) || (!x12 && !x5 && !x9 && !count6 && !count12 && !x0 && !count9 && !count7 && !x2 && !x6 && !x7 && !x10 && !x8 && !x11 && !x13 && !x14 && !count11 && !x15 && !x1 && !count5 && !x3 && !count8 && !count14 && !count13 && !count15 && !count10 && !count4 && count2) || (!x12 && !x5 && !x9 && !count6 && !count12 && !x0 && !count9 && !count7 && !x2 && !x6 && !x7 && !x10 && !x8 && !x11 && !x13 && !x14 && !count11 && !x15 && !x1 && !count5 && !x3 && !count8 && !count14 && !count13 && !count15 && !count10 && count4 && !count3 && !count0 && !count2)
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 1, 'prune': 0}
+Next phase total time:  8.165944576263428
+Next phase DistEstimate time : 0.16750502586364746
+Next phase Validifier time : 3.9732754230499268
+Next phase TreeLearner time : 4.024357795715332
+Final DistEstimate value:  0.0
+Final Validifier value:  0.0
+Final candidate learnt:  (!count0 && !count1 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count2 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count3 && x4) || (!count1 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count2 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count0 && x4) || (!count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count2 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count1 && x4) || (!count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count2 && x4) || (!count0 && !count1 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count2 && !count3 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count4 && x4)
+Height of learnt decision tree:  32
+Number of terms in the candidate DNF:  5
+Total DistEstimate time : 1.0719387531280518
+Total Validifier time : 36.65689706802368
+Total TreeLearner time : 64.89684748649597
+Total time (seconds) : 102.63529825210571
+
+--- Run at 2025-08-24 20:08:18.320221 ---
+(!count15) && (!count14) && (!count13) && (!count12) && (!count11) && (!count10) && (!count9) && (!count8) && (!count7) && (!count6) && (!count5) && (!count4) && (!count3) && (!count2) && (!count1) && (!count0) && (!x15) && (!x14) && (!x13) && (!x12) && (!x11) && (!x10) && (!x9) && (!x8) && (!x7) && (!x6) && (!x5) && (!x4)
+32
+Starting model fitting...
+--- Fitting took: 0.0023 seconds ---
+Starting custom tree build...
+--- Custom tree build took: 0.0012 seconds ---
+Prediction time : 0.17734050750732422
+Initial phase DNF: (!x12 && !count11 && !count14 && !x0 && !count9 && !x7 && x4 && !x2 && !x14 && !x1 && !count1) || (!x12 && !count11 && !count14 && !x0 && !count9 && !x7 && x4 && !x2 && !x14 && !x1 && count1)
+Phase : 2
+DistEstimate value: 0.0
+Validifier value: 1.0
+Phase 2 DNF before prediction: (!x12 && !count11 && !count14 && !x0 && !count9 && !x7 && x4 && !x2 && !x14 && !x1 && !count1) || (!x12 && !count11 && !count14 && !x0 && !count9 && !x7 && x4 && !x2 && !x14 && !x1 && count1)
+Phase 2 DNF after prediction: x15 && !x15
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 10, 'prune': 0}
+Next phase total time:  26.096338987350464
+Next phase DistEstimate time : 0.15172863006591797
+Next phase Validifier time : 11.079030990600586
+Next phase TreeLearner time : 14.864690065383911
+Phase : 3
+DistEstimate value: 0.0
+Validifier value: 1.0
+Phase 3 DNF before prediction: (!x12 && !count11 && !count14 && !x0 && !count9 && !x7 && x4 && !x2 && !x14 && !x1 && !count1 && !x8 && !x6 && !x13 && !x11 && !x9 && !count10) || (!x12 && !count11 && !count14 && !x0 && !count9 && !x7 && x4 && !x2 && !x14 && !x1 && count1 && !count5 && !count13 && !count15 && !x9)
+Phase 3 DNF after prediction: x15 && !x15
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 10, 'prune': 0}
+Next phase total time:  28.262032747268677
+Next phase DistEstimate time : 0.15814685821533203
+Next phase Validifier time : 4.688339948654175
+Next phase TreeLearner time : 23.41435408592224
+Phase : 4
+DistEstimate value: 0.0
+Validifier value: 0.995
+Phase 4 DNF before prediction: (!x12 && !count11 && !count14 && !x0 && !count9 && !x7 && x4 && !x2 && !x14 && !x1 && !count1 && !x8 && !x6 && !x13 && !x11 && !x9 && !count10 && !x5 && !x10 && !count6 && !x3 && !count7) || (!x12 && !count11 && !count14 && !x0 && !count9 && !x7 && x4 && !x2 && !x14 && !x1 && count1 && !count5 && !count13 && !count15 && !x9 && !x5 && !x6 && !x15 && !x8 && !count4)
+Phase 4 DNF after prediction: x15 && !x15
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 12, 'prune': 0}
+Next phase total time:  44.55135798454285
+Next phase DistEstimate time : 0.1464519500732422
+Next phase Validifier time : 4.506688356399536
+Next phase TreeLearner time : 39.897454500198364
+Phase : 5
+DistEstimate value: 0.0
+Validifier value: 0.8983333333333333
+Phase 5 DNF before prediction: (!x12 && !count11 && !count14 && !x0 && !count9 && !x7 && x4 && !x2 && !x14 && !x1 && !count1 && !x8 && !x6 && !x13 && !x11 && !x9 && !count10 && !x5 && !x10 && !count6 && !x3 && !count7 && !x15 && !count15 && !count5 && !count12 && !count13 && !count4) || (!x12 && !count11 && !count14 && !x0 && !count9 && !x7 && x4 && !x2 && !x14 && !x1 && !count1 && !x8 && !x6 && !x13 && !x11 && !x9 && !count10 && !x5 && !x10 && !count6 && !x3 && !count7 && !x15 && !count15 && !count5 && !count12 && !count13 && count4 && !count0) || (!x12 && !count11 && !count14 && !x0 && !count9 && !x7 && x4 && !x2 && !x14 && !x1 && count1 && !count5 && !count13 && !count15 && !x9 && !x5 && !x6 && !x15 && !x8 && !count4 && !x10 && !x11 && !x3 && !count7 && !count6)
+Phase 5 DNF after prediction: (!x12 && !count11 && !count14 && !x0 && !count9 && !x7 && x4 && !x2 && !x14 && !x1 && !count1 && !x8 && !x6 && !x13 && !x11 && !x9 && !count10 && !x5 && !x10 && !count6 && !x3 && !count7 && !x15 && !count15 && !count5 && !count12 && !count13 && !count4)
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 10, 'prune': 0}
+Next phase total time:  49.03929686546326
+Next phase DistEstimate time : 0.17082977294921875
+Next phase Validifier time : 4.212285757064819
+Next phase TreeLearner time : 44.655354738235474
+Phase : 6
+DistEstimate value: 0.0
+Validifier value: 0.44333333333333336
+Phase 6 DNF before prediction: (!x12 && !count11 && !count14 && !x0 && !count9 && !x7 && x4 && !x2 && !x14 && !x1 && !count1 && !x8 && !x6 && !x13 && !x11 && !x9 && !count10 && !x5 && !x10 && !count6 && !x3 && !count7 && !x15 && !count15 && !count5 && !count12 && !count13 && !count4 && !count8 && !count2 && !count0 && count3) || (!x12 && !count11 && !count14 && !x0 && !count9 && !x7 && x4 && !x2 && !x14 && !x1 && !count1 && !x8 && !x6 && !x13 && !x11 && !x9 && !count10 && !x5 && !x10 && !count6 && !x3 && !count7 && !x15 && !count15 && !count5 && !count12 && !count13 && !count4 && !count8 && !count2 && count0) || (!x12 && !count11 && !count14 && !x0 && !count9 && !x7 && x4 && !x2 && !x14 && !x1 && !count1 && !x8 && !x6 && !x13 && !x11 && !x9 && !count10 && !x5 && !x10 && !count6 && !x3 && !count7 && !x15 && !count15 && !count5 && !count12 && !count13 && !count4 && !count8 && count2) || (!x12 && !count11 && !count14 && !x0 && !count9 && !x7 && x4 && !x2 && !x14 && !x1 && !count1 && !x8 && !x6 && !x13 && !x11 && !x9 && !count10 && !x5 && !x10 && !count6 && !x3 && !count7 && !x15 && !count15 && !count5 && !count12 && !count13 && count4 && !count0 && !count3 && !count8 && !count2) || (!x12 && !count11 && !count14 && !x0 && !count9 && !x7 && x4 && !x2 && !x14 && !x1 && count1 && !count5 && !count13 && !count15 && !x9 && !x5 && !x6 && !x15 && !x8 && !count4 && !x10 && !x11 && !x3 && !count7 && !count6 && !count10 && !count8 && !count12)
+Phase 6 DNF after prediction: (!x12 && !count11 && !count14 && !x0 && !count9 && !x7 && x4 && !x2 && !x14 && !x1 && !count1 && !x8 && !x6 && !x13 && !x11 && !x9 && !count10 && !x5 && !x10 && !count6 && !x3 && !count7 && !x15 && !count15 && !count5 && !count12 && !count13 && !count4 && !count8 && !count2 && !count0 && count3) || (!x12 && !count11 && !count14 && !x0 && !count9 && !x7 && x4 && !x2 && !x14 && !x1 && !count1 && !x8 && !x6 && !x13 && !x11 && !x9 && !count10 && !x5 && !x10 && !count6 && !x3 && !count7 && !x15 && !count15 && !count5 && !count12 && !count13 && !count4 && !count8 && !count2 && count0) || (!x12 && !count11 && !count14 && !x0 && !count9 && !x7 && x4 && !x2 && !x14 && !x1 && !count1 && !x8 && !x6 && !x13 && !x11 && !x9 && !count10 && !x5 && !x10 && !count6 && !x3 && !count7 && !x15 && !count15 && !count5 && !count12 && !count13 && !count4 && !count8 && count2) || (!x12 && !count11 && !count14 && !x0 && !count9 && !x7 && x4 && !x2 && !x14 && !x1 && !count1 && !x8 && !x6 && !x13 && !x11 && !x9 && !count10 && !x5 && !x10 && !count6 && !x3 && !count7 && !x15 && !count15 && !count5 && !count12 && !count13 && count4 && !count0 && !count3 && !count8 && !count2) || (!x12 && !count11 && !count14 && !x0 && !count9 && !x7 && x4 && !x2 && !x14 && !x1 && count1 && !count5 && !count13 && !count15 && !x9 && !x5 && !x6 && !x15 && !x8 && !count4 && !x10 && !x11 && !x3 && !count7 && !count6 && !count10 && !count8 && !count12)
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 1, 'prune': 0}
+Next phase total time:  9.639562129974365
+Next phase DistEstimate time : 0.1457233428955078
+Next phase Validifier time : 4.114715337753296
+Next phase TreeLearner time : 5.378306150436401
+Final DistEstimate value:  0.0
+Final Validifier value:  0.0
+Final candidate learnt:  (!count0 && !count1 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count2 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count3 && x4) || (!count1 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count2 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count0 && x4) || (!count1 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count2 && x4) || (!count0 && !count1 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count2 && !count3 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count4 && x4) || (!count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count1 && x4)
+Height of learnt decision tree:  32
+Number of terms in the candidate DNF:  5
+Total DistEstimate time : 0.9108071327209473
+Total Validifier time : 40.776432037353516
+Total TreeLearner time : 128.4776647090912
+Total time (seconds) : 170.17397332191467
+
+--- Run at 2025-08-24 20:10:12.173391 ---
+(!count15) && (!count14) && (!count13) && (!count12) && (!count11) && (!count10) && (!count9) && (!count8) && (!count7) && (!count6) && (!count5) && (!count4) && (!count3) && (!count2) && (!count1) && (!count0) && (!x15) && (!x14) && (!x13) && (!x12) && (!x11) && (!x10) && (!x9) && (!x8) && (!x7) && (!x6) && (!x5) && (!x4)
+64
+Starting model fitting...
+--- Fitting took: 0.0023 seconds ---
+Starting custom tree build...
+--- Custom tree build took: 0.0012 seconds ---
+Prediction time : 0.17713618278503418
+Initial phase DNF: (!count7 && !x8 && !count13 && !x2 && !x6 && !count5 && !count10 && !count9 && !x3 && !x14)
+Phase : 2
+DistEstimate value: 0.0
+Validifier value: 1.0
+Phase 2 DNF before prediction: (!count7 && !x8 && !count13 && !x2 && !x6 && !count5 && !count10 && !count9 && !x3 && !x14)
+Phase 2 DNF after prediction: x15 && !x15
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 4, 'prune': 0}
+Next phase total time:  12.978323698043823
+Next phase DistEstimate time : 0.16867327690124512
+Next phase Validifier time : 7.66357946395874
+Next phase TreeLearner time : 5.145139217376709
+Phase : 3
+DistEstimate value: 0.0
+Validifier value: 1.0
+Phase 3 DNF before prediction: (!count7 && !x8 && !count13 && !x2 && !x6 && !count5 && !count10 && !count9 && !x3 && !x14 && !x5 && !x7 && !x11 && !x12)
+Phase 3 DNF after prediction: x15 && !x15
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 4, 'prune': 0}
+Next phase total time:  12.726038694381714
+Next phase DistEstimate time : 0.1336040496826172
+Next phase Validifier time : 5.9089038372039795
+Next phase TreeLearner time : 6.682677984237671
+Phase : 4
+DistEstimate value: 0.0
+Validifier value: 1.0
+Phase 4 DNF before prediction: (!count7 && !x8 && !count13 && !x2 && !x6 && !count5 && !count10 && !count9 && !x3 && !x14 && !x5 && !x7 && !x11 && !x12 && !x9 && !x10 && !x15 && !x13)
+Phase 4 DNF after prediction: x15 && !x15
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 5, 'prune': 0}
+Next phase total time:  18.264719009399414
+Next phase DistEstimate time : 0.13386869430541992
+Next phase Validifier time : 6.467541456222534
+Next phase TreeLearner time : 11.662585020065308
+Phase : 5
+DistEstimate value: 0.0
+Validifier value: 0.935
+Phase 5 DNF before prediction: (!count7 && !x8 && !count13 && !x2 && !x6 && !count5 && !count10 && !count9 && !x3 && !x14 && !x5 && !x7 && !x11 && !x12 && !x9 && !x10 && !x15 && !x13 && !count12 && !x0 && !count15 && !count11 && !x1)
+Phase 5 DNF after prediction: x15 && !x15
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 11, 'prune': 0}
+Next phase total time:  39.80979776382446
+Next phase DistEstimate time : 0.15644288063049316
+Next phase Validifier time : 5.065845727920532
+Next phase TreeLearner time : 34.58669638633728
+Phase : 6
+DistEstimate value: 0.0
+Validifier value: 0.05333333333333334
+Phase 6 DNF before prediction: (!count7 && !x8 && !count13 && !x2 && !x6 && !count5 && !count10 && !count9 && !x3 && !x14 && !x5 && !x7 && !x11 && !x12 && !x9 && !x10 && !x15 && !x13 && !count12 && !x0 && !count15 && !count11 && !x1 && !count8 && !count6 && !count14 && !count4 && !count2 && !count1 && !count0 && count3) || (!count7 && !x8 && !count13 && !x2 && !x6 && !count5 && !count10 && !count9 && !x3 && !x14 && !x5 && !x7 && !x11 && !x12 && !x9 && !x10 && !x15 && !x13 && !count12 && !x0 && !count15 && !count11 && !x1 && !count8 && !count6 && !count14 && !count4 && !count2 && !count1 && count0) || (!count7 && !x8 && !count13 && !x2 && !x6 && !count5 && !count10 && !count9 && !x3 && !x14 && !x5 && !x7 && !x11 && !x12 && !x9 && !x10 && !x15 && !x13 && !count12 && !x0 && !count15 && !count11 && !x1 && !count8 && !count6 && !count14 && !count4 && !count2 && count1) || (!count7 && !x8 && !count13 && !x2 && !x6 && !count5 && !count10 && !count9 && !x3 && !x14 && !x5 && !x7 && !x11 && !x12 && !x9 && !x10 && !x15 && !x13 && !count12 && !x0 && !count15 && !count11 && !x1 && !count8 && !count6 && !count14 && !count4 && count2) || (!count7 && !x8 && !count13 && !x2 && !x6 && !count5 && !count10 && !count9 && !x3 && !x14 && !x5 && !x7 && !x11 && !x12 && !x9 && !x10 && !x15 && !x13 && !count12 && !x0 && !count15 && !count11 && !x1 && !count8 && !count6 && !count14 && count4 && !count2 && !count0 && !count1)
+Phase 6 DNF after prediction: (!count7 && !x8 && !count13 && !x2 && !x6 && !count5 && !count10 && !count9 && !x3 && !x14 && !x5 && !x7 && !x11 && !x12 && !x9 && !x10 && !x15 && !x13 && !count12 && !x0 && !count15 && !count11 && !x1 && !count8 && !count6 && !count14 && !count4 && !count2 && !count1 && !count0 && count3) || (!count7 && !x8 && !count13 && !x2 && !x6 && !count5 && !count10 && !count9 && !x3 && !x14 && !x5 && !x7 && !x11 && !x12 && !x9 && !x10 && !x15 && !x13 && !count12 && !x0 && !count15 && !count11 && !x1 && !count8 && !count6 && !count14 && !count4 && !count2 && !count1 && count0) || (!count7 && !x8 && !count13 && !x2 && !x6 && !count5 && !count10 && !count9 && !x3 && !x14 && !x5 && !x7 && !x11 && !x12 && !x9 && !x10 && !x15 && !x13 && !count12 && !x0 && !count15 && !count11 && !x1 && !count8 && !count6 && !count14 && !count4 && !count2 && count1) || (!count7 && !x8 && !count13 && !x2 && !x6 && !count5 && !count10 && !count9 && !x3 && !x14 && !x5 && !x7 && !x11 && !x12 && !x9 && !x10 && !x15 && !x13 && !count12 && !x0 && !count15 && !count11 && !x1 && !count8 && !count6 && !count14 && !count4 && count2) || (!count7 && !x8 && !count13 && !x2 && !x6 && !count5 && !count10 && !count9 && !x3 && !x14 && !x5 && !x7 && !x11 && !x12 && !x9 && !x10 && !x15 && !x13 && !count12 && !x0 && !count15 && !count11 && !x1 && !count8 && !count6 && !count14 && count4 && !count2 && !count0 && !count1)
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 1, 'prune': 0}
+Next phase total time:  8.771847009658813
+Next phase DistEstimate time : 0.16211605072021484
+Next phase Validifier time : 4.643922328948975
+Next phase TreeLearner time : 3.9103448390960693
+Final DistEstimate value:  0.0
+Final Validifier value:  0.0
+Final candidate learnt:  (!count0 && !count1 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count2 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count3 && x4) || (!count1 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count2 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count0 && x4) || (!count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count2 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count1 && x4) || (!count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count2 && x4) || (!count0 && !count1 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count2 && !count3 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count4 && x4)
+Height of learnt decision tree:  32
+Number of terms in the candidate DNF:  5
+Total DistEstimate time : 0.9078946113586426
+Total Validifier time : 41.211121559143066
+Total TreeLearner time : 62.25517010688782
+Total time (seconds) : 104.4400897026062
+
+--- Run at 2025-08-24 20:13:14.943168 ---
+Initial phase DNF: x15 || !x15
+Initial phase DNF: (!x15 && !x14 && !x13 && !x12 && !x11 && !x10 && !x9 && !x8 && !x7 && !x6 && !x5 && x4 && !x3 && !x2 && !x1 && !x0 && !count15 && !count14 && !count13 && !count12 && !count11 && !count10 && !count9 && !count8 && !count7 && !count6 && !count5 && !count4 && !count3 && !count2 && count1 && count0) ||
+(!x15 && !x14 && !x13 && !x12 && !x11 && !x10 && !x9 && !x8 && !x7 && !x6 && !x5 && x4 && !x3 && !x2 && !x1 && !x0 && !count15 && !count14 && !count13 && !count12 && !count11 && !count10 && !count9 && !count8 && !count7 && !count6 && !count5 && !count4 && count3 && !count2 && count1 && count0) ||
+(!x15 && !x14 && !x13 && !x12 && !x11 && !x10 && !x9 && !x8 && !x7 && !x6 && !x5 && x4 && !x3 && !x2 && !x1 && !x0 && !count15 && !count14 && !count13 && !count12 && !count11 && !count10 && !count9 && !count8 && !count7 && !count6 && !count5 && !count4 && !count3 && !count2 && !count1 && count0) ||
+(!x15 && !x14 && !x13 && !x12 && !x11 && !x10 && !x9 && !x8 && !x7 && !x6 && !x5 && x4 && !x3 && !x2 && !x1 && !x0 && !count15 && !count14 && !count13 && !count12 && !count11 && !count10 && !count9 && !count8 && !count7 && !count6 && !count5 && !count4 && count3 && !count2 && !count1 && count0) ||
+(!x15 && !x14 && !x13 && !x12 && !x11 && !x10 && !x9 && !x8 && !x7 && !x6 && !x5 && x4 && !x3 && !x2 && !x1 && !x0 && !count15 && !count14 && !count13 && !count12 && !count11 && !count10 && !count9 && !count8 && !count7 && !count6 && !count5 && !count4 && !count3 && count2 && count1 && count0) ||
+(!x15 && !x14 && !x13 && !x12 && !x11 && !x10 && !x9 && !x8 && !x7 && !x6 && !x5 && x4 && !x3 && !x2 && !x1 && !x0 && !count15 && !count14 && !count13 && !count12 && !count11 && !count10 && !count9 && !count8 && !count7 && !count6 && !count5 && !count4 && count3 && count2 && !count1 && count0) ||
+(!x15 && !x14 && !x13 && !x12 && !x11 && !x10 && !x9 && !x8 && !x7 && !x6 && !x5 && x4 && !x3 && !x2 && !x1 && !x0 && !count15 && !count14 && !count13 && !count12 && !count11 && !count10 && !count9 && !count8 && !count7 && !count6 && !count5 && !count4 && count3 && count2 && count1 && !count0) ||
+(!x15 && !x14 && !x13 && !x12 && !x11 && !x10 && !x9 && !x8 && !x7 && !x6 && !x5 && x4 && !x3 && !x2 && !x1 && !x0 && !count15 && !count14 && !count13 && !count12 && !count11 && !count10 && !count9 && !count8 && !count7 && !count6 && !count5 && !count4 && count3 && count2 && count1 && count0) ||
+(!x15 && !x14 && !x13 && !x12 && !x11 && !x10 && !x9 && !x8 && !x7 && !x6 && !x5 && x4 && !x3 && !x2 && !x1 && !x0 && !count15 && !count14 && !count13 && !count12 && !count11 && !count10 && !count9 && !count8 && !count7 && !count6 && !count5 && !count4 && count3 && !count2 && count1 && !count0) ||
+(!x15 && !x14 && !x13 && !x12 && !x11 && !x10 && !x9 && !x8 && !x7 && !x6 && !x5 && x4 && !x3 && !x2 && !x1 && !x0 && !count15 && !count14 && !count13 && !count12 && !count11 && !count10 && !count9 && !count8 && !count7 && !count6 && !count5 && count4 && !count3 && !count2 && !count1 && !count0) ||
+(!x15 && !x14 && !x13 && !x12 && !x11 && !x10 && !x9 && !x8 && !x7 && !x6 && !x5 && x4 && !x3 && !x2 && !x1 && !x0 && !count15 && !count14 && !count13 && !count12 && !count11 && !count10 && !count9 && !count8 && !count7 && !count6 && !count5 && !count4 && count3 && count2 && !count1 && !count0) ||
+(!x15 && !x14 && !x13 && !x12 && !x11 && !x10 && !x9 && !x8 && !x7 && !x6 && !x5 && x4 && !x3 && !x2 && !x1 && !x0 && !count15 && !count14 && !count13 && !count12 && !count11 && !count10 && !count9 && !count8 && !count7 && !count6 && !count5 && !count4 && !count3 && count2 && count1 && !count0) ||
+(!x15 && !x14 && !x13 && !x12 && !x11 && !x10 && !x9 && !x8 && !x7 && !x6 && !x5 && x4 && !x3 && !x2 && !x1 && !x0 && !count15 && !count14 && !count13 && !count12 && !count11 && !count10 && !count9 && !count8 && !count7 && !count6 && !count5 && !count4 && !count3 && !count2 && count1 && !count0) ||
+(!x15 && !x14 && !x13 && !x12 && !x11 && !x10 && !x9 && !x8 && !x7 && !x6 && !x5 && x4 && !x3 && !x2 && !x1 && !x0 && !count15 && !count14 && !count13 && !count12 && !count11 && !count10 && !count9 && !count8 && !count7 && !count6 && !count5 && !count4 && !count3 && count2 && !count1 && count0) ||
+(!x15 && !x14 && !x13 && !x12 && !x11 && !x10 && !x9 && !x8 && !x7 && !x6 && !x5 && x4 && !x3 && !x2 && !x1 && !x0 && !count15 && !count14 && !count13 && !count12 && !count11 && !count10 && !count9 && !count8 && !count7 && !count6 && !count5 && !count4 && !count3 && count2 && !count1 && !count0) ||
+(!x15 && !x14 && !x13 && !x12 && !x11 && !x10 && !x9 && !x8 && !x7 && !x6 && !x5 && x4 && !x3 && !x2 && !x1 && !x0 && !count15 && !count14 && !count13 && !count12 && !count11 && !count10 && !count9 && !count8 && !count7 && !count6 && !count5 && !count4 && count3 && !count2 && !count1 && !count0)
+Final DistEstimate value: 0.0
+Final Validifier value: 0.0
+Final candidate learnt: (!count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count2 && !count3 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count0 && count1 && x4) || (!count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count2 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count0 && count1 && count3 && x4) || (!count1 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count2 && !count3 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count0 && x4) || (!count1 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count2 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count0 && count3 && x4) || (!count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count3 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count0 && count1 && count2 && x4) || (!count1 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count0 && count2 && count3 && x4) || (!count0 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count1 && count2 && count3 && x4) || (!count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count0 && count1 && count2 && count3 && x4) || (!count0 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count2 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count1 && count3 && x4) || (!count0 && !count1 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count2 && !count3 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count4 && x4) || (!count0 && !count1 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count2 && count3 && x4) || (!count0 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count3 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count1 && count2 && x4) || (!count0 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count2 && !count3 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count1 && x4) || (!count1 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count3 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count0 && count2 && x4) || (!count0 && !count1 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count3 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count2 && x4) || (!count0 && !count1 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count2 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count3 && x4)
+Height of learnt decision tree: 32
+Number of terms in the candidate DNF: 16
+Total DistEstimate time: 0.28941798210144043
+Total Validifier time: 3.2452871799468994
+Total TreeLearner time: 0.0043790340423583984
+Total time (seconds): 3.5624449253082275
+
+--- Run at 2025-12-22 22:50:20.695312 ---
+Initial phase DNF: (!x15 && !x14 && !x13 && !x12 && !x11 && !x10 && !x9 && !x8 && !x7 && !x6 && !x5 && x4 && !x3 && !x2 && !x1 && !x0 && !count15 && !count14 && !count13 && !count12 && !count11 && !count10 && !count9 && !count8 && !count7 && !count6 && !count5 && !count4 && !count3 && !count2 && count1 && !count0) ||
+(!x15 && !x14 && !x13 && !x12 && !x11 && !x10 && !x9 && !x8 && !x7 && !x6 && !x5 && x4 && !x3 && !x2 && !x1 && !x0 && !count15 && !count14 && !count13 && !count12 && !count11 && !count10 && !count9 && !count8 && !count7 && !count6 && !count5 && !count4 && count3 && !count2 && !count1 && !count0) ||
+(!x15 && !x14 && !x13 && !x12 && !x11 && !x10 && !x9 && !x8 && !x7 && !x6 && !x5 && x4 && !x3 && !x2 && !x1 && !x0 && !count15 && !count14 && !count13 && !count12 && !count11 && !count10 && !count9 && !count8 && !count7 && !count6 && !count5 && count4 && !count3 && !count2 && !count1 && !count0) ||
+(!x15 && !x14 && !x13 && !x12 && !x11 && !x10 && !x9 && !x8 && !x7 && !x6 && !x5 && x4 && !x3 && !x2 && !x1 && !x0 && !count15 && !count14 && !count13 && !count12 && !count11 && !count10 && !count9 && !count8 && !count7 && !count6 && !count5 && !count4 && !count3 && count2 && !count1 && count0) ||
+(!x15 && !x14 && !x13 && !x12 && !x11 && !x10 && !x9 && !x8 && !x7 && !x6 && !x5 && x4 && !x3 && !x2 && !x1 && !x0 && !count15 && !count14 && !count13 && !count12 && !count11 && !count10 && !count9 && !count8 && !count7 && !count6 && !count5 && !count4 && !count3 && count2 && count1 && count0) ||
+(!x15 && !x14 && !x13 && !x12 && !x11 && !x10 && !x9 && !x8 && !x7 && !x6 && !x5 && x4 && !x3 && !x2 && !x1 && !x0 && !count15 && !count14 && !count13 && !count12 && !count11 && !count10 && !count9 && !count8 && !count7 && !count6 && !count5 && !count4 && !count3 && count2 && !count1 && !count0) ||
+(!x15 && !x14 && !x13 && !x12 && !x11 && !x10 && !x9 && !x8 && !x7 && !x6 && !x5 && x4 && !x3 && !x2 && !x1 && !x0 && !count15 && !count14 && !count13 && !count12 && !count11 && !count10 && !count9 && !count8 && !count7 && !count6 && !count5 && !count4 && !count3 && !count2 && !count1 && count0) ||
+(!x15 && !x14 && !x13 && !x12 && !x11 && !x10 && !x9 && !x8 && !x7 && !x6 && !x5 && x4 && !x3 && !x2 && !x1 && !x0 && !count15 && !count14 && !count13 && !count12 && !count11 && !count10 && !count9 && !count8 && !count7 && !count6 && !count5 && !count4 && count3 && count2 && count1 && !count0) ||
+(!x15 && !x14 && !x13 && !x12 && !x11 && !x10 && !x9 && !x8 && !x7 && !x6 && !x5 && x4 && !x3 && !x2 && !x1 && !x0 && !count15 && !count14 && !count13 && !count12 && !count11 && !count10 && !count9 && !count8 && !count7 && !count6 && !count5 && !count4 && !count3 && !count2 && count1 && count0) ||
+(!x15 && !x14 && !x13 && !x12 && !x11 && !x10 && !x9 && !x8 && !x7 && !x6 && !x5 && x4 && !x3 && !x2 && !x1 && !x0 && !count15 && !count14 && !count13 && !count12 && !count11 && !count10 && !count9 && !count8 && !count7 && !count6 && !count5 && !count4 && count3 && !count2 && !count1 && count0) ||
+(!x15 && !x14 && !x13 && !x12 && !x11 && !x10 && !x9 && !x8 && !x7 && !x6 && !x5 && x4 && !x3 && !x2 && !x1 && !x0 && !count15 && !count14 && !count13 && !count12 && !count11 && !count10 && !count9 && !count8 && !count7 && !count6 && !count5 && !count4 && count3 && count2 && !count1 && count0) ||
+(!x15 && !x14 && !x13 && !x12 && !x11 && !x10 && !x9 && !x8 && !x7 && !x6 && !x5 && x4 && !x3 && !x2 && !x1 && !x0 && !count15 && !count14 && !count13 && !count12 && !count11 && !count10 && !count9 && !count8 && !count7 && !count6 && !count5 && !count4 && count3 && count2 && count1 && count0) ||
+(!x15 && !x14 && !x13 && !x12 && !x11 && !x10 && !x9 && !x8 && !x7 && !x6 && !x5 && x4 && !x3 && !x2 && !x1 && !x0 && !count15 && !count14 && !count13 && !count12 && !count11 && !count10 && !count9 && !count8 && !count7 && !count6 && !count5 && !count4 && count3 && !count2 && count1 && !count0) ||
+(!x15 && !x14 && !x13 && !x12 && !x11 && !x10 && !x9 && !x8 && !x7 && !x6 && !x5 && x4 && !x3 && !x2 && !x1 && !x0 && !count15 && !count14 && !count13 && !count12 && !count11 && !count10 && !count9 && !count8 && !count7 && !count6 && !count5 && !count4 && !count3 && count2 && count1 && !count0) ||
+(!x15 && !x14 && !x13 && !x12 && !x11 && !x10 && !x9 && !x8 && !x7 && !x6 && !x5 && x4 && !x3 && !x2 && !x1 && !x0 && !count15 && !count14 && !count13 && !count12 && !count11 && !count10 && !count9 && !count8 && !count7 && !count6 && !count5 && !count4 && count3 && count2 && !count1 && !count0) ||
+(!x15 && !x14 && !x13 && !x12 && !x11 && !x10 && !x9 && !x8 && !x7 && !x6 && !x5 && x4 && !x3 && !x2 && !x1 && !x0 && !count15 && !count14 && !count13 && !count12 && !count11 && !count10 && !count9 && !count8 && !count7 && !count6 && !count5 && !count4 && count3 && !count2 && count1 && count0)
+Final DistEstimate value: 0.0
+Final Validifier value: 0.0
+Final candidate learnt: (!count0 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count2 && !count3 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count1 && x4) || (!count0 && !count1 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count2 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count3 && x4) || (!count0 && !count1 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count2 && !count3 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count4 && x4) || (!count1 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count3 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count0 && count2 && x4) || (!count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count3 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count0 && count1 && count2 && x4) || (!count0 && !count1 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count3 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count2 && x4) || (!count1 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count2 && !count3 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count0 && x4) || (!count0 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count1 && count2 && count3 && x4) || (!count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count2 && !count3 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count0 && count1 && x4) || (!count1 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count2 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count0 && count3 && x4) || (!count1 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count0 && count2 && count3 && x4) || (!count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count0 && count1 && count2 && count3 && x4) || (!count0 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count2 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count1 && count3 && x4) || (!count0 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count3 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count1 && count2 && x4) || (!count0 && !count1 && !count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count2 && count3 && x4) || (!count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count2 && !count4 && !count5 && !count6 && !count7 && !count8 && !count9 && !x0 && !x1 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x2 && !x3 && !x5 && !x6 && !x7 && !x8 && !x9 && count0 && count1 && count3 && x4)
+Height of learnt decision tree: 32
+Number of terms in the candidate DNF: 16
+Total DistEstimate time: 0.2929868698120117
+Total Validifier time: 3.2868306636810303
+Total TreeLearner time: 0.004282236099243164
+Total time (seconds): 3.6069350242614746
+
+--- Run at 2025-12-22 23:26:00.509027 ---
