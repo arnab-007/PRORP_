@@ -13,6 +13,11 @@ import pandas as pd
 
 from DecisionTreeLearner import CustomDecisionTree
 from utils import *
+import numpy as np
+
+SEED = 42
+random.seed(SEED)
+np.random.seed(SEED)
 
 # Setup logging
 logging.basicConfig(level=logging.INFO, format="%(message)s")
