@@ -1,0 +1,38 @@
+Initial phase DNF: (!x10 && !n1 && !n12 && !x14 && !n13 && !x9 && !n4)
+Phase: 2
+DistEstimate value: 0.0
+Validifier value: 0.9316666666666666
+Phase 2 DNF before prediction: (!x10 && !n1 && !n12 && !x14 && !n13 && !x9 && !n4)
+Phase 2 DNF after prediction: x15 && !x15
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 4, 'prune': 0}
+Next phase total time: 10.805935382843018
+Next phase DistEstimate time: 0.3954505920410156
+Next phase Validifier time: 10.091728448867798
+Next phase TreeLearner time: 0.3180718421936035
+Phase: 3
+DistEstimate value: 0.0
+Validifier value: 0.1
+Phase 3 DNF before prediction: (!x10 && !n1 && !n12 && !x14 && !n13 && !x9 && !n4 && !x12 && !x13 && !x11 && !x15)
+Phase 3 DNF after prediction: (!x10 && !n1 && !n12 && !x14 && !n13 && !x9 && !n4 && !x12 && !x13 && !x11 && !x15)
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 3, 'prune': 0}
+Next phase total time: 10.754206657409668
+Next phase DistEstimate time: 0.4043619632720947
+Next phase Validifier time: 10.037077903747559
+Next phase TreeLearner time: 0.31139135360717773
+Final DistEstimate value: 0.0
+Final Validifier value: 0.0
+Final candidate learnt: (!n0 && !n1 && !n10 && !n11 && !n12 && !n13 && !n14 && !n15 && !n2 && !n3 && !n4 && !n5 && !n6 && !n7 && !n8 && !n9 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x6 && !x7 && !x9 && x8) || (!n0 && !n1 && !n10 && !n11 && !n12 && !n13 && !n14 && !n15 && !n2 && !n3 && !n4 && !n5 && !n6 && !n7 && !n8 && !n9 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x6 && !x9 && x7) || (!n0 && !n1 && !n10 && !n11 && !n12 && !n13 && !n14 && !n15 && !n2 && !n3 && !n4 && !n5 && !n6 && !n7 && !n8 && !n9 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x9 && x6)
+Height of learnt decision tree: 26
+Number of terms in the candidate DNF: 3
+Total DistEstimate time: 1.0602772235870361
+Total Validifier time: 30.117551565170288
+Total TreeLearner time: 0.6960368156433105
+Total time (seconds): 31.885181665420532
+Starting model fitting...
+--- Fitting took: 0.0011 seconds ---
+Starting custom tree build...
+--- Custom tree build took: 0.0016 seconds ---
+
+--- Run at 2026-05-14 12:06:52.944368 ---

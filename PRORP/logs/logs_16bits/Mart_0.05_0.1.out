@@ -1,0 +1,115 @@
+Initial phase DNF: (!b7 && !c15 && !b15 && !b13 && !b8 && !b14 && c6)
+Phase: 2
+DistEstimate value: 0.0
+Validifier value: 1.0
+Phase 2 DNF before prediction: (!b7 && !c15 && !b15 && !b13 && !b8 && !b14 && c6)
+Phase 2 DNF after prediction: c15 && !c15
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 5, 'prune': 0}
+Next phase total time: 9.514453649520874
+Next phase DistEstimate time: 0.2136857509613037
+Next phase Validifier time: 8.874777555465698
+Next phase TreeLearner time: 0.4246516227722168
+Phase: 3
+DistEstimate value: 0.0
+Validifier value: 1.0
+Phase 3 DNF before prediction: (!b7 && !c15 && !b15 && !b13 && !b8 && !b14 && c6 && !c3 && !c10 && !c14 && !c5 && !rounds15)
+Phase 3 DNF after prediction: c15 && !c15
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 5, 'prune': 0}
+Next phase total time: 10.032529830932617
+Next phase DistEstimate time: 0.19222354888916016
+Next phase Validifier time: 9.35292387008667
+Next phase TreeLearner time: 0.4864184856414795
+Phase: 4
+DistEstimate value: 0.0
+Validifier value: 1.0
+Phase 4 DNF before prediction: (!b7 && !c15 && !b15 && !b13 && !b8 && !b14 && c6 && !c3 && !c10 && !c14 && !c5 && !rounds15 && !c4 && !rounds10 && !rounds14 && !c8 && !c9)
+Phase 4 DNF after prediction: c15 && !c15
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 5, 'prune': 0}
+Next phase total time: 10.062659502029419
+Next phase DistEstimate time: 0.23294663429260254
+Next phase Validifier time: 9.21445083618164
+Next phase TreeLearner time: 0.6139552593231201
+Phase: 5
+DistEstimate value: 0.0
+Validifier value: 1.0
+Phase 5 DNF before prediction: (!b7 && !c15 && !b15 && !b13 && !b8 && !b14 && c6 && !c3 && !c10 && !c14 && !c5 && !rounds15 && !c4 && !rounds10 && !rounds14 && !c8 && !c9 && !rounds4 && !c7 && !c13 && !rounds12 && !rounds5)
+Phase 5 DNF after prediction: c15 && !c15
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 5, 'prune': 0}
+Next phase total time: 13.014094829559326
+Next phase DistEstimate time: 0.24320030212402344
+Next phase Validifier time: 12.031667947769165
+Next phase TreeLearner time: 0.7384002208709717
+Phase: 6
+DistEstimate value: 0.0
+Validifier value: 0.9916666666666667
+Phase 6 DNF before prediction: (!b7 && !c15 && !b15 && !b13 && !b8 && !b14 && c6 && !c3 && !c10 && !c14 && !c5 && !rounds15 && !c4 && !rounds10 && !rounds14 && !c8 && !c9 && !rounds4 && !c7 && !c13 && !rounds12 && !rounds5 && !rounds6 && !rounds8 && !c2 && !c11 && !rounds9)
+Phase 6 DNF after prediction: c15 && !c15
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 6, 'prune': 0}
+Next phase total time: 10.283875465393066
+Next phase DistEstimate time: 0.1897275447845459
+Next phase Validifier time: 9.164229393005371
+Next phase TreeLearner time: 0.9287495613098145
+Phase: 7
+DistEstimate value: 0.00666666666666671
+Validifier value: 0.77
+Phase 7 DNF before prediction: (!b7 && !c15 && !b15 && !b13 && !b8 && !b14 && c6 && !c3 && !c10 && !c14 && !c5 && !rounds15 && !c4 && !rounds10 && !rounds14 && !c8 && !c9 && !rounds4 && !c7 && !c13 && !rounds12 && !rounds5 && !rounds6 && !rounds8 && !c2 && !c11 && !rounds9 && !c12 && !rounds13 && !rounds3 && !rounds7 && !c1)
+Phase 7 DNF after prediction: c15 && !c15
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 2, 'prune': 0}
+Next phase total time: 8.174210548400879
+Next phase DistEstimate time: 0.1862468719482422
+Next phase Validifier time: 7.635533571243286
+Next phase TreeLearner time: 0.35167503356933594
+Phase: 8
+DistEstimate value: 0.00666666666666671
+Validifier value: 0.125
+Phase 8 DNF before prediction: (!b7 && !c15 && !b15 && !b13 && !b8 && !b14 && c6 && !c3 && !c10 && !c14 && !c5 && !rounds15 && !c4 && !rounds10 && !rounds14 && !c8 && !c9 && !rounds4 && !c7 && !c13 && !rounds12 && !rounds5 && !rounds6 && !rounds8 && !c2 && !c11 && !rounds9 && !c12 && !rounds13 && !rounds3 && !rounds7 && !c1 && !rounds11 && !c0)
+Phase 8 DNF after prediction: (!b7 && !c15 && !b15 && !b13 && !b8 && !b14 && c6 && !c3 && !c10 && !c14 && !c5 && !rounds15 && !c4 && !rounds10 && !rounds14 && !c8 && !c9 && !rounds4 && !c7 && !c13 && !rounds12 && !rounds5 && !rounds6 && !rounds8 && !c2 && !c11 && !rounds9 && !c12 && !rounds13 && !rounds3 && !rounds7 && !c1 && !rounds11 && !c0)
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 1, 'prune': 0}
+Next phase total time: 8.129724502563477
+Next phase DistEstimate time: 0.18981003761291504
+Next phase Validifier time: 7.732637882232666
+Next phase TreeLearner time: 0.20647716522216797
+Phase: 9
+DistEstimate value: 0.00666666666666671
+Validifier value: 0.14
+Phase 9 DNF before prediction: (!b7 && !c15 && !b15 && !b13 && !b8 && !b14 && c6 && !c3 && !c10 && !c14 && !c5 && !rounds15 && !c4 && !rounds10 && !rounds14 && !c8 && !c9 && !rounds4 && !c7 && !c13 && !rounds12 && !rounds5 && !rounds6 && !rounds8 && !c2 && !c11 && !rounds9 && !c12 && !rounds13 && !rounds3 && !rounds7 && !c1 && !rounds11 && !c0 && !rounds0) || (!b7 && !c15 && !b15 && !b13 && !b8 && !b14 && c6 && !c3 && !c10 && !c14 && !c5 && !rounds15 && !c4 && !rounds10 && !rounds14 && !c8 && !c9 && !rounds4 && !c7 && !c13 && !rounds12 && !rounds5 && !rounds6 && !rounds8 && !c2 && !c11 && !rounds9 && !c12 && !rounds13 && !rounds3 && !rounds7 && !c1 && !rounds11 && !c0 && rounds0)
+Phase 9 DNF after prediction: (!b7 && !c15 && !b15 && !b13 && !b8 && !b14 && c6 && !c3 && !c10 && !c14 && !c5 && !rounds15 && !c4 && !rounds10 && !rounds14 && !c8 && !c9 && !rounds4 && !c7 && !c13 && !rounds12 && !rounds5 && !rounds6 && !rounds8 && !c2 && !c11 && !rounds9 && !c12 && !rounds13 && !rounds3 && !rounds7 && !c1 && !rounds11 && !c0 && !rounds0) || (!b7 && !c15 && !b15 && !b13 && !b8 && !b14 && c6 && !c3 && !c10 && !c14 && !c5 && !rounds15 && !c4 && !rounds10 && !rounds14 && !c8 && !c9 && !rounds4 && !c7 && !c13 && !rounds12 && !rounds5 && !rounds6 && !rounds8 && !c2 && !c11 && !rounds9 && !c12 && !rounds13 && !rounds3 && !rounds7 && !c1 && !rounds11 && !c0 && rounds0)
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 1, 'prune': 0}
+Next phase total time: 8.17401671409607
+Next phase DistEstimate time: 0.20618128776550293
+Next phase Validifier time: 7.752037286758423
+Next phase TreeLearner time: 0.2147998809814453
+Phase: 10
+DistEstimate value: 0.0050000000000000044
+Validifier value: 0.12
+Phase 10 DNF before prediction: (!b7 && !c15 && !b15 && !b13 && !b8 && !b14 && c6 && !c3 && !c10 && !c14 && !c5 && !rounds15 && !c4 && !rounds10 && !rounds14 && !c8 && !c9 && !rounds4 && !c7 && !c13 && !rounds12 && !rounds5 && !rounds6 && !rounds8 && !c2 && !c11 && !rounds9 && !c12 && !rounds13 && !rounds3 && !rounds7 && !c1 && !rounds11 && !c0 && !rounds0 && !rounds1) || (!b7 && !c15 && !b15 && !b13 && !b8 && !b14 && c6 && !c3 && !c10 && !c14 && !c5 && !rounds15 && !c4 && !rounds10 && !rounds14 && !c8 && !c9 && !rounds4 && !c7 && !c13 && !rounds12 && !rounds5 && !rounds6 && !rounds8 && !c2 && !c11 && !rounds9 && !c12 && !rounds13 && !rounds3 && !rounds7 && !c1 && !rounds11 && !c0 && !rounds0 && rounds1) || (!b7 && !c15 && !b15 && !b13 && !b8 && !b14 && c6 && !c3 && !c10 && !c14 && !c5 && !rounds15 && !c4 && !rounds10 && !rounds14 && !c8 && !c9 && !rounds4 && !c7 && !c13 && !rounds12 && !rounds5 && !rounds6 && !rounds8 && !c2 && !c11 && !rounds9 && !c12 && !rounds13 && !rounds3 && !rounds7 && !c1 && !rounds11 && !c0 && rounds0)
+Phase 10 DNF after prediction: (!b7 && !c15 && !b15 && !b13 && !b8 && !b14 && c6 && !c3 && !c10 && !c14 && !c5 && !rounds15 && !c4 && !rounds10 && !rounds14 && !c8 && !c9 && !rounds4 && !c7 && !c13 && !rounds12 && !rounds5 && !rounds6 && !rounds8 && !c2 && !c11 && !rounds9 && !c12 && !rounds13 && !rounds3 && !rounds7 && !c1 && !rounds11 && !c0 && !rounds0 && !rounds1) || (!b7 && !c15 && !b15 && !b13 && !b8 && !b14 && c6 && !c3 && !c10 && !c14 && !c5 && !rounds15 && !c4 && !rounds10 && !rounds14 && !c8 && !c9 && !rounds4 && !c7 && !c13 && !rounds12 && !rounds5 && !rounds6 && !rounds8 && !c2 && !c11 && !rounds9 && !c12 && !rounds13 && !rounds3 && !rounds7 && !c1 && !rounds11 && !c0 && !rounds0 && rounds1) || (!b7 && !c15 && !b15 && !b13 && !b8 && !b14 && c6 && !c3 && !c10 && !c14 && !c5 && !rounds15 && !c4 && !rounds10 && !rounds14 && !c8 && !c9 && !rounds4 && !c7 && !c13 && !rounds12 && !rounds5 && !rounds6 && !rounds8 && !c2 && !c11 && !rounds9 && !c12 && !rounds13 && !rounds3 && !rounds7 && !c1 && !rounds11 && !c0 && rounds0)
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 1, 'prune': 0}
+Next phase total time: 7.623642921447754
+Next phase DistEstimate time: 0.1895461082458496
+Next phase Validifier time: 7.188923597335815
+Next phase TreeLearner time: 0.24410557746887207
+Final DistEstimate value: 0.0050000000000000044
+Final Validifier value: 0.0
+Final candidate learnt: (!b0 && !b1 && !b10 && !b11 && !b12 && !b13 && !b14 && !b15 && !b2 && !b3 && !b4 && !b5 && !b6 && !b7 && !b8 && !b9 && !c0 && !c1 && !c10 && !c11 && !c12 && !c13 && !c14 && !c15 && !c2 && !c3 && !c4 && !c5 && !c7 && !c8 && !c9 && !rounds0 && !rounds1 && !rounds10 && !rounds11 && !rounds12 && !rounds13 && !rounds14 && !rounds15 && !rounds3 && !rounds4 && !rounds5 && !rounds6 && !rounds7 && !rounds8 && !rounds9 && c6 && rounds2) || (!b0 && !b1 && !b10 && !b11 && !b12 && !b13 && !b14 && !b15 && !b2 && !b3 && !b4 && !b5 && !b6 && !b7 && !b8 && !b9 && !c0 && !c1 && !c10 && !c11 && !c12 && !c13 && !c14 && !c15 && !c2 && !c3 && !c4 && !c5 && !c7 && !c8 && !c9 && !rounds0 && !rounds10 && !rounds11 && !rounds12 && !rounds13 && !rounds14 && !rounds15 && !rounds3 && !rounds4 && !rounds5 && !rounds6 && !rounds7 && !rounds8 && !rounds9 && c6 && rounds1) || (!b0 && !b1 && !b10 && !b11 && !b12 && !b13 && !b14 && !b15 && !b2 && !b3 && !b4 && !b5 && !b6 && !b7 && !b8 && !b9 && !c0 && !c1 && !c10 && !c11 && !c12 && !c13 && !c14 && !c15 && !c2 && !c3 && !c4 && !c5 && !c7 && !c8 && !c9 && !rounds10 && !rounds11 && !rounds12 && !rounds13 && !rounds14 && !rounds15 && !rounds3 && !rounds4 && !rounds5 && !rounds6 && !rounds7 && !rounds8 && !rounds9 && c6 && rounds0)
+Height of learnt decision tree: 48
+Number of terms in the candidate DNF: 3
+Total DistEstimate time: 2.037660837173462
+Total Validifier time: 88.47149157524109
+Total TreeLearner time: 4.279314756393433
+Total time (seconds): 94.80518746376038
+Starting model fitting...
+--- Fitting took: 0.0012 seconds ---
+Starting custom tree build...
+--- Custom tree build took: 0.0014 seconds ---
+
+--- Run at 2026-05-14 12:11:22.305725 ---
