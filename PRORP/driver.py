@@ -21,15 +21,16 @@ def get_init_states(progname, k, M):
         "Unif4": ["(x == 0)"],
         "Unif3": [f"(x == 0 && n < {k})"],
         "Temp": ["(z == 0)"],
-        "BigGeo0": ["(z == 0)"],
+        "BigGeo0": ["(z14)"],
         "BigGeo1": ["(z == 0 && x == 16)"],
         "BigGeo2": ["(z == 0 && x == 16)", "(z < 64 && x < 16)"],
-        "LinExp": [f"(count == 0 && n < {k})", f"(count == 0 && n < {k})"],
-        "Sum0": [f"(x < 8 && n < {k})"],
+        "LinExp": [f"(count < 64 && n < {k})"],
+        "Sum0": [f"(x == 64 && n < {k/2})"],
         "ModSum": [f"(x == 0 && n < {k})"],
         "Prinsys": ["(x == 0)"],
         "Detm": ["(count == 0)"],
-        "Fair": ["(count == 0)", "(count < 64)"],
+        # "Fair": ["(count == 0)", "(count < 64)"],
+        "Fair": [ "(count < 64)"],
         "Mart": ["(c == 0 && b == 64 && rounds == 0)"],
         "GeoAr": ["(x == 0 && y == 0)"],
         "Bin0": [f"(x == 0 && y == 2 && n == {k})", f"(x < 64 && y == 2 && n == {k})"],
@@ -37,8 +38,9 @@ def get_init_states(progname, k, M):
         "BinMod": [f"(x == 0 && n == {M - k/2})"],
         "Bin2": [f"(x == 0 && y == 8 && n < {k/2})", f"(x < 32 && y == 8 && n < {k/2})"],
         "BiasDir": ["(x == 0 && y == 0)", "(x == 1 && y == 1)"],
-        "DepRV": [f"(x == 0 && y == 0 && n == {k})", f"(x == 8 && y == 16 && n == {k})"],
-        "RevBin": [f"(x < {k/2} && z == 0)"],
+        "DepRV": [f"(x == 0 && y == 0 && n == {k})", ],
+                #   f"(x == 8 && y == 16 && n == {k})"],
+        "RevBin": [f"(x == {k/2} && z < 16)"],
         "Duel": ["(t == 0)", "(t == 1)"],
     }
     return INIT_STATES_MAP.get(progname, [])
@@ -51,7 +53,7 @@ def ApproxInv(progname, iters, epsilon, eta, delta, mode, worker_id):
     os.makedirs(worker_output_dir, exist_ok=True)
 
     k_values = [iters]
-    num_bits_values = [32]
+    num_bits_values = [16]
     for num_bits in num_bits_values:
         for k in k_values:
             init_states_list = get_init_states(progname, k, M)
@@ -116,11 +118,11 @@ if __name__ == "__main__":
         mode = int(sys.argv[6])
         input_list = [(progname, iters, epsilon, eta, delta, mode)]
     elif sys.argv[1] == "all":
-        for mode in [1, 0]:
+        for mode in [1]:
             input_list = [
                 # ("Unif1", 64, 0.05, 0.05, 0.1, mode),
                 # ("Unif2", 1, 0.05, 0.05, 0.1, mode),
-                ("Unif2", 1, 0.05, 0.05, 0.1, mode),
+                # ("Unif2", 1, 0.05, 0.05, 0.1, mode),
                 # ("MultiMode1", 64, 0.05, 0.05, 0.1, mode),
                 # ("Unif1", 64, 0.05, 0.05, 0.1, mode),
                 # ("Unif3", 64, 0.05, 0.05, 0.1, mode),
@@ -128,23 +130,23 @@ if __name__ == "__main__":
                 # ("ModSum", 96, 0.05, 0.05, 0.1, mode),
                 # ("ModSum", 128, 0.05, 0.05, 0.1, mode),
                 # ("ModSum", 160, 0.05, 0.05, 0.1, mode),
-                ("Duel", 32, 0.05, 0.05, 0.1),
-                ("Bin1", 32, 0.05, 0.05, 0.1),
-                ("Prinsys", 32, 0.05, 0.05, 0.1),
-                ("LinExp",  32, 0.01, 0.01, 0.1),
-                ("Fair", 32, 0.05, 0.05, 0.1),
-                ("Sum0", 32, 0.05, 0.05, 0.1),
-                ("BigGeo0", 32, 0.05, 0.05, 0.1),
-                ("Detm", 32, 0.05, 0.05, 0.1),
-                ("DepRV", 32, 0.05, 0.05, 0.1),
-                ("Bin0", 32, 0.05, 0.05, 0.1),
-                ("Bin2", 32, 0.05, 0.05, 0.1),
-                ("RevBin", 32, 0.05, 0.05, 0.1),
-                ("BiasDir", 32, 0.05, 0.05, 0.1),
-                ("BigGeo1", 32, 0.05, 0.05, 0.1),
-                ("Mart", 32, 0.05, 0.05, 0.1),
-                ("GeoAr", 32, 0.05, 0.05, 0.1),
-                ("BigGeo2", 32, 0.05, 0.05, 0.1),
+                # ("Duel", 32, 0.05, 0.05, 0.1),
+                # ("Bin1", 32, 0.05, 0.05, 0.1),
+                # ("Prinsys", 32, 0.05, 0.05, 0.1),
+                ("LinExp",  64, 0.05, 0.05, 0.1, mode),
+                ("Fair", 64, 0.05, 0.05, 0.1, mode),
+                ("Sum0", 64, 0.05, 0.05, 0.1, mode),
+                # ("BigGeo0", 64, 0.05, 0.05, 0.1, mode),
+                # ("Detm", 32, 0.05, 0.05, 0.1),
+                ("DepRV", 64, 0.05, 0.05, 0.1, mode),
+                # ("Bin0", 32, 0.05, 0.05, 0.1),
+                # ("Bin2", 32, 0.05, 0.05, 0.1),
+                ("RevBin", 64, 0.05, 0.05, 0.1, mode),
+                # ("BiasDir", 32, 0.05, 0.05, 0.1),
+                # ("BigGeo1", 32, 0.05, 0.05, 0.1),
+                ("Mart", 64, 0.05, 0.05, 0.1, mode),
+                # ("GeoAr", 32, 0.05, 0.05, 0.1),
+                # ("BigGeo2", 32, 0.05, 0.05, 0.1),
             ]
 
             for worker_id, args in enumerate(input_list):
