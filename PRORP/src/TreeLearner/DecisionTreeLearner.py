@@ -5,6 +5,7 @@ import numpy as np
 import random
 import matplotlib.pyplot as plt
 import time
+
 # from graphviz import Digraph
 import pickle
 from collections import deque
@@ -140,7 +141,6 @@ class CustomDecisionTree:
 
         return root
 
-    
     def predict_old(self, X, expected_labels=None, weights=None, member=None):
         if expected_labels is None or weights is None or member is None:
             raise ValueError(
@@ -170,17 +170,22 @@ class CustomDecisionTree:
             )
 
             # 1. Concatenate old and new dataframes
-            node.datapoints = pd.concat([node.datapoints, new_data_df], ignore_index=True)
+            # node.datapoints = pd.concat([node.datapoints, new_data_df], ignore_index=True)
+            node.datapoints = new_data_df
 
             # 2. Drop duplicates based on all columns except weight
-            node.datapoints.drop_duplicates(
-                subset=[col for col in node.datapoints.columns if col != "weight"],
-                inplace=True,
-            )
+            # node.datapoints.drop_duplicates(
+            #     subset=[col for col in node.datapoints.columns if col != "weight"],
+            #     inplace=True,
+            # )
 
             # 3. YOUR ORIGINAL, CORRECT CONFLICT CHECK
             # This is now performed efficiently once per updated leaf.
-            feature_cols = [col for col in node.datapoints.columns if col not in ("weight", "label", "member")]
+            feature_cols = [
+                col
+                for col in node.datapoints.columns
+                if col not in ("weight", "label", "member")
+            ]
             grouped = node.datapoints.groupby(feature_cols)
             for key, group in grouped:
                 if group["member"].nunique() > 1:
@@ -195,7 +200,9 @@ class CustomDecisionTree:
 
     def predict(self, X, expected_labels=None, weights=None, member=None):
         if expected_labels is None or weights is None or member is None:
-            raise ValueError("Expected labels, weights and member identifier are required.")
+            raise ValueError(
+                "Expected labels, weights and member identifier are required."
+            )
 
         # A dictionary to buffer new data for each leaf node
         new_data_for_leaves = defaultdict(list)
@@ -206,10 +213,10 @@ class CustomDecisionTree:
         for x, exl, wt, dist in zip(X, expected_labels, weights, member):
             # 1. Find the destination leaf node for the current point 'x'
             leaf_node = _find_leaf_node(x, self.root)
-            
+
             # 2. The prediction is the current value of the leaf BEFORE it's updated
             predictions.append(leaf_node.value)
-            
+
             # 3. Buffer the new data in a simple list. No DataFrames yet!
             new_data_for_leaves[leaf_node].append(np.append(x, [exl, wt, dist]))
 
@@ -218,8 +225,6 @@ class CustomDecisionTree:
         self._batch_update_leaves(new_data_for_leaves)
 
         return np.array(predictions)
-
-    
 
     # def save_tree(self, output_file="tree"):
     #     # dot = Digraph(format='svg')
@@ -741,19 +746,19 @@ def build_graph(dot, node, feature_names, depth=0):
         dot.edge(str(node.node_id), str(node.rchild.node_id), label="True")
         build_graph(dot, node.rchild, feature_names, depth + 1)
 
-def _find_leaf_node(x, node):
-        """
-        Traverses the tree to find the leaf node for a given data point 'x'.
-        This function is fast as it only performs comparisons.
-        """
-        current_node = node
-        while not current_node.is_leaf_node():
-            if x[current_node.feature] <= current_node.threshold:
-                current_node = current_node.lchild
-            else:
-                current_node = current_node.rchild
-        return current_node
 
+def _find_leaf_node(x, node):
+    """
+    Traverses the tree to find the leaf node for a given data point 'x'.
+    This function is fast as it only performs comparisons.
+    """
+    current_node = node
+    while not current_node.is_leaf_node():
+        if x[current_node.feature] <= current_node.threshold:
+            current_node = current_node.lchild
+        else:
+            current_node = current_node.rchild
+    return current_node
 
 
 def predict_and_store(x, expected_label, weight, dist, node, feature_names):
