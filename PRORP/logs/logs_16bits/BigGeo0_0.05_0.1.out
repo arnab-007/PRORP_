@@ -1,0 +1,80 @@
+Initial phase DNF: (z14 && !z5) || (z14 && z5)
+Final DistEstimate value: 0.0
+Final Validifier value: 0.0
+Final candidate learnt: (!z5 && flip && z14) || (flip && z14 && z5)
+Height of learnt decision tree: 3
+Number of terms in the candidate DNF: 2
+Total DistEstimate time: 0.18225336074829102
+Total Validifier time: 6.732491731643677
+Total TreeLearner time: 0.03356480598449707
+Total time (seconds): 7.161508083343506
+Starting model fitting...
+--- Fitting took: 0.0008 seconds ---
+Starting custom tree build...
+--- Custom tree build took: 0.0004 seconds ---
+
+--- Run at 2026-05-16 13:42:03.098144 ---
+Initial phase DNF: (z12 && !z5) || (z12 && z5)
+Final DistEstimate value: 0.0
+Final Validifier value: 0.0
+Final candidate learnt: (!z5 && flip && z12) || (flip && z12 && z5)
+Height of learnt decision tree: 3
+Number of terms in the candidate DNF: 2
+Total DistEstimate time: 0.17366766929626465
+Total Validifier time: 6.761649131774902
+Total TreeLearner time: 0.03641486167907715
+Total time (seconds): 7.188513994216919
+Starting model fitting...
+--- Fitting took: 0.0008 seconds ---
+Starting custom tree build...
+--- Custom tree build took: 0.0005 seconds ---
+
+--- Run at 2026-05-16 13:42:19.071237 ---
+Initial phase DNF: (z10 && !z5) || (z10 && z5)
+Final DistEstimate value: 0.0
+Final Validifier value: 0.0
+Final candidate learnt: (!z5 && flip && z10) || (flip && z10 && z5)
+Height of learnt decision tree: 3
+Number of terms in the candidate DNF: 2
+Total DistEstimate time: 0.16852974891662598
+Total Validifier time: 6.671055316925049
+Total TreeLearner time: 0.03383326530456543
+Total time (seconds): 7.090100049972534
+Starting model fitting...
+--- Fitting took: 0.0008 seconds ---
+Starting custom tree build...
+--- Custom tree build took: 0.0004 seconds ---
+
+--- Run at 2026-05-16 13:42:35.122010 ---
+Initial phase DNF: (!z8 && !z7 && !z6) || (z8 && !z1) || (z8 && z1)
+Final DistEstimate value: 0.0
+Final Validifier value: 0.005
+Final candidate learnt: (!z6 && !z7 && !z8 && flip) || (!z1 && flip && z8) || (flip && z1 && z8)
+Height of learnt decision tree: 4
+Number of terms in the candidate DNF: 3
+Total DistEstimate time: 0.19144296646118164
+Total Validifier time: 7.349661827087402
+Total TreeLearner time: 0.03577232360839844
+Total time (seconds): 7.8257646560668945
+Starting model fitting...
+--- Fitting took: 0.0009 seconds ---
+Starting custom tree build...
+--- Custom tree build took: 0.0006 seconds ---
+
+--- Run at 2026-05-16 13:42:50.835915 ---
+Initial phase DNF: (!z6 && !z3) || (z6 && !z2) || (z6 && z2)
+Final DistEstimate value: 0.0
+Final Validifier value: 0.0
+Final candidate learnt: (!z3 && !z6 && flip) || (!z2 && flip && z6) || (flip && z2 && z6)
+Height of learnt decision tree: 3
+Number of terms in the candidate DNF: 3
+Total DistEstimate time: 0.19649219512939453
+Total Validifier time: 7.31868839263916
+Total TreeLearner time: 0.029071331024169922
+Total time (seconds): 7.8271164894104
+Starting model fitting...
+--- Fitting took: 0.0007 seconds ---
+Starting custom tree build...
+--- Custom tree build took: 0.0006 seconds ---
+
+--- Run at 2026-05-16 13:43:07.385436 ---

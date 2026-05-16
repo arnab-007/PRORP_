@@ -1,0 +1,20 @@
+{
+    "Initial states": "(x == 251)",
+    "Number of iterations": 1,
+    "Epsilon": 0.05,
+    "Eta": 0.05,
+    "Delta": 0.1,
+    "Total number of phases": 4,
+    "Total number of splits": 10,
+    "Total number of prune": 0,
+    "Total DistEstimate time": 0.8167686462402344,
+    "Total Validifier time": 25.95201849937439,
+    "Total TreeLearner time": 1.1934535503387451,
+    "Total time (seconds)": 27.96224069595337,
+    "Final DistEstimate_value": 0.0016666666666667052,
+    "Final Validifier_value": 0.0016666666666666668,
+    "Height of final tree": 17,
+    "Number of DNF terms in candidate": 1,
+    "Final simplified candidate": "['flip = 1, x in [0, 65536)']",
+    "Final candidate": "(!x23 && !x31 && !x24 && !x19 && !x21 && !x18 && !x29 && !x26 && !x27 && !x30 && !x20 && !x25 && flip && !x17 && !x22 && !x28 && !x16)"
+}

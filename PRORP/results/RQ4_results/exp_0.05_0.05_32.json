@@ -1,0 +1,20 @@
+{
+    "Initial states": "(x == 251)",
+    "Number of iterations": 1,
+    "Epsilon": 0.05,
+    "Eta": 0.05,
+    "Delta": 0.1,
+    "Total number of phases": 5,
+    "Total number of splits": 28,
+    "Total number of prune": 0,
+    "Total DistEstimate time": 0.9345543384552002,
+    "Total Validifier time": 21.37271475791931,
+    "Total TreeLearner time": 2.985560178756714,
+    "Total time (seconds)": 25.292829275131226,
+    "Final DistEstimate_value": 0.0,
+    "Final Validifier_value": 0.0,
+    "Height of final tree": 33,
+    "Number of DNF terms in candidate": 2,
+    "Final simplified candidate": "flip = 1, x in [251, 253)",
+    "Final candidate": "(!x27 && flip && !x11 && x5 && !x9 && !x28 && x6 && !x20 && !x15 && x4 && x7 && !x12 && !x29 && !x30 && !x16 && !x10 && !x8 && !x24 && !x21 && !x31 && !x25 && !x19 && !x23 && !x14 && x3 && !x22 && !x18 && !x13 && !x26 && !x17 && !x0 && !x1 && x2) || (!x27 && flip && !x11 && x5 && !x9 && !x28 && x6 && !x20 && !x15 && x4 && x7 && !x12 && !x29 && !x30 && !x16 && !x10 && !x8 && !x24 && !x21 && !x31 && !x25 && !x19 && !x23 && !x14 && x3 && !x22 && !x18 && !x13 && !x26 && !x17 && x0 && !x2 && x1)"
+}

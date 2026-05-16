@@ -1,0 +1,20 @@
+{
+    "Initial states": "(x == 28 && n == 8)",
+    "Number of iterations": 16,
+    "Epsilon": 0.02,
+    "Eta": 0.02,
+    "Delta": 0.1,
+    "Total number of phases": 3,
+    "Total number of splits": 11,
+    "Total number of prune": 0,
+    "Total DistEstimate time": 2.8498315811157227,
+    "Total Validifier time": 19.773645877838135,
+    "Total TreeLearner time": 1.6839430332183838,
+    "Total time (seconds)": 24.30742049217224,
+    "Final DistEstimate_value": 0.004005340453938633,
+    "Final Validifier_value": 0.0,
+    "Height of final tree": 30,
+    "Number of DNF terms in candidate": 2,
+    "Final simplified candidate": "n = 0, x in [28, 64)",
+    "Final candidate": "(!n0 && !n1 && !n10 && !n11 && !n12 && !n13 && !n14 && !n15 && !n2 && !n3 && !n4 && !n5 && !n6 && !n7 && !n8 && !n9 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x5 && !x6 && !x7 && !x8 && !x9 && x2 && x3 && x4) || (!n0 && !n1 && !n10 && !n11 && !n12 && !n13 && !n14 && !n15 && !n2 && !n3 && !n4 && !n5 && !n6 && !n7 && !n8 && !n9 && !x10 && !x11 && !x12 && !x13 && !x14 && !x15 && !x6 && !x7 && !x8 && !x9 && x5)"
+}

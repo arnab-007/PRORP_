@@ -1,10 +1,12 @@
 import z3
 from utilities import add_bitmap, output_dimacs, check_status
 import os
+
 CURRENT_PATH = os.path.realpath("")
 # EXAMPLE Geo0
 
 globM = 512
+
 
 def Temp(path, p1, NUM_BITS):
     z_1 = z3.BitVec("z_1", NUM_BITS)
@@ -14,7 +16,7 @@ def Temp(path, p1, NUM_BITS):
     d = z3.BitVec("d", 1)
     rand = z3.BitVec("rand", 4)  # 4-bit random number for Bernoulli
     g = z3.Goal()
-    
+
     # Encode symbolic bitmap layout for CNF output
     g = add_bitmap(g, NUM_BITS, z_1)
     g = add_bitmap(g, 1, flip_1)
@@ -26,28 +28,26 @@ def Temp(path, p1, NUM_BITS):
     # Constraints for the Bernoulli sampling and state updates
     constraints = [
         # Bernoulli(d ~ Bernoulli(p1))
-        d == z3.If(z3.ULT(rand, int(16 * p1)),
-                   z3.BitVecVal(1, 1),
-                   z3.BitVecVal(0, 1)),
-
+        d == z3.If(z3.ULT(rand, int(16 * p1)), z3.BitVecVal(1, 1), z3.BitVecVal(0, 1)),
         # Transition logic
         z3.If(
             z3.And(flip_1 == 0, d == 0),
             z3.And(
                 flip_2 == flip_1,  # stays 0
-                z_2 == z3.If(
+                z_2
+                == z3.If(
                     z_1 == z3.BitVecVal(9, NUM_BITS),
-                    z3.BitVecVal(17, NUM_BITS),      # reset case
-                    z_1 + z3.BitVecVal(1, NUM_BITS)  # increment
-                )
+                    z3.BitVecVal(17, NUM_BITS),  # reset case
+                    z_1 + z3.BitVecVal(1, NUM_BITS),  # increment
+                ),
             ),
             z3.And(
                 flip_2 == z3.If(d == 1, z3.BitVecVal(1, 1), flip_1),
-                z_2 == z_1  # z unchanged if flipped
-            )
-        )
+                z_2 == z_1,  # z unchanged if flipped
+            ),
+        ),
     ]
-    
+
     g.add(*constraints)
 
     # Convert to CNF
@@ -55,11 +55,10 @@ def Temp(path, p1, NUM_BITS):
     subgoal = t(g)
     assert len(subgoal) == 1
     cnf_goal = subgoal[0]
-    
+
     output_dimacs(cnf_goal, path)
     # Optional sanity check
     check_status(constraints)
-
 
 
 def Geo0(path, p, NUM_BITS):
@@ -93,28 +92,24 @@ def Geo0(path, p, NUM_BITS):
     ]
     """
     constraints = [
-    d2 == z3.If(z3.ULT(rand2, 0b1),
-                z3.BitVecVal(1, 1),
-                z3.BitVecVal(0, 1)),
-
-    z3.If(
-        d2 == 1,
-        z3.And(
-            d1 == z3.If(
-                z3.And(z3.ULT(rand1, int(16*p)), flip_1 == 0),
-                z3.BitVecVal(1, 1),
-                z3.BitVecVal(0, 1)
+        d2 == z3.If(z3.ULT(rand2, 0b1), z3.BitVecVal(1, 1), z3.BitVecVal(0, 1)),
+        z3.If(
+            d2 == 1,
+            z3.And(
+                d1
+                == z3.If(
+                    z3.And(z3.ULT(rand1, int(16 * p)), flip_1 == 0),
+                    z3.BitVecVal(1, 1),
+                    z3.BitVecVal(0, 1),
+                ),
+                flip_2 == z3.If(d1 == 1, z3.BitVecVal(1, 1), flip_1),
+                z_2
+                == z3.If(
+                    z3.And(d1 == 0, flip_1 == 0), z3.BitVecVal(1, NUM_BITS) + z_1, z_1
+                ),
             ),
-            flip_2 == z3.If(d1 == 1, z3.BitVecVal(1, 1), flip_1),
-            z_2 == z3.If(z3.And(d1 == 0, flip_1 == 0),
-                         z3.BitVecVal(1, NUM_BITS) + z_1,
-                         z_1)
+            z3.And(z_2 == z_1, flip_2 == flip_1),
         ),
-        z3.And(
-            z_2 == z_1,
-            flip_2 == flip_1
-        )
-    )
     ]
 
     g.add(*constraints)
@@ -125,6 +120,7 @@ def Geo0(path, p, NUM_BITS):
     output_dimacs(cnf_goal, path)
     # optional
     check_status(constraints)
+
 
 def BigGeo0(path, p, NUM_BITS):
     z_1 = z3.BitVec("z_1", NUM_BITS)  # 8-bit integer
@@ -145,28 +141,24 @@ def BigGeo0(path, p, NUM_BITS):
     g = add_bitmap(g, NUM_BITS, z_2)
 
     constraints = [
-    d2 == z3.If(z3.ULT(rand2, 0b1),
-                z3.BitVecVal(1, 1),
-                z3.BitVecVal(0, 1)),
-
-    z3.If(
-        d2 == 1,
-        z3.And(
-            d1 == z3.If(
-                z3.And(z3.ULT(rand1, int(16*p)), flip_1 == 0),
-                z3.BitVecVal(1, 1),
-                z3.BitVecVal(0, 1)
+        d2 == z3.If(z3.ULT(rand2, 0b1), z3.BitVecVal(1, 1), z3.BitVecVal(0, 1)),
+        z3.If(
+            d2 == 1,
+            z3.And(
+                d1
+                == z3.If(
+                    z3.And(z3.ULT(rand1, int(16 * p)), flip_1 == 0),
+                    z3.BitVecVal(1, 1),
+                    z3.BitVecVal(0, 1),
+                ),
+                flip_2 == z3.If(d1 == 1, z3.BitVecVal(1, 1), flip_1),
+                z_2
+                == z3.If(
+                    z3.And(d1 == 0, flip_1 == 0), z3.BitVecVal(1, NUM_BITS) + z_1, z_1
+                ),
             ),
-            flip_2 == z3.If(d1 == 1, z3.BitVecVal(1, 1), flip_1),
-            z_2 == z3.If(z3.And(d1 == 0, flip_1 == 0),
-                         z3.BitVecVal(1, NUM_BITS) + z_1,
-                         z_1)
+            z3.And(z_2 == z_1, flip_2 == flip_1),
         ),
-        z3.And(
-            z_2 == z_1,
-            flip_2 == flip_1
-        )
-    )
     ]
     g.add(*constraints)
     t = z3.Then("simplify", "bit-blast", "tseitin-cnf")
@@ -176,6 +168,7 @@ def BigGeo0(path, p, NUM_BITS):
     output_dimacs(cnf_goal, path)
     # optional
     check_status(constraints)
+
 
 def BigGeo1(path, p, NUM_BITS):
     z_1 = z3.BitVec("z_1", NUM_BITS)
@@ -188,7 +181,7 @@ def BigGeo1(path, p, NUM_BITS):
     rand1 = z3.BitVec("rand1", 4)
     d2 = z3.BitVec("d2", 1)
     rand2 = z3.BitVec("rand2", 1)
-    
+
     g = z3.Goal()
     g = add_bitmap(g, NUM_BITS, z_1)
     g = add_bitmap(g, NUM_BITS, x_1)
@@ -201,35 +194,28 @@ def BigGeo1(path, p, NUM_BITS):
     g = add_bitmap(g, NUM_BITS, x_2)
 
     constraints = [
-        d2 == z3.If(z3.ULT(rand2, 0b1),
-                    z3.BitVecVal(1, 1),
-                    z3.BitVecVal(0, 1)),
-        
+        d2 == z3.If(z3.ULT(rand2, 0b1), z3.BitVecVal(1, 1), z3.BitVecVal(0, 1)),
         z3.If(
             d2 == 1,
             z3.And(
-                d1 == z3.If(
+                d1
+                == z3.If(
                     z3.And(z3.ULT(rand1, int(16 * p)), flip_1 == 0),
                     z3.BitVecVal(1, 1),
-                    z3.BitVecVal(0, 1)
+                    z3.BitVecVal(0, 1),
                 ),
                 flip_2 == z3.If(d1 == 1, z3.BitVecVal(1, 1), flip_1),
-                z_2 == z3.If(z3.And(d1 == 0, flip_1 == 0),
-                             z3.BitVecVal(1, NUM_BITS) + z_1,
-                             z_1),
+                z_2
+                == z3.If(
+                    z3.And(d1 == 0, flip_1 == 0), z3.BitVecVal(1, NUM_BITS) + z_1, z_1
+                ),
                 # If d1 is 0 and flip is 0, update x to 2*x (left shift by 1)
-                x_2 == z3.If(z3.And(d1 == 0, flip_1 == 0),
-                             x_1 << 1,
-                             x_1)
+                x_2 == z3.If(z3.And(d1 == 0, flip_1 == 0), x_1 << 1, x_1),
             ),
-            z3.And(
-                z_2 == z_1,
-                x_2 == x_1,
-                flip_2 == flip_1
-            )
-        )
+            z3.And(z_2 == z_1, x_2 == x_1, flip_2 == flip_1),
+        ),
     ]
-    
+
     g.add(*constraints)
     t = z3.Then("simplify", "bit-blast", "tseitin-cnf")
     subgoal = t(g)
@@ -251,7 +237,7 @@ def BigGeo2(path, p, NUM_BITS):
     rand1 = z3.BitVec("rand1", 4)
     d2 = z3.BitVec("d2", 1)
     rand2 = z3.BitVec("rand2", 1)
-    
+
     g = z3.Goal()
     g = add_bitmap(g, NUM_BITS, z_1)
     g = add_bitmap(g, NUM_BITS, x_1)
@@ -264,35 +250,31 @@ def BigGeo2(path, p, NUM_BITS):
     g = add_bitmap(g, NUM_BITS, x_2)
 
     constraints = [
-        d2 == z3.If(z3.ULT(rand2, 0b1),
-                    z3.BitVecVal(1, 1),
-                    z3.BitVecVal(0, 1)),
-        
+        d2 == z3.If(z3.ULT(rand2, 0b1), z3.BitVecVal(1, 1), z3.BitVecVal(0, 1)),
         z3.If(
             d2 == 1,
             z3.And(
-                d1 == z3.If(
+                d1
+                == z3.If(
                     z3.And(z3.ULT(rand1, int(16 * p)), flip_1 == 0),
                     z3.BitVecVal(1, 1),
-                    z3.BitVecVal(0, 1)
+                    z3.BitVecVal(0, 1),
                 ),
                 flip_2 == z3.If(d1 == 1, z3.BitVecVal(1, 1), flip_1),
-                z_2 == z3.If(z3.And(d1 == 0, flip_1 == 0),
-                             z3.BitVecVal(1, NUM_BITS) + z_1,
-                             z_1),
+                z_2
+                == z3.If(
+                    z3.And(d1 == 0, flip_1 == 0), z3.BitVecVal(1, NUM_BITS) + z_1, z_1
+                ),
                 # If d1 is 0 and flip is 0, update x by adding 1
-                x_2 == z3.If(z3.And(d1 == 0, flip_1 == 0),
-                             z3.BitVecVal(1, NUM_BITS) + x_1,
-                             x_1)
+                x_2
+                == z3.If(
+                    z3.And(d1 == 0, flip_1 == 0), z3.BitVecVal(1, NUM_BITS) + x_1, x_1
+                ),
             ),
-            z3.And(
-                z_2 == z_1,
-                x_2 == x_1,
-                flip_2 == flip_1
-            )
-        )
+            z3.And(z_2 == z_1, x_2 == x_1, flip_2 == flip_1),
+        ),
     ]
-    
+
     g.add(*constraints)
     t = z3.Then("simplify", "bit-blast", "tseitin-cnf")
     subgoal = t(g)
@@ -301,7 +283,6 @@ def BigGeo2(path, p, NUM_BITS):
     output_dimacs(cnf_goal, path)
     # optional
     check_status(constraints)
-
 
 
 def LinExp(path, p, NUM_BITS):
@@ -335,54 +316,66 @@ def LinExp(path, p, NUM_BITS):
     g = add_bitmap(g, NUM_BITS, count_1)
     g = add_bitmap(g, NUM_BITS, count_2)
 
-    constraints = [d == z3.If(z3.ULT(rand4, 0b1), z3.BitVecVal(1, 1),
-                z3.BitVecVal(0, 1)),
-        
-        z3.If(d == 1, z3.And(x_1
-        == z3.If(
-            z3.And(z3.ULT(rand1, int(16*p)), z3.UGT(n_1, 0)),
-            z3.BitVecVal(1, 1),
-            z3.BitVecVal(0, 1),
+    constraints = [
+        d == z3.If(z3.ULT(rand4, 0b1), z3.BitVecVal(1, 1), z3.BitVecVal(0, 1)),
+        z3.If(
+            d == 1,
+            z3.And(
+                x_1
+                == z3.If(
+                    z3.And(z3.ULT(rand1, int(16 * p)), z3.UGT(n_1, 0)),
+                    z3.BitVecVal(1, 1),
+                    z3.BitVecVal(0, 1),
+                ),
+                x_2
+                == z3.If(
+                    z3.And(z3.ULT(rand2, int(16 * p)), z3.UGT(n_1, 0)),
+                    z3.BitVecVal(1, 1),
+                    z3.BitVecVal(0, 1),
+                ),
+                x_3
+                == z3.If(
+                    z3.And(z3.ULT(rand3, int(16 * p)), z3.UGT(n_1, 0)),
+                    z3.BitVecVal(1, 1),
+                    z3.BitVecVal(0, 1),
+                ),
+                n_2 == z3.If(z3.UGT(n_1, 0), n_1 - z3.BitVecVal(1, NUM_BITS), n_1),
+                c1
+                == z3.If(
+                    z3.And(z3.UGT(n_1, 0), z3.Or(x_1 != 0, x_2 != 0, x_3 != 0)),
+                    z3.BitVecVal(1, 1),
+                    c1,
+                ),
+                c2
+                == z3.If(
+                    z3.And(z3.UGT(n_1, 0), z3.Or(x_1 != 1, x_2 != 0, x_3 != 0)),
+                    z3.BitVecVal(1, 1),
+                    c2,
+                ),
+                c3
+                == z3.If(
+                    z3.And(z3.UGT(n_1, 0), z3.Or(x_1 != 0, x_2 != 1, x_3 != 0)),
+                    z3.BitVecVal(1, 1),
+                    c3,
+                ),
+                count_2
+                == z3.If(
+                    z3.UGT(n_1, 0),
+                    count_1
+                    + z3.If(
+                        c1 == 1, z3.BitVecVal(1, NUM_BITS), z3.BitVecVal(0, NUM_BITS)
+                    )
+                    + z3.If(
+                        c2 == 1, z3.BitVecVal(1, NUM_BITS), z3.BitVecVal(0, NUM_BITS)
+                    )
+                    + z3.If(
+                        c3 == 1, z3.BitVecVal(1, NUM_BITS), z3.BitVecVal(0, NUM_BITS)
+                    ),
+                    count_1,
+                ),
+            ),
+            (z3.And(count_2 == count_1, n_2 == n_1)),
         ),
-        x_2
-        == z3.If(
-            z3.And(z3.ULT(rand2, int(16*p)), z3.UGT(n_1, 0)),
-            z3.BitVecVal(1, 1),
-            z3.BitVecVal(0, 1),
-        ),
-        x_3
-        == z3.If(
-            z3.And(z3.ULT(rand3, int(16*p)), z3.UGT(n_1, 0)),
-            z3.BitVecVal(1, 1),
-            z3.BitVecVal(0, 1),
-        ),
-        n_2 == z3.If(z3.UGT(n_1, 0), n_1 - z3.BitVecVal(1, NUM_BITS), n_1),
-        c1
-        == z3.If(
-            z3.And(z3.UGT(n_1, 0), z3.Or(x_1 != 0, x_2 != 0, x_3 != 0)),
-            z3.BitVecVal(1, 1),
-            c1,
-        ),
-        c2
-        == z3.If(
-            z3.And(z3.UGT(n_1, 0), z3.Or(x_1 != 1, x_2 != 0, x_3 != 0)),
-            z3.BitVecVal(1, 1),
-            c2,
-        ),
-        c3
-        == z3.If(
-            z3.And(z3.UGT(n_1, 0), z3.Or(x_1 != 0, x_2 != 1, x_3 != 0)),
-            z3.BitVecVal(1, 1),
-            c3,
-        ),
-        count_2 == z3.If(
-        z3.UGT(n_1, 0),
-        count_1 
-        + z3.If(c1 == 1, z3.BitVecVal(1, NUM_BITS), z3.BitVecVal(0, NUM_BITS))
-        + z3.If(c2 == 1, z3.BitVecVal(1, NUM_BITS), z3.BitVecVal(0, NUM_BITS))
-        + z3.If(c3 == 1, z3.BitVecVal(1, NUM_BITS), z3.BitVecVal(0, NUM_BITS)),
-        count_1,
-        )), (z3.And(count_2 == count_1, n_2 == n_1))),
     ]
     g.add(*constraints)
     t = z3.Then("simplify", "bit-blast", "tseitin-cnf")
@@ -423,17 +416,21 @@ def DepRV(path, p, NUM_BITS):
             z3.And(
                 d1
                 == z3.If(
-                    z3.And(z3.ULT(rand1, int(16*p)), z3.UGT(n_1, 0)),
+                    z3.And(z3.ULT(rand1, int(16 * p)), z3.UGT(n_1, 0)),
                     z3.BitVecVal(1, 1),
                     z3.BitVecVal(0, 1),
                 ),
                 x_2
                 == z3.If(
-                    z3.And(d1 == 1, z3.UGT(n_1, 0)), x_1 + z3.BitVecVal(1, NUM_BITS), x_1
+                    z3.And(d1 == 1, z3.UGT(n_1, 0)),
+                    x_1 + z3.BitVecVal(1, NUM_BITS),
+                    x_1,
                 ),
                 y_2
                 == z3.If(
-                    z3.And(d1 == 0, z3.UGT(n_1, 0)), y_1 + z3.BitVecVal(1, NUM_BITS), y_1
+                    z3.And(d1 == 0, z3.UGT(n_1, 0)),
+                    y_1 + z3.BitVecVal(1, NUM_BITS),
+                    y_1,
                 ),
                 n_2 == z3.If(z3.UGT(n_1, 0), n_1 - z3.BitVecVal(1, NUM_BITS), n_1),
             ),
@@ -448,7 +445,6 @@ def DepRV(path, p, NUM_BITS):
     output_dimacs(cnf_goal, path)
     # optional
     check_status(constraints)
-
 
 
 def Bin0(path, p, NUM_BITS):
@@ -475,42 +471,26 @@ def Bin0(path, p, NUM_BITS):
     g = add_bitmap(g, NUM_BITS, n_2)
     # Shared conditions
     n_positive = z3.UGT(n_1, 0)
-    rand1_heads = z3.ULT(rand1, int(16*p))
+    rand1_heads = z3.ULT(rand1, int(16 * p))
     rand2_heads = z3.ULT(rand2, 0b1)
 
     # Define constraints using z3.Implies
-    constraints = [ 
+    constraints = [
         # Outer coin toss d2
         d2 == z3.If(rand2_heads, z3.BitVecVal(1, 1), z3.BitVecVal(0, 1)),
-
         # Inner coin toss d1 (only meaningful if d2 fires)
         z3.Implies(
             z3.And(d2 == 1, n_positive),
-            d1 == z3.If(rand1_heads, z3.BitVecVal(1, 1), z3.BitVecVal(0, 1))
+            d1 == z3.If(rand1_heads, z3.BitVecVal(1, 1), z3.BitVecVal(0, 1)),
         ),
-
         # x update only if d2 and d1 fire under n > 0
-        z3.Implies(
-            z3.And(d2 == 1, d1 == 1, n_positive),
-            x_2 == x_1 + y_1
-        ),
-        z3.Implies(
-            z3.Or(d2 == 0, d1 == 0, z3.Not(n_positive)),
-            x_2 == x_1
-        ),
-
+        z3.Implies(z3.And(d2 == 1, d1 == 1, n_positive), x_2 == x_1 + y_1),
+        z3.Implies(z3.Or(d2 == 0, d1 == 0, z3.Not(n_positive)), x_2 == x_1),
         # y is always unchanged
         y_2 == y_1,
-
         # n update only if d2 fires
-        z3.Implies(
-            z3.And(d2 == 1, n_positive),
-            n_2 == n_1 - z3.BitVecVal(1, NUM_BITS)
-        ),
-        z3.Implies(
-            z3.Or(d2 == 0, z3.Not(n_positive)),
-            n_2 == n_1
-        ),
+        z3.Implies(z3.And(d2 == 1, n_positive), n_2 == n_1 - z3.BitVecVal(1, NUM_BITS)),
+        z3.Implies(z3.Or(d2 == 0, z3.Not(n_positive)), n_2 == n_1),
     ]
 
     g.add(*constraints)
@@ -532,7 +512,7 @@ def Bin1(path, p, NUM_BITS):
     n_2 = z3.BitVec("n_2", NUM_BITS)
     d2 = z3.BitVec("d2", 1)
     rand2 = z3.BitVec("rand2", 1)
-    
+
     g = z3.Goal()
     g = add_bitmap(g, 1, d1)
     g = add_bitmap(g, 4, rand1)
@@ -542,7 +522,7 @@ def Bin1(path, p, NUM_BITS):
     g = add_bitmap(g, NUM_BITS, x_2)
     g = add_bitmap(g, NUM_BITS, n_1)
     g = add_bitmap(g, NUM_BITS, n_2)
-    
+
     # Shared conditions
     M = globM
     loop_condition = z3.ULT(n_1, M)
@@ -553,32 +533,23 @@ def Bin1(path, p, NUM_BITS):
     constraints = [
         # Outer coin toss d2
         d2 == z3.If(rand2_heads, z3.BitVecVal(1, 1), z3.BitVecVal(0, 1)),
-
         # Inner coin toss d1 (only meaningful if d2 fires and loop condition holds)
         z3.Implies(
             z3.And(d2 == 1, loop_condition),
-            d1 == z3.If(rand1_heads, z3.BitVecVal(1, 1), z3.BitVecVal(0, 1))
+            d1 == z3.If(rand1_heads, z3.BitVecVal(1, 1), z3.BitVecVal(0, 1)),
         ),
-
         # x update only if d2 and d1 fire and x < M
         z3.Implies(
             z3.And(d2 == 1, d1 == 1, loop_condition),
-            x_2 == x_1 + z3.BitVecVal(1, NUM_BITS)
+            x_2 == x_1 + z3.BitVecVal(1, NUM_BITS),
         ),
-        z3.Implies(
-            z3.Or(d2 == 0, d1 == 0, z3.Not(loop_condition)),
-            x_2 == x_1
-        ),
-
+        z3.Implies(z3.Or(d2 == 0, d1 == 0, z3.Not(loop_condition)), x_2 == x_1),
         # n update only if d2 and d1 fire and x < M
         z3.Implies(
             z3.And(d2 == 1, d1 == 1, loop_condition),
-            n_2 == n_1 + z3.BitVecVal(1, NUM_BITS)
+            n_2 == n_1 + z3.BitVecVal(1, NUM_BITS),
         ),
-        z3.Implies(
-            z3.Or(d2 == 0, d1 == 0, z3.Not(loop_condition)),
-            n_2 == n_1
-        ),
+        z3.Implies(z3.Or(d2 == 0, d1 == 0, z3.Not(loop_condition)), n_2 == n_1),
     ]
 
     g.add(*constraints)
@@ -589,7 +560,6 @@ def Bin1(path, p, NUM_BITS):
     output_dimacs(cnf_goal, path)
     # optional
     check_status(constraints)
-
 
 
 def BinMod(path, p, NUM_BITS):
@@ -604,7 +574,7 @@ def BinMod(path, p, NUM_BITS):
 
     x_1 = z3.BitVec("x_1", NUM_BITS)
     x_2 = z3.BitVec("x_2", NUM_BITS)
-    x_3 = z3.BitVec("x_3", NUM_BITS)   # OUTPUT = x mod 7
+    x_3 = z3.BitVec("x_3", NUM_BITS)  # OUTPUT = x mod 7
 
     n_1 = z3.BitVec("n_1", NUM_BITS)
     n_2 = z3.BitVec("n_2", NUM_BITS)
@@ -633,51 +603,36 @@ def BinMod(path, p, NUM_BITS):
 
     loop_condition = z3.ULT(n_1, M)
 
-    rand2_heads = z3.ULT(rand2, z3.BitVecVal(1, 1))            # prob 1/2
+    rand2_heads = z3.ULT(rand2, z3.BitVecVal(1, 1))  # prob 1/2
     rand1_heads = z3.ULT(rand1, z3.BitVecVal(int(16 * p), 4))  # prob p
 
     # --------------------------------------------------
     # Constraints
     # --------------------------------------------------
     constraints = [
-
         # outer coin toss
-        d2 == z3.If(rand2_heads,
-                    z3.BitVecVal(1, 1),
-                    z3.BitVecVal(0, 1)),
-
+        d2 == z3.If(rand2_heads, z3.BitVecVal(1, 1), z3.BitVecVal(0, 1)),
         # inner coin toss (only if outer coin fires and loop holds)
         z3.Implies(
             z3.And(d2 == 1, loop_condition),
-            d1 == z3.If(rand1_heads,
-                        z3.BitVecVal(1, 1),
-                        z3.BitVecVal(0, 1))
+            d1 == z3.If(rand1_heads, z3.BitVecVal(1, 1), z3.BitVecVal(0, 1)),
         ),
-
         # x update
         z3.Implies(
             z3.And(d2 == 1, d1 == 1, loop_condition),
-            x_2 == x_1 + z3.BitVecVal(1, NUM_BITS)
+            x_2 == x_1 + z3.BitVecVal(1, NUM_BITS),
         ),
-        z3.Implies(
-            z3.Or(d2 == 0, d1 == 0, z3.Not(loop_condition)),
-            x_2 == x_1
-        ),
-
+        z3.Implies(z3.Or(d2 == 0, d1 == 0, z3.Not(loop_condition)), x_2 == x_1),
         # n update
         z3.Implies(
             z3.And(d2 == 1, d1 == 1, loop_condition),
-            n_2 == n_1 + z3.BitVecVal(1, NUM_BITS)
+            n_2 == n_1 + z3.BitVecVal(1, NUM_BITS),
         ),
-        z3.Implies(
-            z3.Or(d2 == 0, d1 == 0, z3.Not(loop_condition)),
-            n_2 == n_1
-        ),
-
+        z3.Implies(z3.Or(d2 == 0, d1 == 0, z3.Not(loop_condition)), n_2 == n_1),
         # --------------------------------------------------
         # OUTPUT: x_3 = x_2 mod 100
         # --------------------------------------------------
-        x_3 == z3.URem(x_2, z3.BitVecVal(100, NUM_BITS))
+        x_3 == z3.URem(x_2, z3.BitVecVal(100, NUM_BITS)),
     ]
 
     g.add(*constraints)
@@ -707,7 +662,7 @@ def Bin2(path, p, NUM_BITS):
     n_2 = z3.BitVec("n_2", NUM_BITS)
     d2 = z3.BitVec("d2", 1)
     rand2 = z3.BitVec("rand2", 1)
-    
+
     g = z3.Goal()
     g = add_bitmap(g, 1, d1)
     g = add_bitmap(g, 4, rand1)
@@ -719,51 +674,34 @@ def Bin2(path, p, NUM_BITS):
     g = add_bitmap(g, NUM_BITS, y_2)
     g = add_bitmap(g, NUM_BITS, n_1)
     g = add_bitmap(g, NUM_BITS, n_2)
-    
+
     # Shared conditions
     n_positive = z3.UGT(n_1, 0)
-    rand1_heads = z3.ULT(rand1, int(16*p))
+    rand1_heads = z3.ULT(rand1, int(16 * p))
     rand2_heads = z3.ULT(rand2, 0b1)
 
     # Define constraints using z3.Implies
     constraints = [
         # Outer coin toss d2
         d2 == z3.If(rand2_heads, z3.BitVecVal(1, 1), z3.BitVecVal(0, 1)),
-
         # Inner coin toss d1 (only meaningful if d2 fires and n > 0)
         z3.Implies(
             z3.And(d2 == 1, n_positive),
-            d1 == z3.If(rand1_heads, z3.BitVecVal(1, 1), z3.BitVecVal(0, 1))
+            d1 == z3.If(rand1_heads, z3.BitVecVal(1, 1), z3.BitVecVal(0, 1)),
         ),
-
         # x update for d1=1 case (if d2 fires and n > 0)
-        z3.Implies(
-            z3.And(d2 == 1, d1 == 1, n_positive),
-            x_2 == x_1 + n_1
-        ),
+        z3.Implies(z3.And(d2 == 1, d1 == 1, n_positive), x_2 == x_1 + n_1),
         # x update for d1=0 case (if d2 fires and n > 0)
-        z3.Implies(
-            z3.And(d2 == 1, d1 == 0, n_positive),
-            x_2 == x_1 + y_1
-        ),
+        z3.Implies(z3.And(d2 == 1, d1 == 0, n_positive), x_2 == x_1 + y_1),
         # x is unchanged if loop doesn't run
-        z3.Implies(
-            z3.Or(d2 == 0, z3.Not(n_positive)),
-            x_2 == x_1
-        ),
-
+        z3.Implies(z3.Or(d2 == 0, z3.Not(n_positive)), x_2 == x_1),
         # y is always unchanged
         y_2 == y_1,
-
         # n update only if d2 fires, n>0, and d1=0
         z3.Implies(
-            z3.And(d2 == 1, d1 == 0, n_positive),
-            n_2 == n_1 - z3.BitVecVal(1, NUM_BITS)
+            z3.And(d2 == 1, d1 == 0, n_positive), n_2 == n_1 - z3.BitVecVal(1, NUM_BITS)
         ),
-        z3.Implies(
-            z3.Or(d2 == 0, d1 == 1, z3.Not(n_positive)),
-            n_2 == n_1
-        ),
+        z3.Implies(z3.Or(d2 == 0, d1 == 1, z3.Not(n_positive)), n_2 == n_1),
     ]
 
     g.add(*constraints)
@@ -775,19 +713,20 @@ def Bin2(path, p, NUM_BITS):
     # optional
     check_status(constraints)
 
+
 def BiasDir(path, p, NUM_BITS):
-    d1 = z3.BitVec("d1", 1)      # Corresponds to d1 in Python code (for x's update)
+    d1 = z3.BitVec("d1", 1)  # Corresponds to d1 in Python code (for x's update)
     rand1 = z3.BitVec("rand1", 4)
-    d2 = z3.BitVec("d2", 1)      # Probabilistic guard for the entire step
+    d2 = z3.BitVec("d2", 1)  # Probabilistic guard for the entire step
     rand2 = z3.BitVec("rand2", 1)
-    d3 = z3.BitVec("d3", 1)      # Corresponds to d2 in Python code (for y's update)
-    rand3 = z3.BitVec("rand3", 4) # A second random source for y's update
-    
+    d3 = z3.BitVec("d3", 1)  # Corresponds to d2 in Python code (for y's update)
+    rand3 = z3.BitVec("rand3", 4)  # A second random source for y's update
+
     x_1 = z3.BitVec("x_1", 1)
     x_2 = z3.BitVec("x_2", 1)
     y_1 = z3.BitVec("y_1", 1)
     y_2 = z3.BitVec("y_2", 1)
-    
+
     g = z3.Goal()
     g = add_bitmap(g, 1, d1)
     g = add_bitmap(g, 4, rand1)
@@ -801,49 +740,39 @@ def BiasDir(path, p, NUM_BITS):
     g = add_bitmap(g, 1, y_2)
 
     # Shared conditions
-    loop_condition = (x_1 == y_1)
-    rand1_heads = z3.ULT(rand1, int(16 * p)) # For updating x
-    rand2_heads = z3.ULT(rand2, 0b1)         # For the step to occur
-    rand3_heads = z3.ULT(rand3, int(16 * p)) # For updating y
+    loop_condition = x_1 == y_1
+    rand1_heads = z3.ULT(rand1, int(16 * p))  # For updating x
+    rand2_heads = z3.ULT(rand2, 0b1)  # For the step to occur
+    rand3_heads = z3.ULT(rand3, int(16 * p))  # For updating y
 
     # Define constraints using z3.Implies
     constraints = [
         # Outer coin toss d2
         d2 == z3.If(rand2_heads, z3.BitVecVal(1, 1), z3.BitVecVal(0, 1)),
-
         # Inner coin toss d1 (for x), only meaningful if step happens and loop condition holds
         z3.Implies(
             z3.And(d2 == 1, loop_condition),
-            d1 == z3.If(rand1_heads, z3.BitVecVal(1, 1), z3.BitVecVal(0, 1))
+            d1 == z3.If(rand1_heads, z3.BitVecVal(1, 1), z3.BitVecVal(0, 1)),
         ),
-        
         # Inner coin toss d3 (for y), also only meaningful if step happens and loop condition holds
         z3.Implies(
             z3.And(d2 == 1, loop_condition),
-            d3 == z3.If(rand3_heads, z3.BitVecVal(1, 1), z3.BitVecVal(0, 1))
+            d3 == z3.If(rand3_heads, z3.BitVecVal(1, 1), z3.BitVecVal(0, 1)),
         ),
-
         # x is updated based on d1 if the loop runs
         z3.Implies(
             z3.And(d2 == 1, loop_condition),
-            x_2 == z3.If(d1 == 1, z3.BitVecVal(1, 1), z3.BitVecVal(0, 1))
+            x_2 == z3.If(d1 == 1, z3.BitVecVal(1, 1), z3.BitVecVal(0, 1)),
         ),
         # x is unchanged if the loop does not run
-        z3.Implies(
-            z3.Or(d2 == 0, z3.Not(loop_condition)),
-            x_2 == x_1
-        ),
-        
+        z3.Implies(z3.Or(d2 == 0, z3.Not(loop_condition)), x_2 == x_1),
         # y is updated based on d3 if the loop runs
         z3.Implies(
             z3.And(d2 == 1, loop_condition),
-            y_2 == z3.If(d3 == 1, z3.BitVecVal(1, 1), z3.BitVecVal(0, 1))
+            y_2 == z3.If(d3 == 1, z3.BitVecVal(1, 1), z3.BitVecVal(0, 1)),
         ),
         # y is unchanged if the loop does not run
-        z3.Implies(
-            z3.Or(d2 == 0, z3.Not(loop_condition)),
-            y_2 == y_1
-        ),
+        z3.Implies(z3.Or(d2 == 0, z3.Not(loop_condition)), y_2 == y_1),
     ]
 
     g.add(*constraints)
@@ -854,7 +783,6 @@ def BiasDir(path, p, NUM_BITS):
     output_dimacs(cnf_goal, path)
     # optional
     check_status(constraints)
-
 
 
 def Detm(path, p, NUM_BITS):
@@ -873,9 +801,15 @@ def Detm(path, p, NUM_BITS):
     g = add_bitmap(g, 1, rand1)
     constraints = [
         d1 == z3.If(z3.ULT(rand1, 0b1), z3.BitVecVal(1, 1), z3.BitVecVal(0, 1)),
-        z3.If(d1 == 1, z3.And(x_2 == z3.If(z3.ULT(x_1, 16), x_1 + z3.BitVecVal(1, NUM_BITS), x_1),
-        count_2 == z3.If(z3.ULT(x_1, 16), count_1 + z3.BitVecVal(1, NUM_BITS), count_1)), z3.And(count_2 == count_1, x_2 == x_1))
-        
+        z3.If(
+            d1 == 1,
+            z3.And(
+                x_2 == z3.If(z3.ULT(x_1, 16), x_1 + z3.BitVecVal(1, NUM_BITS), x_1),
+                count_2
+                == z3.If(z3.ULT(x_1, 16), count_1 + z3.BitVecVal(1, NUM_BITS), count_1),
+            ),
+            z3.And(count_2 == count_1, x_2 == x_1),
+        ),
     ]
     g.add(*constraints)
     t = z3.Then("simplify", "bit-blast", "tseitin-cnf")
@@ -923,25 +857,31 @@ def GeoAr(path, p, NUM_BITS):
     g = add_bitmap(g, NUM_BITS, y_2)
     constraints = [
         d2 == z3.If(z3.ULT(rand2, 0b1), z3.BitVecVal(1, 1), z3.BitVecVal(0, 1)),
-        z3.If(d2 == 1, z3.And(y_2 == z3.If(z_1 != 0, y_1 + z3.BitVecVal(1, NUM_BITS), y_1),
-        d1
-        == z3.If(
-            z3.And(z3.ULT(rand1, int(16*p)), z_1 != 0),
-            z3.BitVecVal(1, 1),
-            z3.BitVecVal(0, 1),
+        z3.If(
+            d2 == 1,
+            z3.And(
+                y_2 == z3.If(z_1 != 0, y_1 + z3.BitVecVal(1, NUM_BITS), y_1),
+                d1
+                == z3.If(
+                    z3.And(z3.ULT(rand1, int(16 * p)), z_1 != 0),
+                    z3.BitVecVal(1, 1),
+                    z3.BitVecVal(0, 1),
+                ),
+                z_2
+                == z3.If(
+                    z3.And(d1 == 1, z_1 != 0),
+                    z3.BitVecVal(0, 1),
+                    z_1,
+                ),
+                x_2
+                == z3.If(
+                    z3.And(d1 == 0, z_1 != 0),
+                    x_1 + y_2,
+                    x_1,
+                ),
+            ),
+            z3.And(z_2 == z_1, y_2 == y_1, x_2 == x_1),
         ),
-        z_2
-        == z3.If(
-            z3.And(d1 == 1, z_1 != 0),
-            z3.BitVecVal(0, 1),
-            z_1,
-        ),
-        x_2
-        == z3.If(
-            z3.And(d1 == 0, z_1 != 0),
-            x_1 + y_2,
-            x_1,
-        )), z3.And(z_2 == z_1, y_2 == y_1, x_2 == x_1))       
     ]
     g.add(*constraints)
     t = z3.Then("simplify", "bit-blast", "tseitin-cnf")
@@ -953,20 +893,19 @@ def GeoAr(path, p, NUM_BITS):
     check_status(constraints)
 
 
-
 def ModSumOld(path, p, NUM_BITS):
     # --------------------------------------------------
     # Bit-vector declarations
     # --------------------------------------------------
-    x_1 = z3.BitVec("x_1", NUM_BITS)   # input x
-    x_2 = z3.BitVec("x_2", NUM_BITS)   # after update
-    x_3 = z3.BitVec("x_3", NUM_BITS)   # after mod 100
+    x_1 = z3.BitVec("x_1", NUM_BITS)  # input x
+    x_2 = z3.BitVec("x_2", NUM_BITS)  # after update
+    x_3 = z3.BitVec("x_3", NUM_BITS)  # after mod 100
 
-    n_1 = z3.BitVec("n_1", NUM_BITS)   # input n
-    n_2 = z3.BitVec("n_2", NUM_BITS)   # after decrement
+    n_1 = z3.BitVec("n_1", NUM_BITS)  # input n
+    n_2 = z3.BitVec("n_2", NUM_BITS)  # after decrement
 
-    d1 = z3.BitVec("d1", 1)            # Bernoulli(p1)
-    rand1 = z3.BitVec("rand1", 4)      # randomness for p1
+    d1 = z3.BitVec("d1", 1)  # Bernoulli(p1)
+    rand1 = z3.BitVec("rand1", 4)  # randomness for p1
 
     # --------------------------------------------------
     # Goal and bitmap
@@ -993,38 +932,18 @@ def ModSumOld(path, p, NUM_BITS):
     # Constraints
     # --------------------------------------------------
     constraints = [
-
         # Bernoulli(p1)
-        d1 == z3.If(
-            rand1_heads,
-            z3.BitVecVal(1, 1),
-            z3.BitVecVal(0, 1)
-        ),
-
+        d1 == z3.If(rand1_heads, z3.BitVecVal(1, 1), z3.BitVecVal(0, 1)),
         # x update: x + n if d1 fires
-        z3.Implies(
-            z3.And(loop_condition, d1 == 1),
-            x_2 == x_1 + n_1
-        ),
-        z3.Implies(
-            z3.Or(d1 == 0, z3.Not(loop_condition)),
-            x_2 == x_1
-        ),
-
+        z3.Implies(z3.And(loop_condition, d1 == 1), x_2 == x_1 + n_1),
+        z3.Implies(z3.Or(d1 == 0, z3.Not(loop_condition)), x_2 == x_1),
         # n always decrements if loop condition holds
-        z3.Implies(
-            loop_condition,
-            n_2 == n_1 - z3.BitVecVal(1, NUM_BITS)
-        ),
-        z3.Implies(
-            z3.Not(loop_condition),
-            n_2 == n_1
-        ),
-
+        z3.Implies(loop_condition, n_2 == n_1 - z3.BitVecVal(1, NUM_BITS)),
+        z3.Implies(z3.Not(loop_condition), n_2 == n_1),
         # --------------------------------------------------
         # MODIFICATION: x := x mod 800
         # --------------------------------------------------
-        x_3 == z3.URem(x_2, z3.BitVecVal(800, NUM_BITS))
+        x_3 == z3.URem(x_2, z3.BitVecVal(800, NUM_BITS)),
     ]
 
     g.add(*constraints)
@@ -1071,34 +990,19 @@ def ModSum(path, p, NUM_BITS):
     # flip_mask = z3.BitVecVal(1, NUM_BITS) << bit_index
 
     # bit_index = it_1 % (NUM_BITS - 1)
-    bit_index = z3.URem(
-        it_1,
-        z3.BitVecVal(NUM_BITS - 1, NUM_BITS)
-    )
+    bit_index = z3.URem(it_1, z3.BitVecVal(NUM_BITS - 1, NUM_BITS))
 
     # flip_mask = 1 << bit_index
     flip_mask = z3.BitVecVal(1, NUM_BITS) << bit_index
 
-
     constraints = [
-        d1 == z3.If(rand1_heads,
-                    z3.BitVecVal(1, 1),
-                    z3.BitVecVal(0, 1)),
-
-        z3.Implies(z3.And(loop_condition, d1 == 1),
-                   x_2 == x_1 ^ flip_mask),
-        z3.Implies(z3.Or(d1 == 0, z3.Not(loop_condition)),
-                   x_2 == x_1),
-
-        z3.Implies(loop_condition,
-                   n_2 == n_1 - z3.BitVecVal(1, NUM_BITS)),
-        z3.Implies(z3.Not(loop_condition),
-                   n_2 == n_1),
-
-        z3.Implies(loop_condition,
-                   it_2 == it_1 + z3.BitVecVal(1, NUM_BITS)),
-        z3.Implies(z3.Not(loop_condition),
-                   it_2 == it_1)
+        d1 == z3.If(rand1_heads, z3.BitVecVal(1, 1), z3.BitVecVal(0, 1)),
+        z3.Implies(z3.And(loop_condition, d1 == 1), x_2 == x_1 ^ flip_mask),
+        z3.Implies(z3.Or(d1 == 0, z3.Not(loop_condition)), x_2 == x_1),
+        z3.Implies(loop_condition, n_2 == n_1 - z3.BitVecVal(1, NUM_BITS)),
+        z3.Implies(z3.Not(loop_condition), n_2 == n_1),
+        z3.Implies(loop_condition, it_2 == it_1 + z3.BitVecVal(1, NUM_BITS)),
+        z3.Implies(z3.Not(loop_condition), it_2 == it_1),
     ]
 
     g.add(*constraints)
@@ -1113,9 +1017,6 @@ def ModSum(path, p, NUM_BITS):
     cnf_goal = subgoal[0]
     output_dimacs(cnf_goal, path)
     check_status(constraints)
-
-
-
 
 
 """
@@ -1170,13 +1071,13 @@ def Prinsys(path, p, NUM_BITS):
             z3.And(
                 d1
                 == z3.If(
-                    z3.And(z3.ULT(rand1, int(16*p)), x_1 == 0),
+                    z3.And(z3.ULT(rand1, int(16 * p)), x_1 == 0),
                     z3.BitVecVal(1, 1),
                     z3.BitVecVal(0, 1),
                 ),
                 d2
                 == z3.If(
-                    z3.And(z3.ULT(rand2, int(16*p)), d1 == 0, x_1 == 0),
+                    z3.And(z3.ULT(rand2, int(16 * p)), d1 == 0, x_1 == 0),
                     z3.BitVecVal(1, 1),
                     z3.BitVecVal(0, 1),
                 ),
@@ -1205,8 +1106,6 @@ def Prinsys(path, p, NUM_BITS):
     check_status(constraints)
 
 
-
-
 def Sum0(path, p, NUM_BITS):
     d1 = z3.BitVec("d1", 1)
     rand1 = z3.BitVec("rand1", 4)
@@ -1226,17 +1125,22 @@ def Sum0(path, p, NUM_BITS):
     g = add_bitmap(g, 1, rand2)
     g = add_bitmap(g, 1, d2)
 
-
     constraints = [
         d2 == z3.If(z3.ULT(rand2, 0b1), z3.BitVecVal(1, 1), z3.BitVecVal(0, 1)),
-        z3.If(d2 == 1, z3.And(d1
-        == z3.If(
-            z3.And(z3.ULT(rand1, int(16*p)), z3.UGT(n_1, 0)),
-            z3.BitVecVal(1, 1),
-            z3.BitVecVal(0, 1),
+        z3.If(
+            d2 == 1,
+            z3.And(
+                d1
+                == z3.If(
+                    z3.And(z3.ULT(rand1, int(16 * p)), z3.UGT(n_1, 0)),
+                    z3.BitVecVal(1, 1),
+                    z3.BitVecVal(0, 1),
+                ),
+                x_2 == z3.If(z3.And(d1 == 1, z3.UGT(n_1, 0)), x_1 + n_1, x_1),
+                n_2 == z3.If(z3.UGT(n_1, 0), n_1 - z3.BitVecVal(1, NUM_BITS), n_1),
+            ),
+            z3.And(x_2 == x_1, n_2 == n_1),
         ),
-        x_2 == z3.If(z3.And(d1 == 1, z3.UGT(n_1, 0)), x_1 + n_1, x_1),
-        n_2 == z3.If(z3.UGT(n_1, 0), n_1 - z3.BitVecVal(1, NUM_BITS), n_1)), z3.And(x_2 == x_1, n_2 == n_1))
     ]
     g.add(*constraints)
     t = z3.Then("simplify", "bit-blast", "tseitin-cnf")
@@ -1280,7 +1184,7 @@ def Fair(path, p, NUM_BITS):
             z3.And(
                 ca_2
                 == z3.If(
-                    z3.And(z3.ULT(rand1, int(16*p)), ca_1 == 0, cb_1 == 0),
+                    z3.And(z3.ULT(rand1, int(16 * p)), ca_1 == 0, cb_1 == 0),
                     z3.BitVecVal(1, 1),
                     z3.BitVecVal(0, 1),
                 ),
@@ -1292,7 +1196,7 @@ def Fair(path, p, NUM_BITS):
                 ),
                 cb_2
                 == z3.If(
-                    z3.And(z3.ULT(rand2, int(16*p)), ca_1 == 0, cb_1 == 0),
+                    z3.And(z3.ULT(rand2, int(16 * p)), ca_1 == 0, cb_1 == 0),
                     z3.BitVecVal(1, 1),
                     z3.BitVecVal(0, 1),
                 ),
@@ -1341,13 +1245,15 @@ def RevBin(path, p, NUM_BITS):
             z3.And(
                 d1
                 == z3.If(
-                    z3.And(z3.ULT(rand1, int(16*p)), z3.UGT(x_1, 0)),
+                    z3.And(z3.ULT(rand1, int(16 * p)), z3.UGT(x_1, 0)),
                     z3.BitVecVal(1, 1),
                     z3.BitVecVal(0, 1),
                 ),
                 x_2
                 == z3.If(
-                    z3.And(d1 == 1, z3.UGT(x_1, 0)), x_1 - z3.BitVecVal(1, NUM_BITS), x_1
+                    z3.And(d1 == 1, z3.UGT(x_1, 0)),
+                    x_1 - z3.BitVecVal(1, NUM_BITS),
+                    x_1,
                 ),
                 z_2 == z3.If(z3.UGT(x_1, 0), z_1 + z3.BitVecVal(1, NUM_BITS), z_1),
             ),
@@ -1362,6 +1268,7 @@ def RevBin(path, p, NUM_BITS):
     output_dimacs(cnf_goal, path)
     # optional
     check_status(constraints)
+
 
 def Mart(path, p, NUM_BITS):
     d1 = z3.BitVec("d1", 1)
@@ -1392,15 +1299,19 @@ def Mart(path, p, NUM_BITS):
             z3.And(
                 d1
                 == z3.If(
-                    z3.And(z3.ULT(rand1, int(16*p)), z3.UGT(b_1, 0)),
+                    z3.And(z3.ULT(rand1, int(16 * p)), z3.UGT(b_1, 0)),
                     z3.BitVecVal(1, 1),
                     z3.BitVecVal(0, 1),
                 ),
                 c_2 == z3.If(z3.And(d1 == 1, z3.UGT(b_1, 0)), c_1 + b_1, c_1 - b_1),
                 b_2
-                == z3.If(z3.And(d1 == 1, z3.UGT(b_1, 0)), z3.BitVecVal(0, NUM_BITS), 2 * b_1),
+                == z3.If(
+                    z3.And(d1 == 1, z3.UGT(b_1, 0)), z3.BitVecVal(0, NUM_BITS), 2 * b_1
+                ),
                 rounds_2
-                == z3.If(z3.UGT(b_1, 0), rounds_1 + z3.BitVecVal(1, NUM_BITS), rounds_1),
+                == z3.If(
+                    z3.UGT(b_1, 0), rounds_1 + z3.BitVecVal(1, NUM_BITS), rounds_1
+                ),
             ),
             z3.And(c_2 == c_1, b_2 == b_1, rounds_2 == rounds_1),
         ),
@@ -1454,19 +1365,23 @@ def Duel(path, p, NUM_BITS):
             z3.And(
                 d1
                 == z3.If(
-                    z3.And(z3.ULT(rand1, int(16*p)), c_1 == 1),
+                    z3.And(z3.ULT(rand1, int(16 * p)), c_1 == 1),
                     z3.BitVecVal(1, 1),
                     z3.BitVecVal(0, 1),
                 ),
                 d2
                 == z3.If(
-                    z3.And(z3.ULT(rand2, int(16*p)), c_1 == 1),
+                    z3.And(z3.ULT(rand2, int(16 * p)), c_1 == 1),
                     z3.BitVecVal(1, 1),
                     z3.BitVecVal(0, 1),
                 ),
                 # f_1 == z3.If(z3.And(t_1 == 1, c_1 == 1), 1, 0),
-                f_1 == z3.If(z3.And(t_1 == z3.BitVecVal(1, 1), c_1 == z3.BitVecVal(1, 1)), z3.BitVecVal(1, 1), z3.BitVecVal(0, 1)),
-
+                f_1
+                == z3.If(
+                    z3.And(t_1 == z3.BitVecVal(1, 1), c_1 == z3.BitVecVal(1, 1)),
+                    z3.BitVecVal(1, 1),
+                    z3.BitVecVal(0, 1),
+                ),
                 c_2 == z3.If(z3.And(d1 == 1, t_1 == 1, c_1 == 1), 0, c_1),
                 t_2
                 == z3.If(
@@ -1477,8 +1392,12 @@ def Duel(path, p, NUM_BITS):
                 == z3.If(
                     z3.And(d2 == 0, t_1 == 0, c_1 == 1), z3.BitVecVal(1, 1) - t_1, t_1
                 ),
-                c_4 == z3.If(z3.And(f_1 == z3.BitVecVal(1, 1), c_1 == z3.BitVecVal(1, 1)), c_2, c_3),
-
+                c_4
+                == z3.If(
+                    z3.And(f_1 == z3.BitVecVal(1, 1), c_1 == z3.BitVecVal(1, 1)),
+                    c_2,
+                    c_3,
+                ),
                 t_4 == z3.If(z3.And(f_1 == 0, c_1 == 1), t_2, t_3),
             ),
             z3.And(c_4 == c_1, t_4 == t_1),
@@ -1498,17 +1417,17 @@ def MultiMode1(path, p, NUM_BITS):
     # --------------------------------------------------
     # Bit-vector declarations
     # --------------------------------------------------
-    x_1 = z3.BitVec("x_1", NUM_BITS)   # input x
-    x_2 = z3.BitVec("x_2", NUM_BITS)   # output x
+    x_1 = z3.BitVec("x_1", NUM_BITS)  # input x
+    x_2 = z3.BitVec("x_2", NUM_BITS)  # output x
 
-    n_1 = z3.BitVec("n_1", NUM_BITS)   # input n
-    n_2 = z3.BitVec("n_2", NUM_BITS)   # output n
+    n_1 = z3.BitVec("n_1", NUM_BITS)  # input n
+    n_2 = z3.BitVec("n_2", NUM_BITS)  # output n
 
-    it_1 = z3.BitVec("it_1", NUM_BITS) # loop counter
+    it_1 = z3.BitVec("it_1", NUM_BITS)  # loop counter
     it_2 = z3.BitVec("it_2", NUM_BITS)
 
-    d1 = z3.BitVec("d1", 1)            # Bernoulli(1/2)
-    rand1 = z3.BitVec("rand1", 1)      # unbiased random bit
+    d1 = z3.BitVec("d1", 1)  # Bernoulli(1/2)
+    rand1 = z3.BitVec("rand1", 1)  # unbiased random bit
 
     # --------------------------------------------------
     # Goal and bitmap
@@ -1533,20 +1452,15 @@ def MultiMode1(path, p, NUM_BITS):
     # --------------------------------------------------
     # Bit index: iters % (NUM_BITS - 1)
     # --------------------------------------------------
-    bit_index = z3.URem(
-        it_1,
-        z3.BitVecVal(NUM_BITS - 1, NUM_BITS)
-    )
+    bit_index = z3.URem(it_1, z3.BitVecVal(NUM_BITS - 1, NUM_BITS))
 
-    bit_mask      = z3.BitVecVal(1, NUM_BITS) << bit_index
-    bit_mask_p1   = z3.BitVecVal(1, NUM_BITS) << (
-                        z3.URem(bit_index + 1,
-                                z3.BitVecVal(NUM_BITS - 1, NUM_BITS))
-                    )
-    bit_mask_p2   = z3.BitVecVal(1, NUM_BITS) << (
-                        z3.URem(bit_index + 2,
-                                z3.BitVecVal(NUM_BITS - 1, NUM_BITS))
-                    )
+    bit_mask = z3.BitVecVal(1, NUM_BITS) << bit_index
+    bit_mask_p1 = z3.BitVecVal(1, NUM_BITS) << (
+        z3.URem(bit_index + 1, z3.BitVecVal(NUM_BITS - 1, NUM_BITS))
+    )
+    bit_mask_p2 = z3.BitVecVal(1, NUM_BITS) << (
+        z3.URem(bit_index + 2, z3.BitVecVal(NUM_BITS - 1, NUM_BITS))
+    )
 
     bit_is_zero = (x_1 & bit_mask) == z3.BitVecVal(0, NUM_BITS)
 
@@ -1554,55 +1468,27 @@ def MultiMode1(path, p, NUM_BITS):
     # Constraints
     # --------------------------------------------------
     constraints = [
-
         # Bernoulli(1/2)
-        d1 == z3.If(
-            rand1_heads,
-            z3.BitVecVal(1, 1),
-            z3.BitVecVal(0, 1)
-        ),
-
+        d1 == z3.If(rand1_heads, z3.BitVecVal(1, 1), z3.BitVecVal(0, 1)),
         # -----------------------------
         # x update (nonlinear)
         # -----------------------------
-        z3.Implies(
-            z3.And(loop_condition, d1 == 1, bit_is_zero),
-            x_2 == x_1 | bit_mask
-        ),
-
+        z3.Implies(z3.And(loop_condition, d1 == 1, bit_is_zero), x_2 == x_1 | bit_mask),
         z3.Implies(
             z3.And(loop_condition, d1 == 1, z3.Not(bit_is_zero)),
-            x_2 == (x_1 | bit_mask_p1 | bit_mask_p2)
+            x_2 == (x_1 | bit_mask_p1 | bit_mask_p2),
         ),
-
-        z3.Implies(
-            z3.Or(d1 == 0, z3.Not(loop_condition)),
-            x_2 == x_1
-        ),
-
+        z3.Implies(z3.Or(d1 == 0, z3.Not(loop_condition)), x_2 == x_1),
         # -----------------------------
         # n decrement
         # -----------------------------
-        z3.Implies(
-            loop_condition,
-            n_2 == n_1 - z3.BitVecVal(1, NUM_BITS)
-        ),
-        z3.Implies(
-            z3.Not(loop_condition),
-            n_2 == n_1
-        ),
-
+        z3.Implies(loop_condition, n_2 == n_1 - z3.BitVecVal(1, NUM_BITS)),
+        z3.Implies(z3.Not(loop_condition), n_2 == n_1),
         # -----------------------------
         # iters increment
         # -----------------------------
-        z3.Implies(
-            loop_condition,
-            it_2 == it_1 + z3.BitVecVal(1, NUM_BITS)
-        ),
-        z3.Implies(
-            z3.Not(loop_condition),
-            it_2 == it_1
-        )
+        z3.Implies(loop_condition, it_2 == it_1 + z3.BitVecVal(1, NUM_BITS)),
+        z3.Implies(z3.Not(loop_condition), it_2 == it_1),
     ]
 
     g.add(*constraints)
@@ -1619,16 +1505,17 @@ def MultiMode1(path, p, NUM_BITS):
 
     check_status(constraints)
 
+
 def Unif1(path, p, NUM_BITS):
 
     # --------------------------------------------------
     # State variables (one-step unrolling)
     # --------------------------------------------------
-    x_1  = z3.BitVec("x_1",  NUM_BITS)
-    x_2  = z3.BitVec("x_2",  NUM_BITS)
+    x_1 = z3.BitVec("x_1", NUM_BITS)
+    x_2 = z3.BitVec("x_2", NUM_BITS)
 
-    n_1  = z3.BitVec("n_1",  NUM_BITS)
-    n_2  = z3.BitVec("n_2",  NUM_BITS)
+    n_1 = z3.BitVec("n_1", NUM_BITS)
+    n_2 = z3.BitVec("n_2", NUM_BITS)
 
     it_1 = z3.BitVec("it_1", NUM_BITS)
     it_2 = z3.BitVec("it_2", NUM_BITS)
@@ -1636,15 +1523,9 @@ def Unif1(path, p, NUM_BITS):
     # --------------------------------------------------
     # Random inputs: one Bernoulli coin per bit
     # --------------------------------------------------
-    rand = [
-        z3.BitVec(f"rand_{i}", 1)
-        for i in range(NUM_BITS - 4)
-    ]
+    rand = [z3.BitVec(f"rand_{i}", 1) for i in range(NUM_BITS - 4)]
 
-    d = [
-        z3.BitVec(f"d_{i}", 1)
-        for i in range(NUM_BITS - 4)
-    ]
+    d = [z3.BitVec(f"d_{i}", 1) for i in range(NUM_BITS - 4)]
 
     # --------------------------------------------------
     # Goal + bitmaps (PRORP standard)
@@ -1668,10 +1549,7 @@ def Unif1(path, p, NUM_BITS):
     # --------------------------------------------------
     # rand_heads guards
     # --------------------------------------------------
-    rand_heads = [
-        rand[i] == z3.BitVecVal(1, 1)
-        for i in range(NUM_BITS - 4)
-    ]
+    rand_heads = [rand[i] == z3.BitVecVal(1, 1) for i in range(NUM_BITS - 4)]
 
     # --------------------------------------------------
     # Flip mask construction
@@ -1682,7 +1560,7 @@ def Unif1(path, p, NUM_BITS):
         flip_mask = flip_mask | z3.If(
             d[i] == z3.BitVecVal(1, 1),
             z3.BitVecVal(1 << i, NUM_BITS),
-            z3.BitVecVal(0, NUM_BITS)
+            z3.BitVecVal(0, NUM_BITS),
         )
 
     # --------------------------------------------------
@@ -1693,46 +1571,19 @@ def Unif1(path, p, NUM_BITS):
     # Bernoulli choices
     for i in range(NUM_BITS - 4):
         constraints.append(
-            d[i] == z3.If(
-                rand_heads[i],
-                z3.BitVecVal(1, 1),
-                z3.BitVecVal(0, 1)
-            )
+            d[i] == z3.If(rand_heads[i], z3.BitVecVal(1, 1), z3.BitVecVal(0, 1))
         )
 
     # x update (all flips applied at once)
     constraints += [
-        z3.Implies(
-            loop_condition,
-            x_2 == x_1 ^ flip_mask
-        ),
-
-        z3.Implies(
-            z3.Not(loop_condition),
-            x_2 == x_1
-        ),
-
+        z3.Implies(loop_condition, x_2 == x_1 ^ flip_mask),
+        z3.Implies(z3.Not(loop_condition), x_2 == x_1),
         # n update
-        z3.Implies(
-            loop_condition,
-            n_2 == n_1 - z3.BitVecVal(1, NUM_BITS)
-        ),
-
-        z3.Implies(
-            z3.Not(loop_condition),
-            n_2 == n_1
-        ),
-
+        z3.Implies(loop_condition, n_2 == n_1 - z3.BitVecVal(1, NUM_BITS)),
+        z3.Implies(z3.Not(loop_condition), n_2 == n_1),
         # iteration counter
-        z3.Implies(
-            loop_condition,
-            it_2 == it_1 + z3.BitVecVal(1, NUM_BITS)
-        ),
-
-        z3.Implies(
-            z3.Not(loop_condition),
-            it_2 == it_1
-        )
+        z3.Implies(loop_condition, it_2 == it_1 + z3.BitVecVal(1, NUM_BITS)),
+        z3.Implies(z3.Not(loop_condition), it_2 == it_1),
     ]
 
     g.add(*constraints)
@@ -1762,14 +1613,14 @@ def Unif2(path, p, NUM_BITS):
     # --------------------------------------------------
     # Bit-vector declarations
     # --------------------------------------------------
-    x_1 = z3.BitVec("x_1", NUM_BITS)   # input x
-    x_2 = z3.BitVec("x_2", NUM_BITS)   # output x
+    x_1 = z3.BitVec("x_1", NUM_BITS)  # input x
+    x_2 = z3.BitVec("x_2", NUM_BITS)  # output x
 
     base = z3.BitVec("base", NUM_BITS)
-    y    = z3.BitVec("y", NUM_BITS)
+    y = z3.BitVec("y", NUM_BITS)
 
     # PRORP iteration coin
-    flip_1    = z3.BitVec("flip_1", 1)
+    flip_1 = z3.BitVec("flip_1", 1)
     rand_flip = z3.BitVec("rand_flip", 4)
 
     # Randomness for y bits
@@ -1796,11 +1647,11 @@ def Unif2(path, p, NUM_BITS):
 
     # PRORP iteration coin
     constraints.append(
-        flip_1 ==
-        z3.If(
+        flip_1
+        == z3.If(
             z3.ULT(rand_flip, z3.BitVecVal(p_thresh, 4)),
             z3.BitVecVal(1, 1),
-            z3.BitVecVal(0, 1)
+            z3.BitVecVal(0, 1),
         )
     )
 
@@ -1819,10 +1670,10 @@ def Unif2(path, p, NUM_BITS):
             z3.If(
                 z3.And(
                     flip_1 == z3.BitVecVal(1, 1),
-                    z3.ULT(rand_y[i], z3.BitVecVal(p_thresh, 4))
+                    z3.ULT(rand_y[i], z3.BitVecVal(p_thresh, 4)),
                 ),
                 bitmask,
-                z3.BitVecVal(0, NUM_BITS)
+                z3.BitVecVal(0, NUM_BITS),
             )
         )
 
@@ -1836,19 +1687,9 @@ def Unif2(path, p, NUM_BITS):
     # --------------------------------------------------
     # x update (OVERWRITE semantics)
     # --------------------------------------------------
-    constraints.append(
-        z3.Implies(
-            flip_1 == z3.BitVecVal(1, 1),
-            x_2 == base + y
-        )
-    )
+    constraints.append(z3.Implies(flip_1 == z3.BitVecVal(1, 1), x_2 == base + y))
 
-    constraints.append(
-        z3.Implies(
-            flip_1 == z3.BitVecVal(0, 1),
-            x_2 == x_1
-        )
-    )
+    constraints.append(z3.Implies(flip_1 == z3.BitVecVal(0, 1), x_2 == x_1))
 
     # --------------------------------------------------
     # Add constraints
@@ -1868,32 +1709,23 @@ def Unif2(path, p, NUM_BITS):
     check_status(constraints)
 
 
-
-
-
-
-
-
-
-
-
 def Unif3(path, p, NUM_BITS):
 
     # --------------------------------------------------
     # Bit-vector declarations
     # --------------------------------------------------
-    x_1  = z3.BitVec("x_1",  NUM_BITS)
-    x_2  = z3.BitVec("x_2",  NUM_BITS)
+    x_1 = z3.BitVec("x_1", NUM_BITS)
+    x_2 = z3.BitVec("x_2", NUM_BITS)
 
-    n_1  = z3.BitVec("n_1",  NUM_BITS)
-    n_2  = z3.BitVec("n_2",  NUM_BITS)
+    n_1 = z3.BitVec("n_1", NUM_BITS)
+    n_2 = z3.BitVec("n_2", NUM_BITS)
 
     it_1 = z3.BitVec("it_1", NUM_BITS)
     it_2 = z3.BitVec("it_2", NUM_BITS)
 
     # PRORP randomness
-    coin = z3.BitVec("coin", 1)      # fair coin
-    rand = z3.BitVec("rand", 1)      # Bernoulli(1/2)
+    coin = z3.BitVec("coin", 1)  # fair coin
+    rand = z3.BitVec("rand", 1)  # Bernoulli(1/2)
 
     # --------------------------------------------------
     # Goal and bitmaps
@@ -1909,8 +1741,7 @@ def Unif3(path, p, NUM_BITS):
     # Execution condition
     # --------------------------------------------------
     exec_cond = z3.And(
-        coin == z3.BitVecVal(1, 1),
-        z3.UGT(n_1, z3.BitVecVal(0, NUM_BITS))
+        coin == z3.BitVecVal(1, 1), z3.UGT(n_1, z3.BitVecVal(0, NUM_BITS))
     )
 
     # --------------------------------------------------
@@ -1919,8 +1750,12 @@ def Unif3(path, p, NUM_BITS):
     bit = z3.URem(it_1, z3.BitVecVal(NUM_BITS, NUM_BITS))
     bit_mask = z3.BitVecVal(1, NUM_BITS) << bit
 
-    bit_p1 = z3.BitVecVal(1, NUM_BITS) << z3.URem(bit + 1, z3.BitVecVal(NUM_BITS, NUM_BITS))
-    bit_p2 = z3.BitVecVal(1, NUM_BITS) << z3.URem(bit + 2, z3.BitVecVal(NUM_BITS, NUM_BITS))
+    bit_p1 = z3.BitVecVal(1, NUM_BITS) << z3.URem(
+        bit + 1, z3.BitVecVal(NUM_BITS, NUM_BITS)
+    )
+    bit_p2 = z3.BitVecVal(1, NUM_BITS) << z3.URem(
+        bit + 2, z3.BitVecVal(NUM_BITS, NUM_BITS)
+    )
 
     bit_is_zero = (x_1 & bit_mask) == z3.BitVecVal(0, NUM_BITS)
 
@@ -1937,16 +1772,9 @@ def Unif3(path, p, NUM_BITS):
     # --------------------------------------------------
     # Parity computations
     # --------------------------------------------------
-    p1 = (
-        z3.Extract(i1, i1, x_1) ^
-        z3.Extract(i2, i2, x_1) ^
-        z3.Extract(i3, i3, x_1)
-    )
+    p1 = z3.Extract(i1, i1, x_1) ^ z3.Extract(i2, i2, x_1) ^ z3.Extract(i3, i3, x_1)
 
-    p2 = (
-        z3.Extract(j1, j1, x_1) ^
-        z3.Extract(j2, j2, x_1)
-    )
+    p2 = z3.Extract(j1, j1, x_1) ^ z3.Extract(j2, j2, x_1)
 
     # --------------------------------------------------
     # Hash-based mixing
@@ -1955,44 +1783,35 @@ def Unif3(path, p, NUM_BITS):
     # Hash-based mixing (FIXED)
     # --------------------------------------------------
     h = (
-        z3.Extract(0, 0, z3.LShR(x_1, 5 % NUM_BITS)) ^
-        z3.Extract(0, 0, z3.LShR(x_1, 12 % NUM_BITS)) ^
-        z3.Extract(0, 0, z3.LShR(x_1, 19 % NUM_BITS))
+        z3.Extract(0, 0, z3.LShR(x_1, 5 % NUM_BITS))
+        ^ z3.Extract(0, 0, z3.LShR(x_1, 12 % NUM_BITS))
+        ^ z3.Extract(0, 0, z3.LShR(x_1, 19 % NUM_BITS))
     )  # h : BitVec(1)
 
     h_ext = z3.ZeroExt(NUM_BITS - 1, h)  # BitVec(NUM_BITS)
 
     hash_index = z3.URem(
-        h_ext + z3.BitVecVal(3, NUM_BITS),
-        z3.BitVecVal(NUM_BITS, NUM_BITS)
+        h_ext + z3.BitVecVal(3, NUM_BITS), z3.BitVecVal(NUM_BITS, NUM_BITS)
     )
 
     hash_mask = z3.BitVecVal(1, NUM_BITS) << hash_index
 
-
-
     # --------------------------------------------------
     # x after noisy reinforcement
     # --------------------------------------------------
-    x_noise = z3.If(
-        bit_is_zero,
-        x_1 | bit_mask,
-        x_1 | bit_p1 | bit_p2
-    )
+    x_noise = z3.If(bit_is_zero, x_1 | bit_mask, x_1 | bit_p1 | bit_p2)
 
     # --------------------------------------------------
     # x after affine enforcement
     # --------------------------------------------------
     x_affine_1 = z3.If(
-        p1 == z3.BitVecVal(1, 1),
-        x_noise ^ z3.BitVecVal(1 << i1, NUM_BITS),
-        x_noise
+        p1 == z3.BitVecVal(1, 1), x_noise ^ z3.BitVecVal(1 << i1, NUM_BITS), x_noise
     )
 
     x_affine_2 = z3.If(
         p2 == z3.BitVecVal(0, 1),
         x_affine_1 ^ z3.BitVecVal(1 << j1, NUM_BITS),
-        x_affine_1
+        x_affine_1,
     )
 
     # --------------------------------------------------
@@ -2004,29 +1823,15 @@ def Unif3(path, p, NUM_BITS):
     # Constraints
     # --------------------------------------------------
     constraints = [
-
         # Noisy + structured update
-        z3.Implies(
-            z3.And(exec_cond, rand == z3.BitVecVal(1, 1)),
-            x_2 == x_final
-        ),
-
+        z3.Implies(z3.And(exec_cond, rand == z3.BitVecVal(1, 1)), x_2 == x_final),
         # No-op when rand == 0
-        z3.Implies(
-            z3.And(exec_cond, rand == z3.BitVecVal(0, 1)),
-            x_2 == x_1
-        ),
-
+        z3.Implies(z3.And(exec_cond, rand == z3.BitVecVal(0, 1)), x_2 == x_1),
         # Stutter
-        z3.Implies(
-            z3.Not(exec_cond),
-            x_2 == x_1
-        ),
-
+        z3.Implies(z3.Not(exec_cond), x_2 == x_1),
         # n update
         z3.Implies(exec_cond, n_2 == n_1 - 1),
         z3.Implies(z3.Not(exec_cond), n_2 == n_1),
-
         # iters update
         z3.Implies(exec_cond, it_2 == it_1 + 1),
         z3.Implies(z3.Not(exec_cond), it_2 == it_1),
@@ -2045,14 +1850,13 @@ def Unif3(path, p, NUM_BITS):
     check_status(constraints)
 
 
-
 def Unif4(path, p, NUM_BITS):
 
     import z3
 
     # compute lengths and starts
     lengths = [1] + [(2**j - j - 1) for j in range(1, NUM_BITS)]
-    a_vals  = [0] + [(2**j + j + 1) for j in range(1, NUM_BITS)]
+    a_vals = [0] + [(2**j + j + 1) for j in range(1, NUM_BITS)]
 
     x_1 = z3.BitVec("x_1", NUM_BITS)
     x_2 = z3.BitVec("x_2", NUM_BITS)
@@ -2061,15 +1865,15 @@ def Unif4(path, p, NUM_BITS):
     member_1 = z3.BitVec("member_1", 1)
     member_2 = z3.BitVec("member_2", 1)
 
-    coin = z3.BitVec("coin", 1)   # PRORP iteration coin
-    j    = z3.BitVec("j", NUM_BITS)
+    coin = z3.BitVec("coin", 1)  # PRORP iteration coin
+    j = z3.BitVec("j", NUM_BITS)
     offset = z3.BitVec("offset", NUM_BITS)
-    y    = z3.BitVec("y", NUM_BITS)
+    y = z3.BitVec("y", NUM_BITS)
 
     g = z3.Goal()
 
     # bitmaps
-    for v in [x_1,x_2,j,offset,y,coin,flip_1,flip_2,member_1,member_2]:
+    for v in [x_1, x_2, j, offset, y, coin, flip_1, flip_2, member_1, member_2]:
         if v.size() > 1:
             g = add_bitmap(g, NUM_BITS, v)
         else:
@@ -2079,23 +1883,23 @@ def Unif4(path, p, NUM_BITS):
 
     # CASE 1: flip_1 == 0 -> stutter
     constraints.append(
-        z3.Implies(flip_1 == 0,
-                   z3.And(
-                       x_2 == x_1,
-                       flip_2 == z3.BitVecVal(0,1),
-                       member_2 == z3.BitVecVal(0,1)
-                   ))
+        z3.Implies(
+            flip_1 == 0,
+            z3.And(
+                x_2 == x_1, flip_2 == z3.BitVecVal(0, 1), member_2 == z3.BitVecVal(0, 1)
+            ),
+        )
     )
 
     # CASE 2: flip_1 == 1 AND coin == 0 -> stop unrolling
     stop = z3.And(flip_1 == 1, coin == 0)
     constraints.append(
-        z3.Implies(stop,
-                   z3.And(
-                       x_2 == x_1,
-                       flip_2 == z3.BitVecVal(1,1),
-                       member_2 == z3.BitVecVal(0,1)
-                   ))
+        z3.Implies(
+            stop,
+            z3.And(
+                x_2 == x_1, flip_2 == z3.BitVecVal(1, 1), member_2 == z3.BitVecVal(0, 1)
+            ),
+        )
     )
 
     # CASE 3: flip_1 == 1 AND coin == 1 -> perform update
@@ -2113,16 +1917,15 @@ def Unif4(path, p, NUM_BITS):
 
         if j_idx == 0:
             Sconds.append(
-                z3.And(j == z3.BitVecVal(0,NUM_BITS),
-                       y == z3.BitVecVal(0,NUM_BITS))
+                z3.And(j == z3.BitVecVal(0, NUM_BITS), y == z3.BitVecVal(0, NUM_BITS))
             )
         else:
             Sconds.append(
                 z3.And(
-                    j == z3.BitVecVal(j_idx,NUM_BITS),
-                    offset >= z3.BitVecVal(0,NUM_BITS),
-                    offset <  z3.BitVecVal(lj,NUM_BITS),
-                    y == z3.BitVecVal(aj,NUM_BITS) + offset
+                    j == z3.BitVecVal(j_idx, NUM_BITS),
+                    offset >= z3.BitVecVal(0, NUM_BITS),
+                    offset < z3.BitVecVal(lj, NUM_BITS),
+                    y == z3.BitVecVal(aj, NUM_BITS) + offset,
                 )
             )
 
@@ -2130,30 +1933,20 @@ def Unif4(path, p, NUM_BITS):
 
     constraints.append(z3.Implies(run, S_formula))
     constraints.append(z3.Implies(run, x_2 == x_1 + y))
-    constraints.append(z3.Implies(run, flip_2 == z3.BitVecVal(1,1)))
-    constraints.append(z3.Implies(run, member_2 == z3.BitVecVal(1,1)))
+    constraints.append(z3.Implies(run, flip_2 == z3.BitVecVal(1, 1)))
+    constraints.append(z3.Implies(run, member_2 == z3.BitVecVal(1, 1)))
 
     g.add(*constraints)
 
     # bit-blast + CNF
-    t = z3.Then("simplify","bit-blast","tseitin-cnf")
+    t = z3.Then("simplify", "bit-blast", "tseitin-cnf")
     cnf_goal = t(g)[0]
     output_dimacs(cnf_goal, path)
 
 
-
-
-
-
-
-
-
-    
-
-
-
 if __name__ == "__main__":
     import sys
+
     if len(sys.argv) != 4:
         print("Usage: python EXIST_progs.py <ProgramName> <NUM_BITS> <probability>")
         sys.exit(1)

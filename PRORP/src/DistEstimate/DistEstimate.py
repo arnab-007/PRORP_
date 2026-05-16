@@ -4,16 +4,17 @@ import numpy
 import os
 from numpy.random import default_rng
 
-
 NUM_BITS = None
 MASK = None
 p = 0.5
 p1 = 0.5
 p2 = 0.5
 
+
 def state_evaluation(binary_list):
     """Convert a list of bits (MSB first) to an integer."""
     return sum(b << (len(binary_list) - 1 - i) for i, b in enumerate(binary_list))
+
 
 def run_parallel(samples, config, iters):
     multiprocessing.set_start_method("spawn", force=True)
@@ -28,7 +29,7 @@ def run_parallel(samples, config, iters):
     ]
     results = []
 
-    with ThreadPoolExecutor(max_workers = min(20, int(0.7 * os.cpu_count()))) as executor:
+    with ThreadPoolExecutor(max_workers=min(20, int(0.7 * os.cpu_count()))) as executor:
         futures = [executor.submit(DistExecute, args) for args in all_args]
         for future in as_completed(futures):
             result = future.result()
@@ -50,12 +51,13 @@ def Temp(k: int, z: int, flip: int, p1: float) -> int:
             flip = 1
         else:
             z += 1
-        
-        if (z == 9):
+
+        if z == 9:
             z = 17
         iters += 1
 
     return (2 * (z & MASK) + flip) % (2 ** (1 + NUM_BITS))
+
 
 def BigGeo0(k: int, z: int, flip: int, p1: float) -> int:
 
@@ -74,6 +76,7 @@ def BigGeo0(k: int, z: int, flip: int, p1: float) -> int:
 
     return (2 * (z & MASK) + flip) % (2 ** (1 + NUM_BITS))
 
+
 def BigGeo1(k: int, z: int, x: int, flip: int, p1: float) -> int:
 
     iters = 0
@@ -86,12 +89,15 @@ def BigGeo1(k: int, z: int, x: int, flip: int, p1: float) -> int:
         if d == 1:
             flip = 1
         else:
-            x = 2*x
+            x = 2 * x
             z += 1
         iters += 1
 
-    result = (((1 << (NUM_BITS + 1)) * (z & MASK)) + (2 * (x & MASK)) + flip) % (2 ** (1 + 2*NUM_BITS))
+    result = (((1 << (NUM_BITS + 1)) * (z & MASK)) + (2 * (x & MASK)) + flip) % (
+        2 ** (1 + 2 * NUM_BITS)
+    )
     return result
+
 
 def BigGeo2(k: int, z: int, x: int, flip: int, p1: float) -> int:
 
@@ -109,7 +115,9 @@ def BigGeo2(k: int, z: int, x: int, flip: int, p1: float) -> int:
             z += 1
         iters += 1
 
-    result = (((1 << (NUM_BITS + 1)) * (z & MASK)) + (2 * (x & MASK)) + flip) % (2 ** (1 + 2*NUM_BITS))
+    result = (((1 << (NUM_BITS + 1)) * (z & MASK)) + (2 * (x & MASK)) + flip) % (
+        2 ** (1 + 2 * NUM_BITS)
+    )
     return result
 
 
@@ -134,7 +142,7 @@ def Bin0(k: int, y: int, n: int, x: int, p1: float) -> int:
 def Bin1(k: int, n: int, x: int, p1: float) -> int:
     iters = 0
     M = 128
-    while n < M  and iters < k:
+    while n < M and iters < k:
         seed = random.randint(0, 2**31 - 1)
         rng = default_rng(seed + iters)
 
@@ -144,9 +152,7 @@ def Bin1(k: int, n: int, x: int, p1: float) -> int:
             n = (n + 1) & MASK  # Wrap around to stay 16-bit
         iters += 1
 
-    result = (
-        (1 << NUM_BITS) * (n & MASK) + (x & MASK)
-    )
+    result = (1 << NUM_BITS) * (n & MASK) + (x & MASK)
     return result
 
 
@@ -160,17 +166,14 @@ def BinMod(k: int, n: int, x: int, p1: float) -> int:
 
         d = 1 if rng.random() < p1 else 0
         if d == 1:
-            x = (x + 1) & MASK   
+            x = (x + 1) & MASK
             n = (n + 1) & MASK
         iters += 1
 
     # MODIFICATION: x := x mod 100
     x = x % 100
-    result = (
-        (1 << NUM_BITS) * (n & MASK) + (x & MASK)
-    )
+    result = (1 << NUM_BITS) * (n & MASK) + (x & MASK)
     return result
-
 
 
 def Bin2(k: int, y: int, n: int, x: int, p1: float) -> int:
@@ -202,22 +205,20 @@ def BiasDir(k: int, y: int, x: int, p1: float) -> int:
 
         d1 = 1 if rng.random() < p1 else 0
         if d1 == 1:
-            x = 1 
+            x = 1
         else:
-            x = 0 
+            x = 0
 
         d2 = 1 if rng.random() < p1 else 0
         if d2 == 1:
-            y = 1 
+            y = 1
         else:
-            y = 0 
-            
+            y = 0
 
         iters += 1
 
-    result = ( (2*y + x) )
+    result = 2 * y + x
     return result
-
 
 
 def Unif(k: int, x: int, count: int, p1: float) -> int:
@@ -229,6 +230,7 @@ def Unif(k: int, x: int, count: int, p1: float) -> int:
 
     result = ((x & MASK) << NUM_BITS) + (count & MASK)
     return result
+
 
 def DepRV(k: int, y: int, n: int, x: int, p1: float) -> int:
 
@@ -463,11 +465,10 @@ def ModSum(k: int, x: int, n: int, p1: float) -> int:
 
         # unbiased random bit
         if rng.random() < p1:
-            x = x ^ (1 << (iters % (NUM_BITS - 1)))   # assign fresh bit
+            x = x ^ (1 << (iters % (NUM_BITS - 1)))  # assign fresh bit
 
         n = (n - 1) & MASK
         iters += 1
-    
 
     # Final result packed as 32-bit: [x|n]
     result = (2 ** (NUM_BITS) * (x & MASK)) + (n & MASK)
@@ -480,7 +481,7 @@ def MultiMode1(k: int, x: int, n: int, p1: float) -> int:
         seed = random.randint(0, 2**31 - 1)
         rng = default_rng(seed + iters)
 
-        bit = iters % (NUM_BITS - 1)   # never touch MSB
+        bit = iters % (NUM_BITS - 1)  # never touch MSB
         b = rng.random() < 0.5
 
         if b:
@@ -495,13 +496,14 @@ def MultiMode1(k: int, x: int, n: int, p1: float) -> int:
 
         n = (n - 1) & MASK
         iters += 1
-    
 
     # Final result packed as 32-bit: [x|n]
     result = (2 ** (NUM_BITS) * (x & MASK)) + (n & MASK)
     return result
 
+
 # NUM_BITS = 16
+
 
 def Unif1(k: int, x: int, n: int, p1: float) -> int:
     iters = 0
@@ -512,19 +514,15 @@ def Unif1(k: int, x: int, n: int, p1: float) -> int:
         rng.shuffle(bits)
         for bit in bits:
             if rng.random() < 0.5:
-                x ^= (1 << bit)
-            
+                x ^= 1 << bit
+
         n = (n - 1) & MASK
         iters += 1
-    
 
     # Final result packed as 32-bit: [x|n]
     result = (2 ** (NUM_BITS) * (x & MASK)) + (n & MASK)
     return result
 
-
-
-    
 
 def Unif2(k: int, x: int, flip: int, p1: float) -> int:
 
@@ -539,18 +537,14 @@ def Unif2(k: int, x: int, flip: int, p1: float) -> int:
 
         for i in range(LOW):
             if random.random() < p1:
-                y |= (1 << i)
+                y |= 1 << i
 
         iters += 1
-        x = base + y 
-        
+        x = base + y
 
-    #x = x + y
-
-
+    # x = x + y
 
     return (2 * (x & MASK) + flip) % (2 ** (1 + NUM_BITS))
-
 
 
 def Unif3(k: int, x: int, n: int, p1: float) -> int:
@@ -559,8 +553,8 @@ def Unif3(k: int, x: int, n: int, p1: float) -> int:
     # --------------------------------------------------
     # Bit-index sets (scale with NUM_BITS)
     # --------------------------------------------------
-    S1 = [0, NUM_BITS // 4, NUM_BITS // 2]   # parity = 0
-    S2 = [1, NUM_BITS // 3]                  # parity = 1
+    S1 = [0, NUM_BITS // 4, NUM_BITS // 2]  # parity = 0
+    S2 = [1, NUM_BITS // 3]  # parity = 1
 
     while n > 0 and iters < k:
         seed = random.randint(0, 2**31 - 1)
@@ -591,7 +585,7 @@ def Unif3(k: int, x: int, n: int, p1: float) -> int:
             p1_val ^= (x >> i) & 1
 
         if p1_val == 1:
-            x ^= (1 << S1[0])
+            x ^= 1 << S1[0]
 
         # Constraint 2: xor over S2 == 1
         p2_val = 0
@@ -599,7 +593,7 @@ def Unif3(k: int, x: int, n: int, p1: float) -> int:
             p2_val ^= (x >> j) & 1
 
         if p2_val == 0:
-            x ^= (1 << S2[0])
+            x ^= 1 << S2[0]
 
         # --------------------------------------------------
         # Hash-style mixing to destroy structure of B
@@ -608,7 +602,7 @@ def Unif3(k: int, x: int, n: int, p1: float) -> int:
         for t in range(3):
             h ^= (x >> ((7 * t + 5) % NUM_BITS)) & 1
 
-        x ^= (1 << ((h + 3) % NUM_BITS))
+        x ^= 1 << ((h + 3) % NUM_BITS)
 
         # --------------------------------------------------
         # Loop bookkeeping
@@ -616,11 +610,8 @@ def Unif3(k: int, x: int, n: int, p1: float) -> int:
         n = (n - 1) & MASK
         iters += 1
 
-        
-
     result = (2 ** (NUM_BITS) * (x & MASK)) + (n & MASK)
     return result
-
 
 
 def Unif4(k: int, x: int, flip: int, p1: float) -> int:
@@ -632,10 +623,8 @@ def Unif4(k: int, x: int, flip: int, p1: float) -> int:
     lengths = [1] + [(2**j - j - 1) for j in range(1, NUM_BITS)]
     total = sum(lengths)
 
-
     while flip == 1 and iters < k:
 
-        
         u = random.randint(0, total - 1)
 
         s = 0
@@ -644,10 +633,8 @@ def Unif4(k: int, x: int, flip: int, p1: float) -> int:
                 break
             s += lengths[j]
 
-        
         offset = u - s
 
-        
         if j == 0:
             y = 0
         else:
@@ -656,15 +643,8 @@ def Unif4(k: int, x: int, flip: int, p1: float) -> int:
 
         iters += 1
         x = base + y
-        
+
     return (2 * (x & MASK) + flip) % (2 ** (1 + NUM_BITS))
-
-
-
-
-
-
-
 
 
 def DistExecute(args):
@@ -741,7 +721,7 @@ def DistExecute(args):
             x = state_evaluation(L1[:NUM_BITS])
             n = state_evaluation(L1[-NUM_BITS:])
             output = Sum0(k, x, n, p)
-        
+
         elif progname == "Bin0":
             y = state_evaluation(L1[:NUM_BITS])
             n = state_evaluation(L1[NUM_BITS : 2 * NUM_BITS])
@@ -752,7 +732,7 @@ def DistExecute(args):
             n = state_evaluation(L1[:NUM_BITS])
             x = state_evaluation(L1[-NUM_BITS:])
             output = Bin1(k, n, x, p)
-        
+
         elif progname == "BinMod":
             n = state_evaluation(L1[:NUM_BITS])
             x = state_evaluation(L1[-NUM_BITS:])
@@ -819,12 +799,12 @@ def DistExecute(args):
 
         elif progname == "Unif2":
             x = state_evaluation(L1[:NUM_BITS])
-            flip = state_evaluation([L1[-1]]) 
+            flip = state_evaluation([L1[-1]])
             output = Unif2(k, x, flip, p)
 
         elif progname == "Unif4":
             x = state_evaluation(L1[:NUM_BITS])
-            flip = state_evaluation([L1[-1]]) 
+            flip = state_evaluation([L1[-1]])
             output = Unif4(k, x, flip, p)
 
         elif progname == "ModSum":
@@ -848,7 +828,7 @@ def DistExecute(args):
         # print(loop_guard)
         flag = evaluate_loop_guard_condition(output, prog_variables, loop_guard)
         # results.append(output)
-        if ((not flag) or progname == "Unif2" or progname == "Unif4"):
+        if (not flag) or progname == "Unif2" or progname == "Unif4":
             results.append(output)
 
     return results
@@ -864,7 +844,7 @@ def main():
     MASK = (1 << NUM_BITS) - 1
     prog_variables = config["Program_variables"]["Bools"]
     init_states = config["Initial states"]["Expression"]
-    
+
     # === Parse Expressions ===
     init_list = [
         list(filter(None, clause.strip("() ").split("||")))

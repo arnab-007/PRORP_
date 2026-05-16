@@ -1,0 +1,20 @@
+{
+    "Initial states": "(z10)",
+    "Number of iterations": 64,
+    "Epsilon": 0.05,
+    "Eta": 0.05,
+    "Delta": 0.1,
+    "Total number of phases": 1,
+    "Total number of splits": 0,
+    "Total number of prune": 0,
+    "Total DistEstimate time": 0.16852974891662598,
+    "Total Validifier time": 6.671055316925049,
+    "Total TreeLearner time": 0.03383326530456543,
+    "Total time (seconds)": 6.87341833114624,
+    "Final DistEstimate_value": 0.0,
+    "Final Validifier_value": 0.0,
+    "Height of final tree": 3,
+    "Number of DNF terms in candidate": 2,
+    "Final simplified candidate": "flip = 1, z mod 2048 in [1024, 2048)",
+    "Final candidate": "(!z5 && flip && z10) || (flip && z10 && z5)"
+}
