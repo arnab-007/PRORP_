@@ -1,38 +1,54 @@
-Initial phase DNF: (!count11 && !n15 && !n12 && !count15 && !n14 && !n7 && !n3)
+Initial phase DNF: (!n6 && !n9 && !n11 && !count13 && !n12 && !n3 && !n14)
 Phase: 2
 DistEstimate value: 0.0
-Validifier value: 0.98
-Phase 2 DNF before prediction: (!count11 && !n15 && !n12 && !count15 && !n14 && !n7 && !n3)
+Validifier value: 0.9916666666666667
+Phase 2 DNF before prediction: (!n6 && !n9 && !n11 && !count13 && !n12 && !n3 && !n14)
 Phase 2 DNF after prediction: count15 && !count15
+Before Muattion{'dist_error': np.float64(1.0), 'valid_error': np.float64(0.0)}
+moves=[(1, 11111111, 'split')]
+After Mutation{'dist_error': np.float64(1.0), 'valid_error': np.float64(0.0)}
+moves=[(np.float64(1.0), 111111111, 'split')]
+After Mutation{'dist_error': np.float64(0.0), 'valid_error': np.float64(0.225)}
+moves=[(np.float64(1.0), 1111111111, 'split')]
+After Mutation{'dist_error': np.float64(0.0), 'valid_error': np.float64(0.09499999999999999)}
+moves=[(np.float64(1.0), 11111111111, 'split')]
+After Mutation{'dist_error': np.float64(0.0), 'valid_error': np.float64(0.034999999999999996)}
 Successfully reached the desired user error bounds.
 Mutation counter: {'split': 4, 'prune': 0}
-Next phase total time: 15.605030059814453
-Next phase DistEstimate time: 1.0413610935211182
-Next phase Validifier time: 14.312249183654785
-Next phase TreeLearner time: 0.2506110668182373
+Next phase total time: 15.923240661621094
+Next phase DistEstimate time: 0.7715277671813965
+Next phase Validifier time: 14.927571773529053
+Next phase TreeLearner time: 0.22249674797058105
 Phase: 3
 DistEstimate value: 0.0
-Validifier value: 0.7666666666666667
-Phase 3 DNF before prediction: (!count11 && !n15 && !n12 && !count15 && !n14 && !n7 && !n3 && !count14 && !count9 && !count10 && !count13)
+Validifier value: 0.9
+Phase 3 DNF before prediction: (!n6 && !n9 && !n11 && !count13 && !n12 && !n3 && !n14 && !count9 && !count12 && !count10 && !count15)
 Phase 3 DNF after prediction: count15 && !count15
+Before Muattion{'dist_error': np.float64(1.0), 'valid_error': np.float64(0.0)}
+moves=[(1, 111111111111, 'split')]
+After Mutation{'dist_error': np.float64(1.0), 'valid_error': np.float64(0.0)}
+moves=[(np.float64(1.0), 1111111111111, 'split')]
+After Mutation{'dist_error': np.float64(0.0), 'valid_error': np.float64(0.12833333333333335)}
+moves=[(np.float64(1.0), 11111111111111, 'split')]
+After Mutation{'dist_error': np.float64(0.0), 'valid_error': np.float64(0.0016666666666666668)}
 Successfully reached the desired user error bounds.
-Mutation counter: {'split': 2, 'prune': 0}
-Next phase total time: 13.524031400680542
-Next phase DistEstimate time: 0.6613278388977051
-Next phase Validifier time: 12.701801776885986
-Next phase TreeLearner time: 0.16025972366333008
+Mutation counter: {'split': 3, 'prune': 0}
+Next phase total time: 13.16108226776123
+Next phase DistEstimate time: 0.8640403747558594
+Next phase Validifier time: 11.946242570877075
+Next phase TreeLearner time: 0.3500847816467285
 Final DistEstimate value: 0.0
-Final Validifier value: 0.015
+Final Validifier value: 0.03333333333333333
 Final candidate learnt: (!count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count8 && !count9 && !n0 && !n1 && !n10 && !n11 && !n12 && !n13 && !n14 && !n15 && !n2 && !n3 && !n4 && !n5 && !n6 && !n7 && !n8 && !n9)
 Height of learnt decision tree: 24
 Number of terms in the candidate DNF: 1
-Total DistEstimate time: 2.4580910205841064
-Total Validifier time: 40.85701894760132
-Total TreeLearner time: 0.5396022796630859
-Total time (seconds): 43.86102485656738
+Total DistEstimate time: 2.6018526554107666
+Total Validifier time: 41.66874861717224
+Total TreeLearner time: 0.6246187686920166
+Total time (seconds): 44.90226149559021
 Starting model fitting...
 --- Fitting took: 0.0011 seconds ---
 Starting custom tree build...
 --- Custom tree build took: 0.0015 seconds ---
 
---- Run at 2026-05-14 12:05:22.517832 ---
+--- Run at 2026-05-16 12:29:28.572356 ---
