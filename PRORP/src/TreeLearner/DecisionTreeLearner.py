@@ -169,9 +169,12 @@ class CustomDecisionTree:
                 columns=list(self.feature_names) + ["label", "weight", "member"],
             )
 
-            # 1. Concatenate old and new dataframes
-            # node.datapoints = pd.concat([node.datapoints, new_data_df], ignore_index=True)
-            node.datapoints = new_data_df
+            node.datapoints = pd.concat(
+                [new_data_df, node.datapoints],
+                ignore_index=True,
+            )
+
+            # node.datapoints = new_data_df
 
             # 2. Drop duplicates based on all columns except weight
             # node.datapoints.drop_duplicates(
@@ -233,6 +236,41 @@ class CustomDecisionTree:
     #     dot = Digraph(format="png")
     #     build_graph(dot, self.root, self.feature_names)
     #     dot.render(output_file, cleanup=True)
+
+    def purify_leaves(self):
+        purified_count = 0
+        total_dropped = 0
+
+        # Traverse every node in the tree to find leaves
+        stack = [self.root]
+        while stack:
+            node = stack.pop()
+
+            # If it's an internal node, push children and continue
+            if node.lchild is not None or node.rchild is not None:
+                if node.lchild:
+                    stack.append(node.lchild)
+                if node.rchild:
+                    stack.append(node.rchild)
+                continue
+
+            # It's a leaf node — purify it
+            if node.datapoints is not None and not node.datapoints.empty:
+                original_size = len(node.datapoints)
+
+                # Keep only rows where label matches the leaf's predicted value
+                node.datapoints = node.datapoints[
+                    node.datapoints["label"] == node.value
+                ].reset_index(drop=True)
+
+                dropped = original_size - len(node.datapoints)
+                if dropped > 0:
+                    total_dropped += dropped
+                    purified_count += 1
+
+                    # Recompute node.value from the now-pure set (optional but safe)
+                    if not node.datapoints.empty:
+                        node.value = most_common_label(node.datapoints["label"].values)
 
     def print_leaf_datapoints(self):
         print_leaf_data(self.root)

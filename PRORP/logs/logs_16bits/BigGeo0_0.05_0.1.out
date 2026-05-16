@@ -1,0 +1,16 @@
+Initial phase DNF: (z14 && !z5) || (z14 && z5)
+Final DistEstimate value: 0.0
+Final Validifier value: 0.0
+Final candidate learnt: (!z5 && flip && z14) || (flip && z14 && z5)
+Height of learnt decision tree: 3
+Number of terms in the candidate DNF: 2
+Total DistEstimate time: 0.17194247245788574
+Total Validifier time: 6.762150764465332
+Total TreeLearner time: 0.03545689582824707
+Total time (seconds): 7.181978225708008
+Starting model fitting...
+--- Fitting took: 0.0008 seconds ---
+Starting custom tree build...
+--- Custom tree build took: 0.0004 seconds ---
+
+--- Run at 2026-05-16 12:32:13.716432 ---

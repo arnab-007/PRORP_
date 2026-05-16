@@ -346,6 +346,7 @@ def TreeLearner():
             f"Phase {phase} DNF before prediction: {intermediate_tree.tree_to_dnf()}"
         )
         next_phase_start = time.time()
+        intermediate_tree.purify_leaves()
         df_next = prepare_data(distestimate_data, validifier_data, prog_variables)
         intermediate_tree.predict(
             df_next[list(df_next.columns[:-3])].values,

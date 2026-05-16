@@ -63,7 +63,7 @@
         ]
     },
     "Candidate": {
-        "Expression": "(!count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count7 && !count8 && !count9 && ca) || (!count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count7 && !count8 && !count9 && cb)"
+        "Expression": "(!count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count6 && !count7 && !count8 && !count9 && ca) || (!count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count6 && !count7 && !count8 && !count9 && cb)"
     },
     "Initial states": {
         "Expression": "(!count15) && (!count14) && (!count13) && (!count12) && (!count11) && (!count10) && (!count9) && (!count8) && (!count7) && (!count6) && (!ca) && (!cb)",

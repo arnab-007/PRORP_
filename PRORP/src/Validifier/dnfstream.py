@@ -10,17 +10,19 @@ import cProfile
 from mprandom import mpbinomial
 from mprandom import vanbinomialvariate as vanbinomial
 
-gp.get_context().precision=20000
+gp.get_context().precision = 20000
 
 
-def isSAT(dnfclause, sol):    
-    tmpRand = np.random.uniform(0, 1, max(len(dnfclause), len(sol)))     
+def isSAT(dnfclause, sol):
+    tmpRand = np.random.uniform(0, 1, max(len(dnfclause), len(sol)))
     idx = 0
     for lit in dnfclause:
-        if -1 * lit in sol :
+        if -1 * lit in sol:
             return False
         elif lit not in sol:
-            if tmpRand[idx] > 0.5:    # np.random.uniform(0, 1)    # delayed sample generation
+            if (
+                tmpRand[idx] > 0.5
+            ):  # np.random.uniform(0, 1)    # delayed sample generation
                 return False
             idx += 1
     return True
@@ -34,7 +36,7 @@ def ComputeNumSamples(t, p, thresh, m, delta, method, verbose):
     if method == 1:
         # vanilla version
         try:
-            N = vanbinomial(t,p)
+            N = vanbinomial(t, p)
             N = int(N)
         except OverflowError:
             print("SAMPLING FAILURE!")
@@ -43,11 +45,11 @@ def ComputeNumSamples(t, p, thresh, m, delta, method, verbose):
     elif method == 2:
         # improved version
         thresh1 = 12 * thresh**2 * m / delta
-        thresh2 = (delta / (6 * m))**0.5
+        thresh2 = (delta / (6 * m)) ** 0.5
 
         thresh1, thresh2 = mpfr(thresh1), mpfr(thresh2)
 
-        if t * p >= thresh2 :
+        if t * p >= thresh2:
             if t <= thresh1:
                 if verbose:
                     print("binomial")
@@ -59,7 +61,7 @@ def ComputeNumSamples(t, p, thresh, m, delta, method, verbose):
         else:
             if verbose:
                 print("small binomial")
-            N = np.random.binomial(1, float(t*p))
+            N = np.random.binomial(1, float(t * p))
 
     elif method == 3:
         # mp version
@@ -70,12 +72,12 @@ def ComputeNumSamples(t, p, thresh, m, delta, method, verbose):
 
 def getSolutionFromVanillaSampler(dnfClause, nVars):
     sol = []
-    tmpRand = np.random.uniform(0,1,nVars)
-    for i in range(1, nVars+1):
+    tmpRand = np.random.uniform(0, 1, nVars)
+    for i in range(1, nVars + 1):
         if i in dnfClause:
             sol.append(i)
         else:
-            if tmpRand[i-1] > 0.5:
+            if tmpRand[i - 1] > 0.5:
                 sol.append(-i)
             else:
                 sol.append(i)
@@ -89,6 +91,7 @@ def GenerateSamples(N, dnfClause, delta, m, nVars, thresh):
 
     return sampSet
 
+
 def dnfstream():
 
     parser = argparse.ArgumentParser()
@@ -99,7 +102,7 @@ def dnfstream():
     parser.add_argument(
         "--delta", type=float, help="default = 0.1", default=0.1, dest="delta"
     )
-    parser.add_argument("--seed", type=int, dest="seed", default=10)
+    parser.add_argument("--seed", type=int, dest="seed", default=42)
     parser.add_argument("--samp", type=int, dest="samp", default=1)
     parser.add_argument("--numsamps", type=int, dest="numsamps", default=500)
     parser.add_argument("input", help="input file")
@@ -110,7 +113,7 @@ def dnfstream():
     args = parser.parse_args()
 
     # file handling
-    inputFile = args.input 
+    inputFile = args.input
     outputFile = args.output
     f = open(inputFile, "r")
     lines = f.readlines()
@@ -120,7 +123,7 @@ def dnfstream():
     sampMethod = args.samp
     do_sampling = args.dosample
     num_samples = args.numsamps
-    #np.random.seed(seed)
+    # np.random.seed(seed)
 
     initLine = lines[0].strip().split()
 
@@ -128,8 +131,7 @@ def dnfstream():
         nVars = initLine[2]
         nClause = initLine[3]
 
-    #print(nVars, nClause)
-
+    # print(nVars, nClause)
 
     # parameters / initialization
     eps = args.eps
@@ -138,36 +140,42 @@ def dnfstream():
         delta *= 2
     m = int(nClause)
     n = int(nVars)
-    thresh = max(12 * math.log(24/delta) / eps**2, 6*(math.log(6/delta) + math.log(m)))
-    # thresh = 4*math.log2(m+1)/(eps**2)*math.log2(1.0/delta) 
+    thresh = max(
+        12 * math.log(24 / delta) / eps**2, 6 * (math.log(6 / delta) + math.log(m))
+    )
+    # thresh = 4*math.log2(m+1)/(eps**2)*math.log2(1.0/delta)
     p = 1
     solset = []
 
     # multi-precision conversion
     thresh, p = mpfr(thresh), mpfr(p)
-    #print("Threshold: ",thresh)
-    #print(p)
+    # print("Threshold: ",thresh)
+    # print(p)
     line = 0  # line 0 corresponds to p dnf
     cl = 0
     # for i in range(1, m+1):
     counter = 0
     while True:
-        counter+=1
-        if lines[line].startswith("c") or lines[line].startswith("p") or lines[line].startswith("w"):
+        counter += 1
+        if (
+            lines[line].startswith("c")
+            or lines[line].startswith("p")
+            or lines[line].startswith("w")
+        ):
             line += 1
-            continue 
+            continue
         currClause = lines[line].strip().split()[:-1]
         line += 1
         currClause = list(map(int, currClause))
         clauseWidth = len(currClause)
 
-        #print(f"adding clause {currClause}")
-        t = mpfr(2**(n-clauseWidth))
-        #print(solset)
+        # print(f"adding clause {currClause}")
+        t = mpfr(2 ** (n - clauseWidth))
+        # print(solset)
         for s in solset:
             if isSAT(currClause, s):
                 solset.remove(s)
-    
+
         if cl == 1 and p >= thresh / t:
             # pow = gp.ceil(gp.log2(p * t / thresh))
             pow = gp.ceil(gp.log2(gp.div(gp.mul(p, t), thresh)))
@@ -176,21 +184,21 @@ def dnfstream():
 
         while p * t >= thresh:
             for sol in solset:
-                if np.random.uniform(0,1) > p : # this was 0.5 before
+                if np.random.uniform(0, 1) > p:  # this was 0.5 before
                     solset.remove(sol)
             # p = p / 2
-            p = gp.div(p,2)
+            p = gp.div(p, 2)
         if args.verbose:
             print(f"p: {p} | thresh : {int(thresh)} | bucket : {len(solset)}")
 
         N_i = ComputeNumSamples(t, p, thresh, m, delta, sampMethod, args.verbose)
-        #print(N_i)
+        # print(N_i)
         Npast = N_i
         while N_i + len(solset) > thresh:
             for sol in solset:
-                if np.random.uniform(0,1) > p : # this was 0.5 before
+                if np.random.uniform(0, 1) > p:  # this was 0.5 before
                     solset.remove(sol)
-            N_i = np.random.binomial(N_i , 1/2)
+            N_i = np.random.binomial(N_i, 1 / 2)
             p = p / 2
             if args.verbose:
                 print(f"bucket reduced to : {len(solset)}")
@@ -201,53 +209,49 @@ def dnfstream():
         sol = GenerateSamples(N_i, currClause, delta, m, n, thresh)
         solset += sol
         cl += 1
-        if cl == m : break
+        if cl == m:
+            break
 
         seed += 1
 
-    #print(counter)
-    modelCount = int(len(solset)/p)
+    # print(counter)
+    modelCount = int(len(solset) / p)
     print(modelCount)
     samples = list()
     if do_sampling:
-        #print("Solution set: ", solset)
+        # print("Solution set: ", solset)
         for _ in range(num_samples):
             sampled_element = list()
-            #print(solset)
+            # print(solset)
             sampled_element = sampled_element = list(random.choice(solset))
 
-            #print("Initial sampled portion: ",sampled_element)
-            tmpRand = np.random.uniform(0, 1, n)    
-            #print(tmpRand) 
+            # print("Initial sampled portion: ",sampled_element)
+            tmpRand = np.random.uniform(0, 1, n)
+            # print(tmpRand)
             idx = 0
-            for lit in range(1, n+1):
+            for lit in range(1, n + 1):
                 if (lit in sampled_element) or ((-lit) in sampled_element):
                     idx += 1
                     continue
                 else:
-                    #print(tmpRand[idx])
+                    # print(tmpRand[idx])
                     if tmpRand[idx] > 0.5:
 
                         sampled_element.append(-lit)
                     else:
                         sampled_element.append(lit)
-            
+
                 idx += 1
-            #print("Sampled element:", tuple(sorted(sampled_element, key=abs)))
+            # print("Sampled element:", tuple(sorted(sampled_element, key=abs)))
             samples.append(sampled_element)
         samples = [" ".join(map(str, sample)) + " 0\n" for sample in samples]
-        
+
         with open(outputFile, "w") as f:
             f.writelines(samples)
-        
-    
-    
-
-
 
 
 if __name__ == "__main__":
-    
+
     start_time = time.time()
 
     dnfstream()
@@ -255,5 +259,3 @@ if __name__ == "__main__":
     end_time = time.time()
 
     print("time used by sampler (seconds) :", end_time - start_time)
-    
-    

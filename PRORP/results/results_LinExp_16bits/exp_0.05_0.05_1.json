@@ -1,0 +1,20 @@
+{
+    "Initial states": "(count < 64 && n < 64)",
+    "Number of iterations": 64,
+    "Epsilon": 0.05,
+    "Eta": 0.05,
+    "Delta": 0.1,
+    "Total number of phases": 3,
+    "Total number of splits": 7,
+    "Total number of prune": 0,
+    "Total DistEstimate time": 2.6018526554107666,
+    "Total Validifier time": 41.66874861717224,
+    "Total TreeLearner time": 0.6246187686920166,
+    "Total time (seconds)": 44.895220041275024,
+    "Final DistEstimate_value": 0.0,
+    "Final Validifier_value": 0.03333333333333333,
+    "Height of final tree": 24,
+    "Number of DNF terms in candidate": 1,
+    "Final simplified candidate": "['count in [0, 256), n mod 65536 in {0}']",
+    "Final candidate": "(!count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count8 && !count9 && !n0 && !n1 && !n10 && !n11 && !n12 && !n13 && !n14 && !n15 && !n2 && !n3 && !n4 && !n5 && !n6 && !n7 && !n8 && !n9)"
+}

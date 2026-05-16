@@ -1,0 +1,34 @@
+Initial phase DNF: (!count14 && !count8 && !count11 && !count7 && !count9 && !count10 && !count6) || (!count14 && !count8 && !count11 && !count7 && !count9 && !count10 && count6 && !count1 && !count3)
+Phase: 2
+DistEstimate value: 0.0
+Validifier value: 0.8816666666666667
+Phase 2 DNF before prediction: (!count14 && !count8 && !count11 && !count7 && !count9 && !count10 && !count6) || (!count14 && !count8 && !count11 && !count7 && !count9 && !count10 && count6 && !count1 && !count3)
+Phase 2 DNF after prediction: count15 && !count15
+Before Muattion{'dist_error': np.float64(1.0), 'valid_error': np.float64(0.0)}
+moves=[(np.float64(1.0), 11111111, 'split'), (np.float64(0.0), 1111111211, 'split')]
+After Mutation{'dist_error': np.float64(0.028333333333333335), 'valid_error': np.float64(0.26166666666666666)}
+moves=[(np.float64(1.0), 111111111, 'split'), (np.float64(0.0), 1111111211, 'split')]
+After Mutation{'dist_error': np.float64(0.028333333333333335), 'valid_error': np.float64(0.08333333333333331)}
+moves=[(np.float64(1.0), 1111111111, 'split'), (np.float64(0.0), 1111111211, 'split')]
+After Mutation{'dist_error': np.float64(0.028333333333333335), 'valid_error': np.float64(0.0)}
+Successfully reached the desired user error bounds.
+Mutation counter: {'split': 3, 'prune': 0}
+Next phase total time: 8.889747858047485
+Next phase DistEstimate time: 0.2163705825805664
+Next phase Validifier time: 8.472182035446167
+Next phase TreeLearner time: 0.20040392875671387
+Final DistEstimate value: 0.030000000000000027
+Final Validifier value: 0.02666666666666667
+Final candidate learnt: (!count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count6 && !count7 && !count8 && !count9 && ca) || (!count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count6 && !count7 && !count8 && !count9 && cb)
+Height of learnt decision tree: 11
+Number of terms in the candidate DNF: 2
+Total DistEstimate time: 0.4018549919128418
+Total Validifier time: 21.260873317718506
+Total TreeLearner time: 0.24443697929382324
+Total time (seconds): 21.91360092163086
+Starting model fitting...
+--- Fitting took: 0.0010 seconds ---
+Starting custom tree build...
+--- Custom tree build took: 0.0015 seconds ---
+
+--- Run at 2026-05-16 12:30:28.134098 ---

@@ -88,10 +88,10 @@
         ]
     },
     "Candidate": {
-        "Expression": "(!count11 && !count14 && !count15 && !count8 && !n0 && !n1 && !n10 && !n11 && !n12 && !n13 && !n14 && !n15 && !n2 && !n3 && !n4 && !n5 && !n6 && !n7 && !n8 && !n9)"
+        "Expression": "(!count10 && !count11 && !count12 && !count13 && !count14 && !count15 && !count8 && !count9 && !n0 && !n1 && !n10 && !n11 && !n12 && !n13 && !n14 && !n15 && !n2 && !n3 && !n4 && !n5 && !n6 && !n7 && !n8 && !n9)"
     },
     "Initial states": {
-        "Expression": "(!count15) && (!count14) && (!count13) && (!count12) && (!count11) && (!count10) && (!count9) && (!count8) && (!count7) && (!count6) && (!n15) && (!n14) && (!n13) && (!n12) && (!n11) && (!n10) && (!n9) && (!n8) && (!n7) && (!n6) && (!n5) && (n15 || n14 || n13 || n12 || n11 || n10 || n9 || n8 || n7 || n6 || n5 || n4 || n3 || n2 || n1 || n0)",
+        "Expression": "(!count15) && (!count14) && (!count13) && (!count12) && (!count11) && (!count10) && (!count9) && (!count8) && (!count7) && (!count6) && (!n15) && (!n14) && (!n13) && (!n12) && (!n11) && (!n10) && (!n9) && (!n8) && (!n7) && (!n6) && (n15 || n14 || n13 || n12 || n11 || n10 || n9 || n8 || n7 || n6 || n5 || n4 || n3 || n2 || n1 || n0)",
         "Loop guard": "(n15 || n14 || n13 || n12 || n11 || n10 || n9 || n8 || n7 || n6 || n5 || n4 || n3 || n2 || n1 || n0)"
     },
     "Loop guard": "(n > 0)",
