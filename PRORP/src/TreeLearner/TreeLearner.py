@@ -22,11 +22,9 @@ np.random.seed(SEED)
 # Setup logging
 logging.basicConfig(level=logging.INFO, format="%(message)s")
 
+
 def df_to_dnf(df):
-    feature_cols = [
-        c for c in df.columns
-        if c not in {"label", "weight", "member"}
-    ]
+    feature_cols = [c for c in df.columns if c not in {"label", "weight", "member"}]
 
     clauses = []
 
@@ -46,9 +44,6 @@ def df_to_dnf(df):
     return " || ".join(clauses)
 
 
-
-
-
 def get_arguments():
     parser = argparse.ArgumentParser()
     parser.add_argument("--progname", type=str, default="Geo0", dest="progname")
@@ -62,19 +57,24 @@ def get_arguments():
     args = parser.parse_args()
     return args
 
+
 def read_json_with_lock(filepath):
     from filelock import FileLock
+
     lock = FileLock(str(filepath) + ".lock")
     with lock:
         with open(filepath, "r") as f:
             return json.load(f)
 
+
 def write_json_with_lock(filepath, data):
     from filelock import FileLock
+
     lock = FileLock(str(filepath) + ".lock")
     with lock:
         with open(filepath, "w") as f:
             json.dump(data, f, indent=4)
+
 
 def get_latest_result_file(directory: Path, prefix: str, progname: str) -> Path:
     files = sorted(directory.glob(f"{prefix}_{progname}_*.json"))
@@ -82,11 +82,13 @@ def get_latest_result_file(directory: Path, prefix: str, progname: str) -> Path:
         return None
     return files[-1]
 
+
 def remove_file_if_exists(path: Path):
     try:
         path.unlink()
     except FileNotFoundError:
         pass
+
 
 def read_validifier_samples(progname, valid_results_directory):
     valid_results_directory = Path(valid_results_directory)
@@ -102,6 +104,7 @@ def read_validifier_samples(progname, valid_results_directory):
     if len(files) > 1:
         remove_file_if_exists(latest)
     return data, value
+
 
 def read_distestimate_samples(progname, dist_results_directory):
     dist_results_directory = Path(dist_results_directory)
@@ -119,6 +122,7 @@ def read_distestimate_samples(progname, dist_results_directory):
         remove_file_if_exists(latest.with_suffix(".json.lock"))
     return data, value
 
+
 def dump_candidate(progname, candidate, parent_path):
     cand_file = Path(parent_path) / "candidate_files" / f"{progname}.json"
     with open(cand_file, "r") as file:
@@ -127,18 +131,25 @@ def dump_candidate(progname, candidate, parent_path):
     with open(cand_file, "w") as file:
         json.dump(data, file, indent=4)
 
+
 def execute_verifier(verifier_trigger_path, progname, epsilon, delta, k, num_bits):
     import subprocess
+
     try:
         subprocess.run(
             [
                 "python3",
                 verifier_trigger_path,
-                "--progname", str(progname),
-                "--epsilon", str(epsilon),
-                "--delta", str(delta),
-                "--iters", str(k),
-                "--num_bits", str(num_bits),
+                "--progname",
+                str(progname),
+                "--epsilon",
+                str(epsilon),
+                "--delta",
+                str(delta),
+                "--iters",
+                str(k),
+                "--num_bits",
+                str(num_bits),
             ],
             capture_output=True,
             text=True,
@@ -148,6 +159,7 @@ def execute_verifier(verifier_trigger_path, progname, epsilon, delta, k, num_bit
         logging.error(f"Subprocess failed: {e.stderr}")
     except Exception as e:
         logging.error(f"Unexpected error: {e}")
+
 
 def get_ratio(tree, mutation, leaf, distCurr, validCurr):
     if mutation == "split":
@@ -171,15 +183,18 @@ def get_ratio(tree, mutation, leaf, distCurr, validCurr):
         move = ((gaindist + gainvalid), leaf, "prune")
         return move
 
+
 def Normalize(moves):
     total = sum([move[0] for move in moves])
     if total == 0:
         return [(1, move[1], move[2]) for move in moves]
     return [(move[0] / total, move[1], move[2]) for move in moves]
 
+
 def MuteTree(tree, distUser, validUser, timeout=600):
     start = time.time()
     error_bounds = tree.get_error_bounds()
+    logging.info(f"Before Muattion{error_bounds}")
     distCurr, validCurr = error_bounds["dist_error"], error_bounds["valid_error"]
     set_of_mutations = ["split"]
     mutation_counter = {"split": 0, "prune": 0}
@@ -194,7 +209,9 @@ def MuteTree(tree, distUser, validUser, timeout=600):
                     filter(
                         None,
                         executor.map(
-                            lambda leaf: get_ratio(tree, mutation, leaf, distCurr, validCurr),
+                            lambda leaf: get_ratio(
+                                tree, mutation, leaf, distCurr, validCurr
+                            ),
                             leaf_ids,
                         ),
                     )
@@ -205,15 +222,19 @@ def MuteTree(tree, distUser, validUser, timeout=600):
             break
         moves = Normalize(moves)
         moves.sort(key=lambda x: x[0], reverse=True)
+        logging.info(f"{moves=}")
         if random.random() < 0.9:
             _, leaf_id, mutation = moves[0]
         else:
-            _, leaf_id, mutation = random.choices(moves, weights=[move[0] for move in moves])[0]
+            _, leaf_id, mutation = random.choices(
+                moves, weights=[move[0] for move in moves]
+            )[0]
         if mutation == "split":
             tree.split_node(leaf_id)
         elif mutation == "prune":
             tree.prune_node(leaf_id)
         error_bounds = tree.get_error_bounds()
+        logging.info(f"After Mutation{error_bounds}")
         mutation_counter[mutation] += 1
         distCurr, validCurr = error_bounds["dist_error"], error_bounds["valid_error"]
         if distCurr <= distUser and validCurr <= validUser:
@@ -223,6 +244,7 @@ def MuteTree(tree, distUser, validUser, timeout=600):
     logging.info(f"Mutation counter: {mutation_counter}")
     logging.info("Specified error bounds not met. Returning the last mutated tree.")
     return tree, distCurr, validCurr, mutation_counter
+
 
 def TreeLearner():
     args = get_arguments()
@@ -234,7 +256,6 @@ def TreeLearner():
     num_bits = args.num_bits
     init_states_FOL = args.initstates
     flag = args.flag
-
 
     PARENT_PATH = Path(__file__).resolve().parent.parent.parent
     DistEstimate_trigger_path = str(PARENT_PATH / "src/DistEstimate/DistEstimate.py")
@@ -248,12 +269,14 @@ def TreeLearner():
     progvars = config["Program_variables"]["Vars"]
     progvarmap = config["Program_variables"]["Varmap"]
 
-    if (flag == 1):
+    if flag == 1:
         validifier_data, validifier_value = read_validifier_samples(
             progname, PARENT_PATH / "src/Validifier/Validifier_results"
         )
     else:
-        validifier_data = {"output_dict": {"counterexamples": {}, "Validifier_value": 0}}
+        validifier_data = {
+            "output_dict": {"counterexamples": {}, "Validifier_value": 0}
+        }
         validifier_value = 0
 
     distestimate_data, distestimate_value = read_distestimate_samples(
@@ -262,7 +285,7 @@ def TreeLearner():
     initial_phase_start = time.time()
     number_of_vars = len(prog_variables)
     df = prepare_data(distestimate_data, validifier_data, prog_variables)
-    if (flag == 1):
+    if flag == 1:
         # for index, row in df.iterrows():
         #     print(row)
         X = df[list(df.columns[:-3])].values
@@ -287,10 +310,8 @@ def TreeLearner():
         initial_dnf = df_to_dnf(df)
         logging.info(f"Initial phase DNF: {initial_dnf}")
 
-
-    
     initial_phase_TreeLearner_time = time.time() - initial_phase_start
-    if (progname == "Unif2" or progname == "Unif4"):
+    if progname == "Unif2" or progname == "Unif4":
         dump_candidate(progname, initial_dnf, PARENT_PATH)
     else:
         dump_candidate(progname, modify_cand(initial_dnf, loop_guard), PARENT_PATH)
@@ -313,15 +334,19 @@ def TreeLearner():
     phase = 1
     total_mutation_counter = {"split": 0, "prune": 0}
 
-    while ((distestimate_value >= epsilon or validifier_value >= eta) and (
-        time.time() - initial_phase_start < 7200
-    )) and (flag == 1):
+    while (
+        (distestimate_value >= epsilon or validifier_value >= eta)
+        and (time.time() - initial_phase_start < 7200)
+    ) and (flag == 1):
         logging.info(f"Phase: {phase + 1}")
         logging.info(f"DistEstimate value: {distestimate_value}")
         logging.info(f"Validifier value: {validifier_value}")
         phase += 1
-        logging.info(f"Phase {phase} DNF before prediction: {intermediate_tree.tree_to_dnf()}")
+        logging.info(
+            f"Phase {phase} DNF before prediction: {intermediate_tree.tree_to_dnf()}"
+        )
         next_phase_start = time.time()
+        intermediate_tree.purify_leaves()
         df_next = prepare_data(distestimate_data, validifier_data, prog_variables)
         intermediate_tree.predict(
             df_next[list(df_next.columns[:-3])].values,
@@ -329,7 +354,9 @@ def TreeLearner():
             weights=df_next["weight"].values,
             member=df_next["member"].values,
         )
-        logging.info(f"Phase {phase} DNF after prediction: {intermediate_tree.tree_to_dnf()}")
+        logging.info(
+            f"Phase {phase} DNF after prediction: {intermediate_tree.tree_to_dnf()}"
+        )
         (
             final_tree,
             tree_dist_error,
@@ -342,15 +369,19 @@ def TreeLearner():
                 total_mutation_counter.get(mutation, 0) + mutation_count
             )
         next_phase_TreeLearner_time = time.time() - next_phase_start
-        if (progname == "Unif2"):
+        if progname == "Unif2":
             dump_candidate(progname, Next_phase_DNF, PARENT_PATH)
-        else:    
-            dump_candidate(progname, modify_cand(Next_phase_DNF, loop_guard), PARENT_PATH)
+        else:
+            dump_candidate(
+                progname, modify_cand(Next_phase_DNF, loop_guard), PARENT_PATH
+            )
         next_phase_validifier_start_time = time.time()
         execute_verifier(Validifier_trigger_path, progname, eta, delta, k, num_bits)
         next_phase_validifier_time = time.time() - next_phase_validifier_start_time
         next_phase_distEstimate_start_time = time.time()
-        execute_verifier(DistEstimate_trigger_path, progname, epsilon, delta, k, num_bits)
+        execute_verifier(
+            DistEstimate_trigger_path, progname, epsilon, delta, k, num_bits
+        )
         next_phase_distEstimate_time = time.time() - next_phase_distEstimate_start_time
         validifier_data, validifier_value = read_validifier_samples(
             progname, PARENT_PATH / "src/Validifier/Validifier_results"
@@ -374,7 +405,7 @@ def TreeLearner():
 
     Final_DistEstimate_value = distestimate_value
     Final_Validifier_value = validifier_value
-    if (progname == "Unif2" or progname == "Unif4"):
+    if progname == "Unif2" or progname == "Unif4":
         Final_candidate = next_dnf
     else:
         Final_candidate = modify_cand(next_dnf, loop_guard)
@@ -382,8 +413,12 @@ def TreeLearner():
     logging.info(f"Final DistEstimate value: {distestimate_value}")
     logging.info(f"Final Validifier value: {validifier_value}")
     logging.info(f"Final candidate learnt: {Final_candidate}")
-    logging.info(f"Height of learnt decision tree: {analyze_candidate(Final_candidate)[1]}")
-    logging.info(f"Number of terms in the candidate DNF: {analyze_candidate(Final_candidate)[0]}")
+    logging.info(
+        f"Height of learnt decision tree: {analyze_candidate(Final_candidate)[1]}"
+    )
+    logging.info(
+        f"Number of terms in the candidate DNF: {analyze_candidate(Final_candidate)[0]}"
+    )
     logging.info(f"Total DistEstimate time: {total_DistEstimate_time}")
     logging.info(f"Total Validifier time: {total_Validifier_time}")
     logging.info(f"Total TreeLearner time: {total_TreeLearner_time}")
@@ -400,7 +435,9 @@ def TreeLearner():
         "Total DistEstimate time": total_DistEstimate_time,
         "Total Validifier time": total_Validifier_time,
         "Total TreeLearner time": total_TreeLearner_time,
-        "Total time (seconds)": total_DistEstimate_time + total_Validifier_time + total_TreeLearner_time,
+        "Total time (seconds)": total_DistEstimate_time
+        + total_Validifier_time
+        + total_TreeLearner_time,
         "Final DistEstimate_value": Final_DistEstimate_value,
         "Final Validifier_value": Final_Validifier_value,
         "Height of final tree": analyze_candidate(Final_candidate)[1],
@@ -416,15 +453,14 @@ def TreeLearner():
         idx += 1
     write_json_with_lock(result_dir / f"exp_{epsilon}_{eta}_{idx}.json", output_dict)
 
+
 if __name__ == "__main__":
     start_time = time.time()
     TreeLearner()
     end_time = time.time()
     logging.info(f"Total time (seconds): {end_time - start_time}")
-    
-    
-    
-    
+
+
 # from DecisionTreeLearner import CustomDecisionTree
 # from concurrent.futures import ThreadPoolExecutor
 
@@ -476,7 +512,7 @@ if __name__ == "__main__":
 #         # else:
 #         move = ((gaindist + gainvalid), leaf, "split")
 #         return move
-        
+
 #     elif mutation == "prune":
 #         try:
 #             """If trying to prune the root node that is the only node in the tree, it will raise a ValueError."""
@@ -492,7 +528,7 @@ if __name__ == "__main__":
 #         if gaindist <= 0 or gainvalid <= 0:
 #             return None
 #         # print("Prune selected")
-        
+
 #         # if gaindist + gainvalid < 0:
 #         #     return None
 #         move = ((gaindist + gainvalid), leaf, "prune")
@@ -558,7 +594,6 @@ if __name__ == "__main__":
 #             print("No more valid moves found. Exiting.")
 #             break  # Exit the loop if no moves are available
 
-        
 
 #         moves = Normalize(moves)
 #         moves.sort(key=lambda x: x[0], reverse=True)
@@ -756,7 +791,7 @@ if __name__ == "__main__":
 #                 str(delta),
 #                 "--iters",
 #                 str(k),
-#                 "--num_bits", 
+#                 "--num_bits",
 #                 str(num_bits),
 #             ],
 #             capture_output=True,
@@ -989,4 +1024,3 @@ if __name__ == "__main__":
 #     end_time = time.time()
 
 #     print("Total time (seconds) :", end_time - start_time)
-
